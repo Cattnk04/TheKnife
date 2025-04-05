@@ -8,6 +8,7 @@ public class Main {
 
     // metodo per la registrazione
     public static void registraUtente(Scanner scanner){
+
         System.out.println("=== Registrazione ===");
         System.out.print("Inserisci il tuo nome: ");
         String nome = scanner.nextLine();
