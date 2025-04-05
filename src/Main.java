@@ -22,11 +22,12 @@ public class Main {
         System.out.print("Inserisci la tua password: ");
         String password = scanner.nextLine();
 
+        //Storing del nuovo utente nel file
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_UTENTI, true))){
             writer.write(nome + "," + cognome + "," + username + "," + indirizzo + "," + email + "," + password);
             writer.newLine();
             System.out.println("Registrazione avvenuta con successo!");
-        } catch (IOException e) {
+        } catch (IOException e) {           //gestione dell'eccezione
             System.out.println("Errore nella registrazione! Riprova più tardi.");
         }
     }
@@ -47,6 +48,7 @@ public class Main {
             System.out.print("Inserisci la tua password: ");
             String password = scanner.nextLine();
 
+            //lettura del file txt
             try (BufferedReader reader = new BufferedReader(new FileReader(FILE_UTENTI))) {
                 String line;
 
@@ -71,7 +73,7 @@ public class Main {
                     }
                 }
             } // chiusura try
-            catch (IOException e) {
+            catch (IOException e) {         //gestione dell'eccezione
                 System.out.println("Errore durante il login. Riprova più tardi o effetua la registrazione.\"\n");
             }
         }
