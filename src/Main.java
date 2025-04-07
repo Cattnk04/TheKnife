@@ -26,12 +26,6 @@ public class Main {
             }
         } while (cognome.length()<=1);
 
-        //secondo tank meglio non usarlo e usare nome e iniziale del
-        // cognome perché sarebbe un altro dato che poi andrebbe
-        // controllato se è unico fra gli utenti (non possono esserci due username uguali)
-        System.out.print("Inserisci un username: ");
-        String username = scanner.nextLine();
-
         String indirizzo = "";
         //do{
             System.out.print("Inserisci la provincia di domicilio (prima lettera maiuscola): ");
@@ -64,7 +58,7 @@ public class Main {
 
         //Storing del nuovo utente nel file
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_UTENTI, true))){
-            writer.write(nome + "," + cognome + "," + username + "," + indirizzo + "," + email + "," + password);
+            writer.write(nome + "," + cognome + "," + indirizzo + "," + email + "," + password);
             writer.newLine();
             System.out.println("Registrazione avvenuta con successo!");
         } catch (IOException e) {           //gestione dell'eccezione
@@ -72,49 +66,54 @@ public class Main {
         }
     }
     //login diretto dopo la registrazione
-    private static void LoginPostRegistrazione(String username, String password){
-        System.out.println("Login effettuato automaticamente per l'utente registrato: " + username);
+    private static void LoginPostRegistrazione(String email, String password){
+        System.out.println("Login effettuato automaticamente per l'utente registrato");
     }
     // metodo per il login
-    public static void effettuaLogin(Scanner scanner){
+    public static void effettuaLogin(Scanner scanner) {
 
         boolean trovato = false; // Flag per controllare se il login riesce
 
         while (!trovato) {
 
             System.out.println("=== Login ===");
-            System.out.print("Inserisci il tuo username: ");
-            String username = scanner.nextLine();
+            System.out.print("Inserisci il tuo email: ");
+            String email = scanner.nextLine().trim(); // Rimuove spazi inutili
             System.out.print("Inserisci la tua password: ");
-            String password = scanner.nextLine();
+            String password = scanner.nextLine().trim(); // Rimuove spazi inutili
 
-            //lettura del file txt
+            // Lettura del file txt
             try (BufferedReader reader = new BufferedReader(new FileReader(FILE_UTENTI))) {
                 String line;
 
                 while ((line = reader.readLine()) != null) {
-                    String[] credenziali = line.split(",");
-                    if (credenziali[2].equals(username) && credenziali[5].equals(password)) {
-                        trovato = true;
-                        break; // Esci dal ciclo una volta trovata una corrispondenza valida
+                    // Rimuove gli spazi dai dati del file prima del confronto
+                    String[] credenziali = line.trim().split(",");
+                    if (credenziali.length >= 4) { // Assicura che ci siano abbastanza campi
+                        if (credenziali[3].trim().equals(email) && credenziali[4].trim().equals(password)) {
+                            trovato = true;
+
+                            // Recupera il nome dell'utente per il messaggio di benvenuto
+                            String nome = credenziali[0].trim(); // Afferra il primo campo come nome
+                            System.out.println("Login avvenuto con successo! \nBenvenuto/a " + nome + "!");
+                            break; // Esci dal ciclo una volta trovata la corrispondenza
+                        }
                     }
                 }
+
                 // Controllo finale dopo il ciclo
-                if (trovato) {
-                    System.out.println("Login avvenuto con successo! \n Benveuto/a " + username + "!");
-                } else {
-                    System.out.println("Username o password errati!");
+                if (!trovato) { // Se non trovato
+                    System.out.println("Email o password errati!");
                     System.out.print("Vuoi riprovare? (sì/no): ");
-                    String risposta = scanner.nextLine();
-                    if (risposta.equals("no")) {            // riprova se sbagli password o username
+                    String risposta = scanner.nextLine().trim();
+                    if (risposta.equalsIgnoreCase("no")) { // Gestisce "No" in maiuscolo/minuscolo
                         System.out.println("Grazie per aver usato il nostro servizio!");
                         scanner.close();
                         return;
                     }
                 }
-            } // chiusura try
-            catch (IOException e) {         //gestione dell'eccezione
-                System.out.println("Errore durante il login. Riprova più tardi o effetua la registrazione.\"\n");
+            } catch (IOException e) { // Gestione eccezione per problemi con il file
+                System.out.println("Errore durante il login. Riprova più tardi o effettua la registrazione.");
             }
         }
     }
