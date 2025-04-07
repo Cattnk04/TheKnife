@@ -10,18 +10,57 @@ public class Main {
     public static void registraUtente(Scanner scanner){
 
         System.out.println("=== Registrazione ===");
-        System.out.print("Inserisci il tuo nome: ");
-        String nome = scanner.nextLine();
-        System.out.print("Inserisci il tuo cognome: ");
-        String cognome = scanner.nextLine();
+        String nome = "";
+        do{
+            System.out.print("Inserisci il tuo nome: ");
+            nome = scanner.nextLine();
+            if(nome.length()<=1)
+                System.out.println("Nome non valido");
+        }while (nome.length()<=1);
+        String cognome = "";
+        do{
+            System.out.print("Inserisci il tuo cognome: ");
+            cognome = scanner.nextLine();
+            if(cognome.length()<=1){
+                System.out.println("Cognome non valido");
+            }
+        } while (cognome.length()<=1);
+
+        //secondo tank meglio non usarlo e usare nome e iniziale del
+        // cognome perché sarebbe un altro dato che poi andrebbe
+        // controllato se è unico fra gli utenti (non possono esserci due username uguali)
         System.out.print("Inserisci un username: ");
         String username = scanner.nextLine();
-        System.out.print("Inserisci il luogo di domicilio: ");
-        String indirizzo = scanner.nextLine();
-        System.out.print("Inserisci la tua email: ");
-        String email = scanner.nextLine();
-        System.out.print("Inserisci la tua password: ");
-        String password = scanner.nextLine();
+
+        String indirizzo = "";
+        //do{
+            System.out.print("Inserisci la provincia di domicilio (prima lettera maiuscola): ");
+            indirizzo = scanner.nextLine();
+        //} while (!trovaProvincia(indirizzo)); //CRERE IL METODO trovaProvincia();
+
+        String email = "";
+        boolean emailValida = true;
+        do{
+            System.out.print("Inserisci la tua email: ");
+            email = scanner.nextLine();
+            if(!email.contains("@") || !email.contains(".")){
+                emailValida = false;
+                System.out.println("Email non valida");
+            }
+        } while (!emailValida);
+        String password = "";
+        boolean passwordValida = true;
+        do{
+             System.out.print("Inserisci la tua password: ");
+             password = scanner.nextLine();
+             //VEDERE COME FAR VISUALIZZARE GLI ASTERISCHI INVECE DELLA STRINGA
+             if(password.length()<8){
+                 //SE VOGLIAMO POSSIAMO METTERE QUI ALTRE CONDIZIONI
+                 // TIPO CARETTERI SPECIALI O MAIUSCOLE/MINUSCOLE
+                 passwordValida = false;
+                 System.out.println("Password non valida");
+             }
+         } while (!passwordValida);
 
         //Storing del nuovo utente nel file
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_UTENTI, true))){
@@ -98,6 +137,7 @@ public class Main {
             System.out.print("La tua scelta: ");
 
             int choice = scanner.nextInt();
+
             scanner.nextLine(); // Pulizia della linea
 
             switch (choice) {
@@ -118,6 +158,7 @@ public class Main {
                 case 4:
                     System.out.println("Grazie per aver usato il nostro servizio!");
                     scanner.close();
+                    sessioneAttiva = false;
                     return;
                 default:
                     System.out.println("Scelta non valida!");

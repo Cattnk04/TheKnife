@@ -5,7 +5,7 @@ public class Utenti {
     private String cognome;
     private String email;
     private String username;
-    private String citta;
+    private String provincia;
     private boolean ristoratore;
     private String passwordHash;
 
@@ -28,17 +28,11 @@ public class Utenti {
     public void setEmail(String email){
         this.email = email;
     }
-    public String getUsername(){
-        return  this.username;
-    }
-    public void setUsername(String username){
-        this.username = username;
-    }
     public String getCitta(){
-        return  this.citta;
+        return  this.provincia;
     }
-    public void setCitta(String citta){
-        this.citta = citta;
+    public void setCitta(String provincia){
+        this.provincia = provincia;
     }
     public boolean getRistoratore(){
         return  this.ristoratore;
