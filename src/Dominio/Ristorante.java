@@ -1,16 +1,19 @@
 package Dominio;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Ristorante {
     private String nome;
     private String nazione;
     private String citta;
     private String indirizzo;
-    private int fasciaPrezzo;
+    private Integer fasciaPrezzo;
     private boolean servizioDelivery;
     private boolean servizioPrenotazioneOnline;
     private String tipoCucina;
 
-    Ristorante(String nome, String nazione, String citta, String indirizzo, int fasciaPrezzo, boolean servizioDelivery, boolean servizioPrenotazioneOnline, String tipoCucina){
+    Ristorante(String nome, String nazione, String citta, String indirizzo, Integer fasciaPrezzo, boolean servizioDelivery, boolean servizioPrenotazioneOnline, String tipoCucina){
         this.nome = nome;
         this.nazione = nazione;
         this.citta = citta;
@@ -33,7 +36,7 @@ public class Ristorante {
     public String getIndirizzo(){
         return this.indirizzo;
     }
-    public int getFasciaPrezzo(){
+    public Integer getFasciaPrezzo(){
         return this.fasciaPrezzo;
     }
     public boolean getServizioDelivery(){
@@ -58,7 +61,7 @@ public class Ristorante {
     public void setIndirizzo(String indirizzo){
         this.indirizzo = indirizzo;
     }
-    public void setFasciaPrezzo(int fasciaPrezzo){
+    public void setFasciaPrezzo(Integer fasciaPrezzo){
         this.fasciaPrezzo = fasciaPrezzo;
     }
     public void setServizioDelivery(boolean servizioDelivery){
@@ -70,5 +73,15 @@ public class Ristorante {
     public void setTipoCucina(String tipoCucina){
         this.tipoCucina = tipoCucina;
     }
+    public void InserisciRistorante() {
+        File fileRistoranti = new File("Ristoranti.txt");
 
+        try {
+            FileWriter writer = new FileWriter(fileRistoranti, true);
+            String stringa = this.nome.trim() + ',' + this.nazione.trim() + ',' + this.citta.trim() + ',' + this.indirizzo.trim() + ',' + this.fasciaPrezzo.toString() + ','+ this.servizioDelivery + ',' + this.servizioPrenotazioneOnline + ',' + this.tipoCucina.trim();
+            writer.write(stringa);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
