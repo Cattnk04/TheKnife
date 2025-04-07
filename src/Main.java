@@ -48,6 +48,14 @@ public class Main {
              System.out.print("Inserisci la tua password: ");
              password = scanner.nextLine();
              //VEDERE COME FAR VISUALIZZARE GLI ASTERISCHI INVECE DELLA STRINGA
+                /*devono essere visualizzate mentre scrive o dopo?
+                Perchè se vogliamo gli asterischi per ogni carattere immesso,
+                bisogna simulare un meccanismo in cui intercetti i tasti premuti e
+                visualizzi solo gli asterischi al posto dei caratteri.
+                Questo richiede l'uso della libreria esterna come `Jline`.
+                Se invece vogliamo mantenere nascosta la password,
+                è meglio usare `Console` oppure `JPasswordField`, che è per applicazioni grafiche
+                 */
              if(password.length()<8){
                  //SE VOGLIAMO POSSIAMO METTERE QUI ALTRE CONDIZIONI
                  // TIPO CARETTERI SPECIALI O MAIUSCOLE/MINUSCOLE
