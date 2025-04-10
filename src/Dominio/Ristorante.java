@@ -5,6 +5,7 @@ import java.io.IOException;
 
 public class Ristorante {
     private String nome;
+    private String emailRistoratore;
     private String nazione;
     private String citta;
     private String indirizzo;
@@ -13,15 +14,16 @@ public class Ristorante {
     private boolean servizioPrenotazioneOnline;
     private String tipoCucina;
 
-    Ristorante(String nome, String nazione, String citta, String indirizzo, Integer fasciaPrezzo, boolean servizioDelivery, boolean servizioPrenotazioneOnline, String tipoCucina){
-        this.nome = nome;
-        this.nazione = nazione;
-        this.citta = citta;
-        this.indirizzo = indirizzo;
+    Ristorante(String nome, String emailRistoratore, String nazione, String citta, String indirizzo, Integer fasciaPrezzo, boolean servizioDelivery, boolean servizioPrenotazioneOnline, String tipoCucina){
+        this.nome = nome.trim();
+        this.emailRistoratore = emailRistoratore.trim();
+        this.nazione = nazione.trim();
+        this.citta = citta.trim();
+        this.indirizzo = indirizzo.trim();
         this.fasciaPrezzo = fasciaPrezzo;
         this.servizioDelivery = servizioDelivery;
         this.servizioPrenotazioneOnline = servizioPrenotazioneOnline;
-        this.tipoCucina = tipoCucina;
+        this.tipoCucina = tipoCucina.trim();
     }
 
     public String getNome(){
@@ -78,7 +80,7 @@ public class Ristorante {
 
         try {
             FileWriter writer = new FileWriter(fileRistoranti, true);
-            String stringa = this.nome.trim() + ',' + this.nazione.trim() + ',' + this.citta.trim() + ',' + this.indirizzo.trim() + ',' + this.fasciaPrezzo.toString() + ','+ this.servizioDelivery + ',' + this.servizioPrenotazioneOnline + ',' + this.tipoCucina.trim();
+            String stringa = this.nome + + ',' + this.emailRistoratore + ',' + this.nazione + ',' + this.citta + ',' + this.indirizzo + ',' + this.fasciaPrezzo.toString() + ','+ this.servizioDelivery + ',' + this.servizioPrenotazioneOnline + ',' + this.tipoCucina;
             writer.write(stringa);
         } catch (IOException e) {
             e.printStackTrace();
