@@ -37,6 +37,7 @@ public class Main {
         do{
             System.out.print("Inserisci la tua email: ");
             email = scanner.nextLine();
+            email = email.toLowerCase();
             if(!email.contains("@") || !email.contains(".")){
                 emailValida = false;
                 System.out.println("Email non valida");
