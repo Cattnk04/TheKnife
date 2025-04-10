@@ -27,16 +27,17 @@ public class Main {
         } while (cognome.length()<=1);
 
         String indirizzo = "";
-        //do{
+        do{
             System.out.print("Inserisci la provincia di domicilio (prima lettera maiuscola): ");
             indirizzo = scanner.nextLine();
-        //} while (!trovaProvincia(indirizzo)); //CRERE IL METODO trovaProvincia();
+        } while (!trovaProvincia(indirizzo));
 
         String email = "";
         boolean emailValida = true;
         do{
             System.out.print("Inserisci la tua email: ");
             email = scanner.nextLine();
+            email = email.toLowerCase();
             if(!email.contains("@") || !email.contains(".")){
                 emailValida = false;
                 System.out.println("Email non valida");
@@ -73,6 +74,32 @@ public class Main {
             System.out.println("Errore nella registrazione! Riprova più tardi.");
         }
     }
+    //metodo trovaProvincia
+    private static boolean trovaProvincia(String provincia){
+        try{
+            FileReader reader = new FileReader("Province.txt");
+            BufferedReader bufferedReader = new BufferedReader(reader);
+            String data = bufferedReader.readLine();
+
+            while(data != null && !data.toLowerCase().contains(provincia.toLowerCase())){
+                data = bufferedReader.readLine();
+            }
+            bufferedReader.close();
+            reader.close();
+            if(data == null){
+                return false;
+            } else {
+                return true;
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     //login diretto dopo la registrazione
     private static void LoginPostRegistrazione(String email, String password){
         System.out.println("Login effettuato automaticamente per l'utente registrato");
