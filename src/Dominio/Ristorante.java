@@ -13,7 +13,8 @@ public class Ristorante {
     private boolean servizioPrenotazioneOnline;
     private String tipoCucina;
 
-    Ristorante(String nome, String nazione, String citta, String indirizzo, Integer fasciaPrezzo, boolean servizioDelivery, boolean servizioPrenotazioneOnline, String tipoCucina){
+    Ristorante(String nome, String nazione, String citta, String indirizzo, Integer fasciaPrezzo,
+               boolean servizioDelivery, boolean servizioPrenotazioneOnline, String tipoCucina){
         this.nome = nome;
         this.nazione = nazione;
         this.citta = citta;
@@ -78,7 +79,8 @@ public class Ristorante {
 
         try {
             FileWriter writer = new FileWriter(fileRistoranti, true);
-            String stringa = this.nome.trim() + ',' + this.nazione.trim() + ',' + this.citta.trim() + ',' + this.indirizzo.trim() + ',' + this.fasciaPrezzo.toString() + ','+ this.servizioDelivery + ',' + this.servizioPrenotazioneOnline + ',' + this.tipoCucina.trim();
+            String stringa = this.nome.trim() + ',' + this.nazione.trim() + ',' + this.citta.trim() + ',' + this.indirizzo.trim() + ','
+                    + this.fasciaPrezzo.toString() + ','+ this.servizioDelivery + ',' + this.servizioPrenotazioneOnline + ',' + this.tipoCucina.trim();
             writer.write(stringa);
         } catch (IOException e) {
             e.printStackTrace();
