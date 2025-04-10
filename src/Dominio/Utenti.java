@@ -56,7 +56,6 @@ public class Utenti {
                     throw new RuntimeException("Utente non puo' essere duplicato");
                 else
                     stringa = br.readLine();
-
             }
         } catch (FileNotFoundException e) {
             throw new RuntimeException("File non trovato");
