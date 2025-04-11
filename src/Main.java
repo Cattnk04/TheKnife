@@ -56,7 +56,7 @@ public class Main {
                 Questo richiede l'uso della libreria esterna come `Jline`.
                 Se invece vogliamo mantenere nascosta la password,
                 è meglio usare `Console` oppure `JPasswordField`, che è per applicazioni grafiche
-                 */
+                */
              if(password.length()<8){
                  //SE VOGLIAMO POSSIAMO METTERE QUI ALTRE CONDIZIONI
                  // TIPO CARETTERI SPECIALI O MAIUSCOLE/MINUSCOLE
