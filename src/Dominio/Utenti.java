@@ -12,9 +12,7 @@ public class Utenti {
     private String passwordHash;
 
     public Utenti(String email,String nome,String cognome, String provincia, boolean ristoratore, String passwordHash) throws RuntimeException{
-        controllaUtenteDuplicato(email.trim());
         this.email = email.trim();
-        controllaUtenteDuplicato(email);
         this.nome = nome.trim();
         this.cognome = cognome.trim();
         this.provincia = provincia.trim();
@@ -46,14 +44,14 @@ public class Utenti {
     public boolean getRistoratore(){
         return  this.ristoratore;
     }
-    public void controllaUtenteDuplicato(String email) throws RuntimeException{
+    public void controllaUtenteDuplicato() throws RuntimeException{
         try{
             FileReader fileReader = new FileReader(FILE_UTENTI);
             BufferedReader br = new BufferedReader(fileReader);
             String stringa = br.readLine();
             while(stringa!=null){
                 String[] arrayStringaUtente = stringa.split(",");
-                if(arrayStringaUtente[0].equals(email))
+                if(arrayStringaUtente[0].equals(this.email))
                     throw new RuntimeException("Utente non puo' essere duplicato");
                 else
                     stringa = br.readLine();
