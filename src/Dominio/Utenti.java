@@ -12,6 +12,7 @@ public class Utenti {
     private String passwordHash;
 
     public Utenti(String email,String nome,String cognome, String provincia, boolean ristoratore, String passwordHash) throws RuntimeException{
+        controllaUtenteDuplicato(email.trim());
         this.email = email.trim();
         controllaUtenteDuplicato(email);
         this.nome = nome.trim();
