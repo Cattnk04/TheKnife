@@ -193,29 +193,35 @@ public class Menu {
         return choice;
     }
     public Menu() {
+        boolean sessioneAttiva = true; // Controllo della sessione
         Scanner scanner = new Scanner(System.in);
         int choice;
-        do {
+
+        while(sessioneAttiva){      //chiude il Menu a fine di ogni scelta
             choice = stampaMenu(scanner);
             switch (choice) {
                 case 1:
                     registraUtente(scanner);
                     System.out.println("Subito dopo il termine della registrazione, verrai loggato automaticamente.");
                     LoginPostRegistrazione("username", "password");
+                    sessioneAttiva = false;
                     break;
                 case 2:
                     effettuaLogin(scanner);
+                    sessioneAttiva = false;
                     break;
                 case 3:
                     accediComeGuest();
+                    sessioneAttiva = false;
                     break;
                 case 4:
                     System.out.println("Grazie per aver usato il nostro servizio!");
                     scanner.close();
+                    sessioneAttiva = false;
                     return;
                 default:
                     System.out.println("Scelta non valida!");
             } // chiusura switch
-        }while (choice != 4);
+        }
     } //chiusura costruttore Menu
 }
