@@ -1,6 +1,7 @@
 
 import java.io.*;
 import java.util.*;
+import Dominio.*;
 
 public class Main {
 
@@ -26,53 +27,60 @@ public class Main {
             }
         } while (cognome.length()<=1);
 
-        String indirizzo = "";
+        String provincia = "";
         do{
             System.out.print("Inserisci la provincia di domicilio (prima lettera maiuscola): ");
-            indirizzo = scanner.nextLine();
-        } while (!trovaProvincia(indirizzo));
+            provincia = scanner.nextLine();
+        } while (!trovaProvincia(provincia));
+
+        boolean valido,ristoratore = false;
+        do{
+            valido = true;
+            System.out.println("Sei proprietario di un ristorante? [s/n]");
+            if(scanner.nextLine().trim().toLowerCase().equals("s")){
+                ristoratore = true;
+            } else if  (scanner.nextLine().trim().toLowerCase().equals("n")){
+                ristoratore = false;
+            }
+            else valido = false;
+        } while (!valido);
 
         String email = "";
-        boolean emailValida = true;
         do{
+            valido = true;
             System.out.print("Inserisci la tua email: ");
             email = scanner.nextLine();
             email = email.toLowerCase();
             if(!email.contains("@") || !email.contains(".")){
-                emailValida = false;
+                valido = false;
                 System.out.println("Email non valida");
             }
-        } while (!emailValida);
+        } while (!valido);
         String password = "";
-        boolean passwordValida = true;
         do{
-             System.out.print("Inserisci la tua password: ");
-             password = scanner.nextLine();
-             //VEDERE COME FAR VISUALIZZARE GLI ASTERISCHI INVECE DELLA STRINGA
+            valido = true;
+            System.out.print("Inserisci la tua password: ");
+            password = scanner.nextLine();
+            //VEDERE COME FAR VISUALIZZARE GLI ASTERISCHI INVECE DELLA STRINGA
                 /*devono essere visualizzate mentre scrive o dopo?
                 Perchè se vogliamo gli asterischi per ogni carattere immesso,
                 bisogna simulare un meccanismo in cui intercetti i tasti premuti e
                 visualizzi solo gli asterischi al posto dei caratteri.
-                Questo richiede l'uso della libreria esterna come `Jline`.
+                Questo richiede l'uso della libreria esterna come Jline.
                 Se invece vogliamo mantenere nascosta la password,
-                è meglio usare `Console` oppure `JPasswordField`, che è per applicazioni grafiche
+                è meglio usare Console oppure JPasswordField, che è per applicazioni grafiche
                  */
-             if(password.length()<8){
-                 //SE VOGLIAMO POSSIAMO METTERE QUI ALTRE CONDIZIONI
-                 // TIPO CARETTERI SPECIALI O MAIUSCOLE/MINUSCOLE
-                 passwordValida = false;
-                 System.out.println("Password non valida");
-             }
-         } while (!passwordValida);
+            if(password.length()<8){
+                //SE VOGLIAMO POSSIAMO METTERE QUI ALTRE CONDIZIONI
+                // TIPO CARETTERI SPECIALI O MAIUSCOLE/MINUSCOLE
+                valido = false;
+                System.out.println("Password non valida");
+            }
+        } while (!valido);
 
         //Storing del nuovo utente nel file
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_UTENTI, true))){
-            writer.write(nome + "," + cognome + "," + indirizzo + "," + email + "," + password);
-            writer.newLine();
-            System.out.println("Registrazione avvenuta con successo!");
-        } catch (IOException e) {           //gestione dell'eccezione
-            System.out.println("Errore nella registrazione! Riprova più tardi.");
-        }
+        Utenti user = new Utenti(email, nome, cognome, provincia, ristoratore, password);
+        user.salvaUtente();
     }
     //metodo trovaProvincia
     private static boolean trovaProvincia(String provincia){
