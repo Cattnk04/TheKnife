@@ -3,7 +3,9 @@ package Dominio;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Scanner;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -11,7 +13,7 @@ import java.io.File;
 
 
 public class Menu {
-    private static final String FILE_UTENTI = "Utenti.txt";
+    private static final String FILE_UTENTI = "src/Dominio/Utenti.txt";
 
     // metodo per la registrazione
     public static void registraUtente(Scanner scanner){
@@ -42,7 +44,7 @@ public class Menu {
         boolean valido,ristoratore = false;
         do{
             valido = true;
-            System.out.println("Sei proprietario di un ristorante? [s/n]");
+            System.out.print("Sei proprietario di un ristorante? [s/n]: ");
             if(scanner.nextLine().trim().toLowerCase().equals("s")){
                 ristoratore = true;
             } else if  (scanner.nextLine().trim().toLowerCase().equals("n")){
@@ -92,7 +94,7 @@ public class Menu {
     //metodo trovaProvincia
     private static boolean trovaProvincia(String provincia){
         try{
-            File fileProvince = new File("Province.txt");
+            File fileProvince = new File("src/Dominio/Province.txt");
             if (fileProvince.exists()){
                 System.out.println("Esiste");
             }else{
@@ -127,52 +129,50 @@ public class Menu {
     }
     // metodo per il login
     public static void effettuaLogin(Scanner scanner) {
+    boolean trovato = false; // Flag per controllare se il login riesce
 
-        boolean trovato = false; // Flag per controllare se il login riesce
+    while (!trovato) {
+        System.out.println("=== Login ===");
+        System.out.print("Inserisci il tuo email: ");
+        String email = scanner.nextLine().trim();
+        System.out.print("Inserisci la tua password: ");
+        String password = scanner.nextLine().trim();
 
-        while (!trovato) {
+        try {
+            Path path = Paths.get("src", "Dominio", "Utenti.txt");
+            BufferedReader reader = Files.newBufferedReader(path);
 
-            System.out.println("=== Login ===");
-            System.out.print("Inserisci il tuo email: ");
-            String email = scanner.nextLine().trim(); // Rimuove spazi inutili
-            System.out.print("Inserisci la tua password: ");
-            String password = scanner.nextLine().trim(); // Rimuove spazi inutili
-
-            // Lettura del file txt
-            try (BufferedReader reader = new BufferedReader(new FileReader(FILE_UTENTI))) {
-                String line;
-
-                while ((line = reader.readLine()) != null) {
-                    // Rimuove gli spazi dai dati del file prima del confronto
-                    String[] credenziali = line.trim().split(",");
-                    if (credenziali.length >= 4) { // Assicura che ci siano abbastanza campi
-                        if (credenziali[3].trim().equals(email) && credenziali[4].trim().equals(password)) {
-                            trovato = true;
-
-                            // Recupera il nome dell'utente per il messaggio di benvenuto
-                            String nome = credenziali[0].trim(); // Afferra il primo campo come nome
-                            System.out.println("Login avvenuto con successo! \nBenvenuto/a " + nome + "!");
-                            break; // Esci dal ciclo una volta trovata la corrispondenza
-                        }
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] credenziali = line.trim().split(",");
+                if (credenziali.length >= 6) {
+                    if (credenziali[0].trim().equals(email) && credenziali[5].trim().equals(password)) {
+                        trovato = true;
+                        String nome = credenziali[0].trim();
+                        System.out.println("Login avvenuto con successo! \nBenvenuto/a " + nome + "!");
+                        break;
                     }
                 }
-
-                // Controllo finale dopo il ciclo
-                if (!trovato) { // Se non trovato
-                    System.out.println("Email o password errati!");
-                    System.out.print("Vuoi riprovare? (sì/no): ");
-                    String risposta = scanner.nextLine().trim();
-                    if (risposta.equalsIgnoreCase("no")) { // Gestisce "No" in maiuscolo/minuscolo
-                        System.out.println("Grazie per aver usato il nostro servizio!");
-                        scanner.close();
-                        return;
-                    }
-                }
-            } catch (IOException e) { // Gestione eccezione per problemi con il file
-                System.out.println("Errore durante il login. Riprova più tardi o effettua la registrazione.");
             }
+            reader.close();
+
+            if (!trovato) {
+                System.out.println("Email o password errati!");
+                System.out.print("Vuoi riprovare? (sì/no): ");
+                String risposta = scanner.nextLine().trim();
+                if (risposta.equalsIgnoreCase("no")) {
+                    System.out.println("Grazie per aver usato il nostro servizio!");
+                    scanner.close();
+                    return;
+                }
+            }
+
+        } catch (IOException e) {
+            System.out.println("Errore durante il login. Verifica il file Utenti.txt.");
+            e.printStackTrace();
         }
     }
+}
     //metodo accesso come Guest
     public static void accediComeGuest(){
         System.out.println("Sei entrato come Guest. Benvenuto!");
