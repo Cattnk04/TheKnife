@@ -12,22 +12,20 @@ public class Utenti {
     private String passwordHash;
 
     public Utenti(String email,String nome,String cognome, String provincia, boolean ristoratore, String passwordHash) throws RuntimeException{
-        controllaUtenteDuplicato(email.trim());
         this.email = email.trim();
-        controllaUtenteDuplicato(email);
         this.nome = nome.trim();
         this.cognome = cognome.trim();
         this.provincia = provincia.trim();
         this.ristoratore = ristoratore;
         this.passwordHash = passwordHash;
     }
+
     public String getNome(){
         return  this.nome;
     }
     public void setNome(String nome){
         this.nome = nome;
     }
-
     public String getCognome(){
         return  this.cognome;
     }
@@ -46,31 +44,48 @@ public class Utenti {
     public boolean getRistoratore(){
         return  this.ristoratore;
     }
-    public void controllaUtenteDuplicato(String email) throws RuntimeException{
-        try{
-            FileReader fileReader = new FileReader(FILE_UTENTI);
-            BufferedReader br = new BufferedReader(fileReader);
-            String stringa = br.readLine();
-            while(stringa!=null){
-                String[] arrayStringaUtente = stringa.split(",");
-                if(arrayStringaUtente[0].equals(email))
-                    throw new RuntimeException("Utente non puo' essere duplicato");
-                else
-                    stringa = br.readLine();
+
+    //Metodo per controllo duplicato utente
+    public void controllaUtenteDuplicato() throws RuntimeException{
+        File fileUtenti = new File("src/Dominio/Utenti.txt");
+
+        // Verifica se il file esiste, se no, lo crea
+        if (!fileUtenti.exists()) {
+            try {
+                fileUtenti.createNewFile();  // Crea il file se non esiste
+            } catch (IOException e) {
+                System.out.println("Errore durante la creazione del file Utenti.txt.");
+                e.printStackTrace();
             }
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException("File non trovato");
+        }
+
+        // Aggiungi la logica per verificare se l'utente esiste già
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(fileUtenti));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] credenziali = line.split(",");
+                if (credenziali.length >= 6 && credenziali[4].trim().equals(email)) {
+                    throw new RuntimeException("Utente già registrato con questa email!");
+                }
+            }
+            reader.close();
         } catch (IOException e) {
-            throw new RuntimeException("IO Exception");
+            System.out.println("Errore durante la lettura del file Utenti.txt.");
+            e.printStackTrace();
         }
     }
+
+    //Metodo di salvataggio utente
     public void salvaUtente(){
-        File fileUtenti = new File(FILE_UTENTI);
-        try{
-            FileWriter fileWriter = new FileWriter(fileUtenti, true);
-            String stringaUtente = this.email + ',' + this.nome + ',' + this.cognome + ',' + this.provincia + ',' + this.ristoratore + ',' + this.passwordHash;
+        // Usa il percorso relativo per aggiungere l'utente al file "src/Dominio/Utenti.txt"
+        try {
+            FileWriter writer = new FileWriter("src/Dominio/Utenti.txt", true);  // Aggiungi l'utente al file esistente
+            writer.write(email + "," + nome + "," + cognome + "," + provincia + "," + ristoratore + "," + passwordHash + "\n");
+            writer.close();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.out.println("Errore durante il salvataggio dell'utente.");
+            e.printStackTrace();
         }
     }
 }
