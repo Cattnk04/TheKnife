@@ -2,8 +2,8 @@ package Dominio;
 
 import java.io.*;
 
-public class Utenti {
-    public static final String FILE_UTENTI = "Utenti.txt";
+public class Utente {
+    public static final String FILE_UTENTI = "Utente.txt";
     private String nome;
     private String cognome;
     private final String email;
@@ -11,7 +11,7 @@ public class Utenti {
     private final boolean ristoratore;
     private String passwordHash;
 
-    public Utenti(String email,String nome,String cognome, String provincia, boolean ristoratore, String passwordHash) throws RuntimeException{
+    public Utente(String email, String nome, String cognome, String provincia, boolean ristoratore, String passwordHash) throws RuntimeException{
         this.email = email.trim();
         this.nome = nome.trim();
         this.cognome = cognome.trim();
@@ -47,14 +47,14 @@ public class Utenti {
 
     //Metodo per controllo duplicato utente
     public void controllaUtenteDuplicato() throws RuntimeException{
-        File fileUtenti = new File("src/Dominio/Utenti.txt");
+        File fileUtenti = new File("src/Dominio/Utente.txt");
 
         // Verifica se il file esiste, se no, lo crea
         if (!fileUtenti.exists()) {
             try {
                 fileUtenti.createNewFile();  // Crea il file se non esiste
             } catch (IOException e) {
-                System.out.println("Errore durante la creazione del file Utenti.txt.");
+                System.out.println("Errore durante la creazione del file Utente.txt.");
                 e.printStackTrace();
             }
         }
@@ -71,16 +71,16 @@ public class Utenti {
             }
             reader.close();
         } catch (IOException e) {
-            System.out.println("Errore durante la lettura del file Utenti.txt.");
+            System.out.println("Errore durante la lettura del file Utente.txt.");
             e.printStackTrace();
         }
     }
 
     //Metodo di salvataggio utente
     public void salvaUtente(){
-        // Usa il percorso relativo per aggiungere l'utente al file "src/Dominio/Utenti.txt"
+        // Usa il percorso relativo per aggiungere l'utente al file "src/Dominio/Utente.txt"
         try {
-            FileWriter writer = new FileWriter("src/Dominio/Utenti.txt", true);  // Aggiungi l'utente al file esistente
+            FileWriter writer = new FileWriter("src/Dominio/Utente.txt", true);  // Aggiungi l'utente al file esistente
             writer.write(email + "," + nome + "," + cognome + "," + provincia + "," + ristoratore + "," + passwordHash + "\n");
             writer.close();
         } catch (IOException e) {

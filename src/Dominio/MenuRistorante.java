@@ -5,10 +5,10 @@ import java.io.*;
 
 public class MenuRistorante {
 
-    private List<Ristorante> ristoranti;
-    private Utenti utenteCorrente;
+    /*private List<Ristorante> ristoranti;
+    private Utente utenteCorrente;
 
-    public MenuRistorante(Utenti utente) {
+    public MenuRistorante(Utente utente) {
         this.utenteCorrente = utente;
         this.ristoranti = caricaRistoranti();
     }
@@ -80,7 +80,7 @@ public class MenuRistorante {
         return ristoranti.stream()
                 .filter(Ristorante::getServizioPrenotazioneOnline)
                 .toList();
-    }
+    }*/
 
 
 

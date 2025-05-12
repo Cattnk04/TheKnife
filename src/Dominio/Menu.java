@@ -12,7 +12,7 @@ import java.io.File;
 
 
 public class Menu {
-    private static final String FILE_UTENTI = "src/Dominio/Utenti.txt";
+    private static final String FILE_UTENTI = "src/Dominio/Utente.txt";
 
     // metodo per la registrazione
     public static void registraUtente(Scanner scanner){
@@ -86,7 +86,7 @@ public class Menu {
         } while (!valido);
 
         //Storing del nuovo utente nel file
-        Utenti user = new Utenti(email, nome, cognome, provincia, ristoratore, password);
+        Utente user = new Utente(email, nome, cognome, provincia, ristoratore, password);
         user.controllaUtenteDuplicato();
         user.salvaUtente();
     }
@@ -138,7 +138,7 @@ public class Menu {
         String password = scanner.nextLine().trim();
 
         try {
-            Path path = Paths.get("src", "Dominio", "Utenti.txt");
+            Path path = Paths.get("src", "Dominio", "Utente.txt");
             BufferedReader reader = Files.newBufferedReader(path);
 
             String line;
@@ -167,7 +167,7 @@ public class Menu {
             }
 
         } catch (IOException e) {
-            System.out.println("Errore durante il login. Verifica il file Utenti.txt.");
+            System.out.println("Errore durante il login. Verifica il file Utente.txt.");
             e.printStackTrace();
         }
     }
