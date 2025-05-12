@@ -1,11 +1,12 @@
 package Dominio;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class ListaRistoranti {
-    public ListaRistoranti(){}
+    public ListaRistoranti(){
+        ricavaRistorantiDaCSV();
+    }
     public List<Ristorante> listaRistoranti = new ArrayList<>();
 
     public List<Ristorante> getListaRistoranti() {
@@ -22,5 +23,9 @@ public class ListaRistoranti {
 
     public void ricavaRistorantiDaCSV(){
         //lettura del file Ristoranti.txt e salvataggio nella lista listaRistoranti
+    }
+    public Ristorante cercaRistorante(){
+        //funzione per la ricerca del ristorante nella lista
+        return null;
     }
 }

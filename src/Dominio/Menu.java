@@ -4,19 +4,58 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.util.Scanner;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.io.File;
-
 
 public class Menu {
     private static final String FILE_UTENTI = "src/Dominio/Utente.txt";
 
-    // metodo per la registrazione
-    public static void registraUtente(Scanner scanner){
+    public Menu(){
+        //Creazione delle diverse liste per l'accesso ai dati
+        ListaUtenti listaUtenti = new ListaUtenti();
+        ListaRistoranti listaRistoranti = new ListaRistoranti();
+        int scelta = 0; //scelta del menu
+        do{
+            menuGuest(new Scanner(System.in));
+            switch(scelta){
+                case 1:
+                    registraUtente(listaUtenti); //chiamerà la funzione nella lista per aggiungere l'utente li
+                    //LoginPostRegistrazione("username", "password"); //vedere poi come farlo se tornare subito l'utente appena creato
+                    break;
+                case 2:
+                    loginUtente(listaUtenti);
+                    break;
+                case 3:
+                    listaRistoranti.cercaRistorante();
+                    break;
+                case 4:
+                    System.out.println("Grazie per aver usato il nostro servizio!");
+                    return;
+                default:
+                    System.out.println("Scelta non valida!");
+            } // chiusura switch
 
+        }while (scelta != 0);
+    }
+
+    public static int menuGuest(Scanner scanner){
+        int choice;
+        System.out.println("Benvenuto nella schermata home ospite!\n");
+        System.out.println("Scegli un'opzione:");
+        System.out.println("1. Registrati");
+        System.out.println("2. Accedi");
+        System.out.println("3. Cerca ristorante");
+        System.out.println("0. Esci dall'applicazione");
+        System.out.print("La tua scelta: ");
+
+        choice = scanner.nextInt();
+
+        scanner.nextLine(); // Pulizia della linea
+        return choice;
+    }
+    // metodo per la registrazione
+    public static void registraUtente(ListaUtenti listaUtenti){
+        Scanner scanner = new Scanner(System.in); //per inserire i dati
         System.out.println("=== Registrazione ===");
         String nome = "";
         do{
@@ -84,13 +123,14 @@ public class Menu {
                 System.out.println("Password non valida");
             }
         } while (!valido);
-
+        scanner.close();
         //Storing del nuovo utente nel file
-        Utente user = new Utente(email, nome, cognome, provincia, ristoratore, password);
-        user.controllaUtenteDuplicato();
-        user.salvaUtente();
+        Utente nuovoUtente = new Utente(email, nome, cognome, provincia, ristoratore, password);
+        if(!listaUtenti.utenteDuplicato()){
+            listaUtenti.aggiungiUtente();
+        }
     }
-    //metodo trovaProvincia
+    //metodo trovaProvincia per verificare se la provincia inserita dall'utente esiste
     private static boolean trovaProvincia(String provincia){
         try{
             File fileProvince = new File("src/Dominio/Province.txt");
@@ -122,39 +162,23 @@ public class Menu {
         }
     }
 
-    //login diretto dopo la registrazione
-    private static void LoginPostRegistrazione(String email, String password){
-        System.out.println("Login effettuato automaticamente per l'utente registrato");
-    }
     // metodo per il login
-    public static void effettuaLogin(Scanner scanner) {
-    boolean trovato = false; // Flag per controllare se il login riesce
+    public static Utente loginUtente(ListaUtenti listaUtenti) {
+        boolean trovato = false; // Flag per controllare se il login riesce
+        Scanner scanner = new Scanner(System.in);
+        while (!trovato) {
+            //inserimento dei dati
+            System.out.println("=== Login ===");
+            System.out.print("Inserisci la tua e-mail: ");
+            String email = scanner.nextLine().trim();
+            System.out.print("Inserisci la tua password: ");
+            //va fatta la cosa degli asterischi qui
+            String password = scanner.nextLine().trim();
+            //Fine inserimento dati da cercare
 
-    while (!trovato) {
-        System.out.println("=== Login ===");
-        System.out.print("Inserisci il tuo email: ");
-        String email = scanner.nextLine().trim();
-        System.out.print("Inserisci la tua password: ");
-        String password = scanner.nextLine().trim();
+            //SCORRERE LA LISTA PER VEDERE SE ESISTE UN UTNTE CON QUESTI DATI
 
-        try {
-            Path path = Paths.get("src", "Dominio", "Utente.txt");
-            BufferedReader reader = Files.newBufferedReader(path);
-
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] credenziali = line.trim().split(",");
-                if (credenziali.length >= 6) {
-                    if (credenziali[0].trim().equals(email) && credenziali[5].trim().equals(password)) {
-                        trovato = true;
-                        String nome = credenziali[0].trim();
-                        System.out.println("Login avvenuto con successo! \nBenvenuto/a " + nome + "!");
-                        break;
-                    }
-                }
-            }
-            reader.close();
-
+            //altrimenti
             if (!trovato) {
                 System.out.println("Email o password errati!");
                 System.out.print("Vuoi riprovare? (sì/no): ");
@@ -162,65 +186,11 @@ public class Menu {
                 if (risposta.equalsIgnoreCase("no")) {
                     System.out.println("Grazie per aver usato il nostro servizio!");
                     scanner.close();
-                    return;
+                    return null;
                 }
             }
-
-        } catch (IOException e) {
-            System.out.println("Errore durante il login. Verifica il file Utente.txt.");
-            e.printStackTrace();
         }
     }
-}
-    //metodo accesso come Guest
-    public static void accediComeGuest(){
-        System.out.println("Sei entrato come Guest. Benvenuto!");
-    }
-    public static int stampaMenu(Scanner scanner){
-        int choice;
-            System.out.println("Benvenuto nella schermata home!\n");
-            System.out.println("Scegli un'opzione:");
-            System.out.println("1. Registrati");
-            System.out.println("2. Accedi");
-            System.out.println("3. Accedi come Guest");
-            System.out.println("4. Esci");
-            System.out.print("La tua scelta: ");
 
-            choice = scanner.nextInt();
 
-            scanner.nextLine(); // Pulizia della linea
-        return choice;
-    }
-    public Menu() {
-        boolean sessioneAttiva = true; // Controllo della sessione
-        Scanner scanner = new Scanner(System.in);
-        int choice;
-
-        while(sessioneAttiva){      //chiude il Menu a fine di ogni scelta
-            choice = stampaMenu(scanner);
-            switch (choice) {
-                case 1:
-                    registraUtente(scanner);
-                    System.out.println("Subito dopo il termine della registrazione, verrai loggato automaticamente.");
-                    LoginPostRegistrazione("username", "password");
-                    sessioneAttiva = false;
-                    break;
-                case 2:
-                    effettuaLogin(scanner);
-                    sessioneAttiva = false;
-                    break;
-                case 3:
-                    accediComeGuest();
-                    sessioneAttiva = false;
-                    break;
-                case 4:
-                    System.out.println("Grazie per aver usato il nostro servizio!");
-                    scanner.close();
-                    sessioneAttiva = false;
-                    return;
-                default:
-                    System.out.println("Scelta non valida!");
-            } // chiusura switch
-        }
-    } //chiusura costruttore Menu
 }
