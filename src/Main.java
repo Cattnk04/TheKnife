@@ -7,8 +7,11 @@ import Dominio.*;
 public class Main {
 
     public static void main(String[] args) {
-        Menu menu = new Menu();
-
-
+        int scelta = 0;
+        List<Utente> = ListaUtenti.getListaUtenti();
+        Utente utente; //utente senza dati per poi prenderli se fa il login
+        do{
+            Menu menu = new Menu();
+        }while (scelta!= 0);
     } // chiusura main
 }

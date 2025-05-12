@@ -11,6 +11,14 @@ public class Utente {
     private final boolean ristoratore;
     private String passwordHash;
 
+    public Utente() {
+        this.nome = "";
+        this.cognome = "";
+        this.email = "";
+        this.provincia = "";
+        this.ristoratore = false;
+        this.passwordHash = "";
+    }
     public Utente(String email, String nome, String cognome, String provincia, boolean ristoratore, String passwordHash) throws RuntimeException{
         this.email = email.trim();
         this.nome = nome.trim();
@@ -65,7 +73,7 @@ public class Utente {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] credenziali = line.split(",");
-                if (credenziali.length >= 6 && credenziali[4].trim().equals(email)) {
+                if (credenziali.length >= 6 && credenziali[0].trim().equals(email)) {
                     throw new RuntimeException("Utente già registrato con questa email!");
                 }
             }
