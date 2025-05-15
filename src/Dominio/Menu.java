@@ -126,8 +126,8 @@ public class Menu {
         scanner.close();
         //Storing del nuovo utente nel file
         Utente nuovoUtente = new Utente(email, nome, cognome, provincia, ristoratore, password);
-        if(!listaUtenti.utenteDuplicato()){
-            listaUtenti.aggiungiUtente();
+        if(!listaUtenti.utenteDuplicato(nuovoUtente)){
+            listaUtenti.aggiungiUtente(nuovoUtente);
         }
     }
     //metodo trovaProvincia per verificare se la provincia inserita dall'utente esiste
@@ -166,7 +166,7 @@ public class Menu {
     public static Utente loginUtente(ListaUtenti listaUtenti) {
         boolean trovato = false; // Flag per controllare se il login riesce
         Scanner scanner = new Scanner(System.in);
-        while (!trovato) {
+        do {
             //inserimento dei dati
             System.out.println("=== Login ===");
             System.out.print("Inserisci la tua e-mail: ");
@@ -177,6 +177,11 @@ public class Menu {
             //Fine inserimento dati da cercare
 
             //SCORRERE LA LISTA PER VEDERE SE ESISTE UN UTNTE CON QUESTI DATI
+            for(Utente utente : listaUtenti.getListaUtenti()){
+                if(utente.getEmail() == email && utente.getPassword() == password){
+                    return utente;
+                }
+            }
 
             //altrimenti
             if (!trovato) {
@@ -189,7 +194,8 @@ public class Menu {
                     return null;
                 }
             }
-        }
+        }while(!trovato);
+        return null;
     }
 
 

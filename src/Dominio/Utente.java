@@ -9,7 +9,7 @@ public class Utente {
     private final String email;
     private String provincia;
     private final boolean ristoratore;
-    private String passwordHash;
+    private String password;
 
     public Utente() {
         this.nome = "";
@@ -17,15 +17,15 @@ public class Utente {
         this.email = "";
         this.provincia = "";
         this.ristoratore = false;
-        this.passwordHash = "";
+        this.password = "";
     }
-    public Utente(String email, String nome, String cognome, String provincia, boolean ristoratore, String passwordHash) throws RuntimeException{
+    public Utente(String email, String nome, String cognome, String provincia, boolean ristoratore, String password) throws RuntimeException{
         this.email = email.trim();
         this.nome = nome.trim();
         this.cognome = cognome.trim();
         this.provincia = provincia.trim();
         this.ristoratore = ristoratore;
-        this.passwordHash = passwordHash;
+        this.password = password;
     }
 
     public String getNome(){
@@ -52,6 +52,7 @@ public class Utente {
     public boolean getRistoratore(){
         return  this.ristoratore;
     }
+    public String getPassword(){return this.password;}
 
     //Metodo per controllo duplicato utente
     public void controllaUtenteDuplicato() throws RuntimeException{
@@ -89,7 +90,7 @@ public class Utente {
         // Usa il percorso relativo per aggiungere l'utente al file "src/Dominio/Utente.txt"
         try {
             FileWriter writer = new FileWriter("src/Dominio/Utente.txt", true);  // Aggiungi l'utente al file esistente
-            writer.write(email + "," + nome + "," + cognome + "," + provincia + "," + ristoratore + "," + passwordHash + "\n");
+            writer.write(email + "," + nome + "," + cognome + "," + provincia + "," + ristoratore + "," + password + "\n");
             writer.close();
         } catch (IOException e) {
             System.out.println("Errore durante il salvataggio dell'utente.");
