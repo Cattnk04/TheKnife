@@ -19,7 +19,7 @@ public class Utente {
         this.ristoratore = false;
         this.password = "";
     }
-    public Utente(String email, String nome, String cognome, String provincia, boolean ristoratore, String password) throws RuntimeException{
+    public Utente(String email, String nome, String cognome, String password, String provincia, boolean ristoratore) throws RuntimeException{
         this.email = email.trim();
         this.nome = nome.trim();
         this.cognome = cognome.trim();
@@ -54,47 +54,9 @@ public class Utente {
     }
     public String getPassword(){return this.password;}
 
-    //Metodo per controllo duplicato utente
-    public void controllaUtenteDuplicato() throws RuntimeException{
-        File fileUtenti = new File("src/Dominio/Utente.txt");
-
-        // Verifica se il file esiste, se no, lo crea
-        if (!fileUtenti.exists()) {
-            try {
-                fileUtenti.createNewFile();  // Crea il file se non esiste
-            } catch (IOException e) {
-                System.out.println("Errore durante la creazione del file Utente.txt.");
-                e.printStackTrace();
-            }
-        }
-
-        // Aggiungi la logica per verificare se l'utente esiste già
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(fileUtenti));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] credenziali = line.split(",");
-                if (credenziali.length >= 6 && credenziali[0].trim().equals(email)) {
-                    throw new RuntimeException("Utente già registrato con questa email!");
-                }
-            }
-            reader.close();
-        } catch (IOException e) {
-            System.out.println("Errore durante la lettura del file Utente.txt.");
-            e.printStackTrace();
-        }
+    public String toString(){
+        String stringa = email.trim().toLowerCase() + "," + nome.trim() + "," + cognome.trim() + "," + password.trim() + ","+ provincia.trim() + "," + ristoratore;
+        return stringa;
     }
 
-    //Metodo di salvataggio utente
-    public void salvaUtente(){
-        // Usa il percorso relativo per aggiungere l'utente al file "src/Dominio/Utente.txt"
-        try {
-            FileWriter writer = new FileWriter("src/Dominio/Utente.txt", true);  // Aggiungi l'utente al file esistente
-            writer.write(email + "," + nome + "," + cognome + "," + provincia + "," + ristoratore + "," + password + "\n");
-            writer.close();
-        } catch (IOException e) {
-            System.out.println("Errore durante il salvataggio dell'utente.");
-            e.printStackTrace();
-        }
-    }
 }

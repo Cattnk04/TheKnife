@@ -125,7 +125,7 @@ public class Menu {
         } while (!valido);
         scanner.close();
         //Storing del nuovo utente nel file
-        Utente nuovoUtente = new Utente(email, nome, cognome, provincia, ristoratore, password);
+        Utente nuovoUtente = new Utente(email, nome, cognome, password, provincia, ristoratore);
         if(!listaUtenti.utenteDuplicato(nuovoUtente)){
             listaUtenti.aggiungiUtente(nuovoUtente);
         }
