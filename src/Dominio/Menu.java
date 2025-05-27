@@ -2,29 +2,33 @@ package Dominio;
 
 
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 public class Menu {
     private static final String FILE_UTENTI = "src/Data/Utenti.txt";
 
     public Menu(){
-        //Creazione delle diverse liste per l'accesso ai dati
-        ListaUtenti listaUtenti = new ListaUtenti();
-        ListaRistoranti listaRistoranti = new ListaRistoranti();
-        int scelta = 0; //scelta del menu
-        Utente utenteCorrente;
-        do{
-            scelta = menuGuest(new Scanner(System.in));
+    //Creazione delle diverse liste per l'accesso ai dati
+    Scanner scanner = new Scanner(System.in);  // Creiamo un solo Scanner
+    ListaUtenti listaUtenti = new ListaUtenti();
+    ListaRistoranti listaRistoranti = new ListaRistoranti();
+    int scelta = 0;
+    Utente utenteCorrente;
+    
+    do {
+        try {
+            scelta = menuGuest(scanner);
             switch(scelta){
                 case 1:
-                    utenteCorrente = registraUtente(listaUtenti); //chiamerà la funzione nella lista per aggiungere l'utente li
-                    if(utenteCorrente != null){             //apertura menù utente
+                    utenteCorrente = registraUtente(listaUtenti);
+                    if(utenteCorrente != null){
                         System.out.println("Registrazione avvenuta con successo!");
                         MenuUtenteLog menuUtenteLog = new MenuUtenteLog();
                     }
                     break;
                 case 2:
                     utenteCorrente = loginUtente(listaUtenti);
-                    if(utenteCorrente != null){             //apertura menù utente
+                    if(utenteCorrente != null){
                         System.out.println("Login avvenuto con successo!");
                         MenuUtenteLog menuUtenteLog = new MenuUtenteLog();
                     }
@@ -34,13 +38,19 @@ public class Menu {
                     break;
                 case 0:
                     System.out.println("Grazie per aver usato il nostro servizio!");
-                    return;
+                    break;
                 default:
                     System.out.println("Scelta non valida!");
-            } // chiusura switch
-
-        }while (scelta != 0);
-    }
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("Inserire un numero valido!");
+            scanner.nextLine(); // Pulizia del buffer
+            scelta = -1;
+        }
+    } while (scelta != 0);
+    
+    scanner.close(); // Chiudiamo lo Scanner solo alla fine del programma
+}
 
     public static int menuGuest(Scanner scanner){
         int choice;
