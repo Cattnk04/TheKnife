@@ -1,9 +1,6 @@
 package Dominio;
 
-import java.util.*;
-import java.io.*;
-
-public class MenuRistorante {
+public class MenuUtenteLog {
 
     /*private List<Ristorante> ristoranti;
     private Utente utenteCorrente;
@@ -11,32 +8,6 @@ public class MenuRistorante {
     public MenuRistorante(Utente utente) {
         this.utenteCorrente = utente;
         this.ristoranti = caricaRistoranti();
-    }
-
-    // Metodo per caricare i ristoranti dal file
-    private List<Ristorante> caricaRistoranti() {
-        List<Ristorante> listaRistoranti = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader("src/Dominio/Ristoranti.txt"))){
-            String line;
-            while((line = reader.readLine()) != null){
-                String[] dati = line.split(",");
-                Ristorante r = new Ristorante(
-                        dati[0],    // nome
-                        dati[1],    // nazione
-                        dati[2],    //città
-                        dati[3],    //indirizzo
-                        Integer.parseInt(dati[4]),  //fascia prezzo
-                        Boolean.parseBoolean(dati[5]),  //delivery
-                        Boolean.parseBoolean(dati[6]),  //prenotazione online
-                        dati[7]     // tipo cucina
-                        );
-                listaRistoranti.add(r);
-            }
-        }
-        catch (IOException e) {
-            System.out.println("Errore nel caricamento dei ristoranti: " + e.getMessage());
-        }
-        return listaRistoranti;
     }
 
     // Metodo per visualizzare i ristoranti nella località dell'utente

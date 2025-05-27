@@ -1,11 +1,7 @@
 package Dominio;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+
 import java.util.Scanner;
-import java.io.File;
 
 public class Menu {
     private static final String FILE_UTENTI = "../Persistenza/Utenti.txt";
@@ -15,20 +11,28 @@ public class Menu {
         ListaUtenti listaUtenti = new ListaUtenti();
         ListaRistoranti listaRistoranti = new ListaRistoranti();
         int scelta = 0; //scelta del menu
+        Utente utenteCorrente;
         do{
-            menuGuest(new Scanner(System.in));
+            scelta = menuGuest(new Scanner(System.in));
             switch(scelta){
                 case 1:
-                    registraUtente(listaUtenti); //chiamerà la funzione nella lista per aggiungere l'utente li
-                    //LoginPostRegistrazione("username", "password"); //vedere poi come farlo se tornare subito l'utente appena creato
+                    utenteCorrente = registraUtente(listaUtenti); //chiamerà la funzione nella lista per aggiungere l'utente li
+                    if(utenteCorrente != null){             //apertura menù utente
+                        System.out.println("Registrazione avvenuta con successo!");
+                        MenuUtenteLog menuUtenteLog = new MenuUtenteLog();
+                    }
                     break;
                 case 2:
-                    loginUtente(listaUtenti);
+                    utenteCorrente = loginUtente(listaUtenti);
+                    if(utenteCorrente != null){             //apertura menù utente
+                        System.out.println("Login avvenuto con successo!");
+                        MenuUtenteLog menuUtenteLog = new MenuUtenteLog();
+                    }
                     break;
                 case 3:
                     listaRistoranti.cercaRistorante();
                     break;
-                case 4:
+                case 0:
                     System.out.println("Grazie per aver usato il nostro servizio!");
                     return;
                 default:
@@ -54,7 +58,7 @@ public class Menu {
         return choice;
     }
     // metodo per la registrazione
-    public static void registraUtente(ListaUtenti listaUtenti){
+    public static Utente registraUtente(ListaUtenti listaUtenti){
         Scanner scanner = new Scanner(System.in); //per inserire i dati
         System.out.println("=== Registrazione ===");
         String nome = "";
@@ -131,7 +135,10 @@ public class Menu {
         Utente nuovoUtente = new Utente(email, nome, cognome, password, nazione, citta, ristoratore);
         if(!listaUtenti.utenteDuplicato(nuovoUtente)){
             listaUtenti.aggiungiUtente(nuovoUtente);
+            return nuovoUtente;
         }
+        return null;
+
     }
 
     // metodo per il login

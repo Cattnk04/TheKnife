@@ -75,15 +75,10 @@ public class Ristorante {
     public void setTipoCucina(String tipoCucina){
         this.tipoCucina = tipoCucina;
     }
-    public void InserisciRistorante() {
-        File fileRistoranti = new File("../Persistenza/Ristoranti.txt");
 
-        try {
-            FileWriter writer = new FileWriter(fileRistoranti, true);
-            String stringa = this.nome + + ',' + this.emailRistoratore + ',' + this.nazione + ',' + this.citta + ',' + this.indirizzo + ',' + this.fasciaPrezzo + ','+ this.servizioDelivery + ',' + this.servizioPrenotazioneOnline + ',' + this.tipoCucina;
-            writer.write(stringa);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    @Override
+    public String toString(){
+        return this.nome + + ',' + this.emailRistoratore + ',' + this.nazione + ',' + this.citta + ',' + this.indirizzo + ',' + this.fasciaPrezzo + ','+ this.servizioDelivery + ',' + this.servizioPrenotazioneOnline + ',' + this.tipoCucina;
     }
+
 }
