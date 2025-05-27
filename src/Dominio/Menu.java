@@ -73,11 +73,13 @@ public class Menu {
             }
         } while (cognome.length()<=1);
 
-        String provincia = "";
-        do{
-            System.out.print("Inserisci la provincia di domicilio (prima lettera maiuscola): ");
-            provincia = scanner.nextLine();
-        } while (!trovaProvincia(provincia));
+        String nazione = "";
+        System.out.print("Inserisci la Nazione: ");
+        nazione = scanner.nextLine();
+
+        String citta = "";
+        System.out.print("Inserisci la provincia di domicilio (prima lettera maiuscola): ");
+        citta = scanner.nextLine();
 
         boolean valido,ristoratore = false;
         do{
@@ -124,41 +126,11 @@ public class Menu {
             }
         } while (!valido);
         scanner.close();
+
         //Storing del nuovo utente nel file
-        Utente nuovoUtente = new Utente(email, nome, cognome, password, provincia, ristoratore);
+        Utente nuovoUtente = new Utente(email, nome, cognome, password, nazione, citta, ristoratore);
         if(!listaUtenti.utenteDuplicato(nuovoUtente)){
             listaUtenti.aggiungiUtente(nuovoUtente);
-        }
-    }
-    //metodo trovaProvincia per verificare se la provincia inserita dall'utente esiste
-    private static boolean trovaProvincia(String provincia){
-        try{
-            File fileProvince = new File("../Persistenza/Province.txt");
-            if (fileProvince.exists()){
-                System.out.println("Esiste");
-            }else{
-                System.out.println("Non esiste");
-            }
-            FileReader reader = new FileReader(fileProvince);
-            BufferedReader bufferedReader = new BufferedReader(reader);
-            String data = bufferedReader.readLine();
-
-            while(data != null && !data.toLowerCase().contains(provincia.toLowerCase())){
-                data = bufferedReader.readLine();
-            }
-            bufferedReader.close();
-            reader.close();
-            if(data == null){
-                return false;
-            } else {
-                return true;
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            return false;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
         }
     }
 
@@ -197,6 +169,4 @@ public class Menu {
         }while(!trovato);
         return null;
     }
-
-
 }

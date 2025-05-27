@@ -9,12 +9,12 @@ public class Ristorante {
     private String nazione;
     private String citta;
     private String indirizzo;
-    private Integer fasciaPrezzo;
+    private double fasciaPrezzo;
     private boolean servizioDelivery;
     private boolean servizioPrenotazioneOnline;
     private String tipoCucina;
 
-    Ristorante(String nome, String emailRistoratore, String nazione, String citta, String indirizzo, Integer fasciaPrezzo, boolean servizioDelivery, boolean servizioPrenotazioneOnline, String tipoCucina){
+    Ristorante(String nome, String emailRistoratore, String nazione, String citta, String indirizzo, double fasciaPrezzo, boolean servizioDelivery, boolean servizioPrenotazioneOnline, String tipoCucina){
         this.nome = nome.trim();
         this.emailRistoratore = emailRistoratore.trim();
         this.nazione = nazione.trim();
@@ -38,7 +38,7 @@ public class Ristorante {
     public String getIndirizzo(){
         return this.indirizzo;
     }
-    public Integer getFasciaPrezzo(){
+    public double getFasciaPrezzo(){
         return this.fasciaPrezzo;
     }
     public boolean getServizioDelivery(){
@@ -80,7 +80,7 @@ public class Ristorante {
 
         try {
             FileWriter writer = new FileWriter(fileRistoranti, true);
-            String stringa = this.nome + + ',' + this.emailRistoratore + ',' + this.nazione + ',' + this.citta + ',' + this.indirizzo + ',' + this.fasciaPrezzo.toString() + ','+ this.servizioDelivery + ',' + this.servizioPrenotazioneOnline + ',' + this.tipoCucina;
+            String stringa = this.nome + + ',' + this.emailRistoratore + ',' + this.nazione + ',' + this.citta + ',' + this.indirizzo + ',' + this.fasciaPrezzo + ','+ this.servizioDelivery + ',' + this.servizioPrenotazioneOnline + ',' + this.tipoCucina;
             writer.write(stringa);
         } catch (IOException e) {
             e.printStackTrace();

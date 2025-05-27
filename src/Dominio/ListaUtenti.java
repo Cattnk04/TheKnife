@@ -42,9 +42,10 @@ public class ListaUtenti {
                 String nome = dati[1];
                 String cognome = dati[2];
                 String password = dati[3];
-                String provincia = dati[4];
-                String ristoratore = dati[5];
-                Utente utente = new Utente(email, nome, cognome, password, provincia, (Boolean.parseBoolean(ristoratore)));
+                String nazione = dati[4];
+                String citta = dati[5];
+                String ristoratore = dati[6];
+                Utente utente = new Utente(email, nome, cognome, password, nazione, citta, (Boolean.parseBoolean(ristoratore)));
                 this.listaUtenti.add(utente);
             }
 

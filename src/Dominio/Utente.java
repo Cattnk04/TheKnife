@@ -7,7 +7,8 @@ public class Utente {
     private String nome;
     private String cognome;
     private final String email;
-    private String provincia;
+    private String nazione;
+    private String citta;
     private final boolean ristoratore;
     private String password;
 
@@ -15,15 +16,17 @@ public class Utente {
         this.nome = "";
         this.cognome = "";
         this.email = "";
-        this.provincia = "";
+        this.nazione = "";
+        this.citta = "";
         this.ristoratore = false;
         this.password = "";
     }
-    public Utente(String email, String nome, String cognome, String password, String provincia, boolean ristoratore) throws RuntimeException{
+    public Utente(String email, String nome, String cognome, String password, String nazione, String citta, boolean ristoratore) throws RuntimeException{
         this.email = email.trim();
         this.nome = nome.trim();
         this.cognome = cognome.trim();
-        this.provincia = provincia.trim();
+        this.nazione = nazione.trim();
+        this.citta = citta.trim();
         this.ristoratore = ristoratore;
         this.password = password;
     }
@@ -43,19 +46,26 @@ public class Utente {
     public String getEmail(){
         return  this.email;
     }
-    public String getProvincia(){
-        return  this.provincia;
+    public String getNazione(){
+        return  this.nazione;
     }
-    public void setProvincia(String provincia){
-        this.provincia = provincia;
+    public void setNazione(String nazione){
+        this.nazione = nazione;
+    }
+    public String getCitta(){
+        return  this.citta;
+    }
+    public void setCitta(String citta){
+        this.citta = citta;
     }
     public boolean getRistoratore(){
         return  this.ristoratore;
     }
     public String getPassword(){return this.password;}
 
+    @Override
     public String toString(){
-        String stringa = email.trim().toLowerCase() + "," + nome.trim() + "," + cognome.trim() + "," + password.trim() + ","+ provincia.trim() + "," + ristoratore;
+        String stringa = email.trim().toLowerCase() + "," + nome.trim() + "," + cognome.trim() + "," + password.trim() + ","+ nazione.trim().toLowerCase() + ","+ citta.trim().toLowerCase() + "," + ristoratore;
         return stringa;
     }
 
