@@ -20,41 +20,48 @@ public class ListaUtenti {
 
     public void salvaUtentiSuCSV(){
         //accesso al file e salvataggio della lista su file di testo Utenti.txt
-        for(Utente utente : listaUtenti){
-            try {
-                FileWriter writer = new FileWriter("src/Data/Utenti.txt");
-                writer.append(utente.toString() + "\n");
-            }catch (IOException e){
-                e.printStackTrace();
-            }
-        }
-    }
-
-    public void ricavaUtentiDaCSV(){
-        //lettura del file CSV e salvataggio dei dati sulla lista
         try {
-            FileReader reader = new FileReader("src/Data/Utenti.txt");
-            BufferedReader bufferedReader = new BufferedReader(reader);
-            String riga;
-            while((riga = bufferedReader.readLine()) != null){
-                String[] dati = riga.split(",");
-                String email = dati[0];
-                String nome = dati[1];
-                String cognome = dati[2];
-                String password = dati[3];
-                String nazione = dati[4];
-                String citta = dati[5];
-                String ristoratore = dati[6];
-                Utente utente = new Utente(email, nome, cognome, password, nazione, citta, (Boolean.parseBoolean(ristoratore)));
-                this.listaUtenti.add(utente);
+            FileWriter writer = new FileWriter("src/Data/Utenti.txt");
+            for(Utente utente : listaUtenti){
+                writer.append(utente.toString() + "\n");
             }
-
-        }catch (FileNotFoundException e){
-            e.printStackTrace();
-        } catch (IOException e){
+            writer.close();
+        }catch (IOException e){
             e.printStackTrace();
         }
     }
+
+public void ricavaUtentiDaCSV() {
+    try {
+        FileReader reader = new FileReader("src/Data/Utenti.txt");
+        BufferedReader bufferedReader = new BufferedReader(reader);
+        String riga;
+        while ((riga = bufferedReader.readLine()) != null) {
+            if (!riga.trim().isEmpty()) {  // Verifica che la riga non sia vuota
+                String[] dati = riga.split(",");
+                if (dati.length >= 7) {  // Verifica che ci siano tutti i campi necessari
+                    String email = dati[0].trim();
+                    String nome = dati[1].trim();
+                    String cognome = dati[2].trim();
+                    String password = dati[3].trim();
+                    String nazione = dati[4].trim();
+                    String citta = dati[5].trim();
+                    boolean ristoratore = Boolean.parseBoolean(dati[6].trim());
+                    Utente utente = new Utente(email, nome, cognome, password, nazione, citta, ristoratore);
+                    this.listaUtenti.add(utente);
+                } else {
+                    System.out.println("Avviso: Riga del file non valida (campi insufficienti): " + riga);
+                }
+            }
+        }
+        bufferedReader.close();
+        reader.close();
+    } catch (FileNotFoundException e) {
+        System.out.println("File Utenti.txt non trovato. Verrà creata una nuova lista utenti.");
+    } catch (IOException e) {
+        System.out.println("Errore durante la lettura del file: " + e.getMessage());
+    }
+}
 
     public void aggiungiUtente(Utente nuovoUtente){
         listaUtenti.add(nuovoUtente);
@@ -63,7 +70,7 @@ public class ListaUtenti {
     public Utente trovaUtente(String email, String password){
         //scorri la lista e trova l'utente
         for(Utente utente : listaUtenti){
-            if(utente.getEmail() == email && utente.getPassword() == password){
+            if(utente.getEmail().equals(email) && utente.getPassword().equals(password)){
                 return utente;
             }
         }
@@ -72,7 +79,7 @@ public class ListaUtenti {
     public boolean utenteDuplicato(Utente nuovoUtente){
         //scorrere la lista e verificare se esitono altri utenti con la stessa email del nuovo utente e in caso tornare true
         for(Utente utente : listaUtenti){
-            if(utente.getEmail() == nuovoUtente.getEmail()){
+            if(utente.getEmail().equals(nuovoUtente.getEmail())){
                 return true;
             }
         }
