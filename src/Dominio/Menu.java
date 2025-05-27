@@ -8,7 +8,7 @@ import java.util.Scanner;
 import java.io.File;
 
 public class Menu {
-    private static final String FILE_UTENTI = "src/Dominio/Utente.txt";
+    private static final String FILE_UTENTI = "../Persistenza/Utenti.txt";
 
     public Menu(){
         //Creazione delle diverse liste per l'accesso ai dati
@@ -133,7 +133,7 @@ public class Menu {
     //metodo trovaProvincia per verificare se la provincia inserita dall'utente esiste
     private static boolean trovaProvincia(String provincia){
         try{
-            File fileProvince = new File("src/Dominio/Province.txt");
+            File fileProvince = new File("../Persistenza/Province.txt");
             if (fileProvince.exists()){
                 System.out.println("Esiste");
             }else{

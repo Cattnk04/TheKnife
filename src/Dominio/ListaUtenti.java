@@ -33,7 +33,7 @@ public class ListaUtenti {
     public void ricavaUtentiDaCSV(){
         //lettura del file CSV e salvataggio dei dati sulla lista
         try {
-            FileReader reader = new FileReader("Utenti.txt");
+            FileReader reader = new FileReader("../Persistenza/Utenti.txt");
             BufferedReader bufferedReader = new BufferedReader(reader);
             String riga;
             while((riga = bufferedReader.readLine()) != null){

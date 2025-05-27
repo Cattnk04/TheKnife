@@ -76,7 +76,7 @@ public class Ristorante {
         this.tipoCucina = tipoCucina;
     }
     public void InserisciRistorante() {
-        File fileRistoranti = new File("src/Dominio/Ristoranti.txt");
+        File fileRistoranti = new File("../Persistenza/Ristoranti.txt");
 
         try {
             FileWriter writer = new FileWriter(fileRistoranti, true);
