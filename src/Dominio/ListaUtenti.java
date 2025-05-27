@@ -22,7 +22,7 @@ public class ListaUtenti {
         //accesso al file e salvataggio della lista su file di testo Utenti.txt
         for(Utente utente : listaUtenti){
             try {
-                FileWriter writer = new FileWriter("Utenti.txt");
+                FileWriter writer = new FileWriter("src/Data/Utenti.txt");
                 writer.append(utente.toString() + "\n");
             }catch (IOException e){
                 e.printStackTrace();
@@ -33,7 +33,7 @@ public class ListaUtenti {
     public void ricavaUtentiDaCSV(){
         //lettura del file CSV e salvataggio dei dati sulla lista
         try {
-            FileReader reader = new FileReader("../Persistenza/Utenti.txt");
+            FileReader reader = new FileReader("src/Data/Utenti.txt");
             BufferedReader bufferedReader = new BufferedReader(reader);
             String riga;
             while((riga = bufferedReader.readLine()) != null){

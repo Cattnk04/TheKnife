@@ -4,7 +4,7 @@ package Dominio;
 import java.util.Scanner;
 
 public class Menu {
-    private static final String FILE_UTENTI = "../Persistenza/Utenti.txt";
+    private static final String FILE_UTENTI = "src/Data/Utenti.txt";
 
     public Menu(){
         //Creazione delle diverse liste per l'accesso ai dati
