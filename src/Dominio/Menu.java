@@ -137,6 +137,7 @@ public class Menu {
     // metodo per il login
     public static Utente loginUtente(ListaUtenti listaUtenti) {
         boolean trovato = false; // Flag per controllare se il login riesce
+        Utente utente;
         Scanner scanner = new Scanner(System.in);
         do {
             //inserimento dei dati
@@ -149,14 +150,10 @@ public class Menu {
             //Fine inserimento dati da cercare
 
             //SCORRERE LA LISTA PER VEDERE SE ESISTE UN UTNTE CON QUESTI DATI
-            for(Utente utente : listaUtenti.getListaUtenti()){
-                if(utente.getEmail() == email && utente.getPassword() == password){
-                    return utente;
-                }
-            }
+            utente = listaUtenti.trovaUtente(email, password);
 
             //altrimenti
-            if (!trovato) {
+            if (utente == null) {
                 System.out.println("Email o password errati!");
                 System.out.print("Vuoi riprovare? (sì/no): ");
                 String risposta = scanner.nextLine().trim();

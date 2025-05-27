@@ -2,6 +2,7 @@ package Dominio;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,14 @@ public class ListaRistoranti {
 
     public void salvaRistorantiSuCSV(){
         //Accesso al file Ristoranti.txt e scrittura dei dati dalla lista listaRistoranti
+        try {
+            FileWriter writer = new FileWriter("Ristoranti.txt");
+            for(Ristorante r : listaRistoranti){
+                writer.append(r.toString() + "\n");
+            }
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     public void ricavaRistorantiDaCSV(){

@@ -60,12 +60,22 @@ public class ListaUtenti {
         listaUtenti.add(nuovoUtente);
     }
 
-    public Utente trovaUtente(String email){
+    public Utente trovaUtente(String email, String password){
         //scorri la lista e trova l'utente
+        for(Utente utente : listaUtenti){
+            if(utente.getEmail() == email && utente.getPassword() == password){
+                return utente;
+            }
+        }
         return null;
     }
     public boolean utenteDuplicato(Utente nuovoUtente){
         //scorrere la lista e verificare se esitono altri utenti con la stessa email del nuovo utente e in caso tornare true
+        for(Utente utente : listaUtenti){
+            if(utente.getEmail() == nuovoUtente.getEmail()){
+                return true;
+            }
+        }
         return false;
     }
 }
