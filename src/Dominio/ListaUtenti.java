@@ -18,18 +18,19 @@ public class ListaUtenti {
         this.listaUtenti = listaUtenti;
     }
 
-    public void salvaUtentiSuCSV(){
-        //accesso al file e salvataggio della lista su file di testo Utenti.txt
-        try {
-            FileWriter writer = new FileWriter("src/Data/Utenti.txt");
-            for(Utente utente : listaUtenti){
-                writer.append(utente.toString() + "\n");
-            }
-            writer.close();
-        }catch (IOException e){
-            e.printStackTrace();
+public void salvaUtentiSuCSV(){
+    File file = new File("src/Data/Utenti.txt");
+    file.getParentFile().mkdirs(); // Crea le directory se non esistono
+    
+    try (FileWriter writer = new FileWriter(file)) {  // Uso del try-with-resources
+        for(Utente utente : listaUtenti){
+            writer.append(utente.toString() + "\n");
         }
+    } catch (IOException e){
+        System.out.println("Errore durante il salvataggio: " + e.getMessage());
+        e.printStackTrace();
     }
+}
 
 public void ricavaUtentiDaCSV() {
     try {
@@ -65,17 +66,24 @@ public void ricavaUtentiDaCSV() {
 
     public void aggiungiUtente(Utente nuovoUtente){
         listaUtenti.add(nuovoUtente);
+        salvaUtentiSuCSV(); // Aggiungi questa riga per salvare su file
     }
 
-    public Utente trovaUtente(String email, String password){
-        //scorri la lista e trova l'utente
-        for(Utente utente : listaUtenti){
-            if(utente.getEmail().equals(email) && utente.getPassword().equals(password)){
+public Utente trovaUtente(String email, String password) {
+    
+    for(Utente utente : listaUtenti) {
+        if(utente.getEmail().equals(email)) {
+            if(utente.getPassword().equals(password)) {
                 return utente;
+            } else {
+                System.out.println("Password non corretta per l'utente: " + email);
+                return null;
             }
         }
-        return null;
     }
+    System.out.println("Nessun utente trovato con email: " + email);
+    return null;
+}
     public boolean utenteDuplicato(Utente nuovoUtente){
         //scorrere la lista e verificare se esitono altri utenti con la stessa email del nuovo utente e in caso tornare true
         for(Utente utente : listaUtenti){

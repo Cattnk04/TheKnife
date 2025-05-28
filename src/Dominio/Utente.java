@@ -3,7 +3,7 @@ package Dominio;
 import java.io.*;
 
 public class Utente {
-    public static final String FILE_UTENTI = "Utente.txt";
+    public static final String FILE_UTENTI = "src/Data/Utenti.txt";
     private String nome;
     private String cognome;
     private final String email;

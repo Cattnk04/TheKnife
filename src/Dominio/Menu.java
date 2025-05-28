@@ -20,14 +20,14 @@ public class Menu {
             scelta = menuGuest(scanner);
             switch(scelta){
                 case 1:
-                    utenteCorrente = registraUtente(listaUtenti);
+                    utenteCorrente = registraUtente(listaUtenti, scanner);
                     if(utenteCorrente != null){
                         System.out.println("Registrazione avvenuta con successo!");
                         MenuUtenteLog menuUtenteLog = new MenuUtenteLog();
                     }
                     break;
                 case 2:
-                    utenteCorrente = loginUtente(listaUtenti);
+                    utenteCorrente = loginUtente(listaUtenti, scanner);
                     if(utenteCorrente != null){
                         System.out.println("Login avvenuto con successo!");
                         MenuUtenteLog menuUtenteLog = new MenuUtenteLog();
@@ -51,9 +51,9 @@ public class Menu {
     
     scanner.close(); // Chiudiamo lo Scanner solo alla fine del programma
 }
-
-    public static int menuGuest(Scanner scanner){
-        int choice;
+    // metodo per la scelta dell'utente ospite
+    public static int menuGuest(Scanner scanner) {
+        int choice = -1;
         System.out.println("Benvenuto nella schermata home ospite!\n");
         System.out.println("Scegli un'opzione:");
         System.out.println("1. Registrati");
@@ -62,14 +62,20 @@ public class Menu {
         System.out.println("0. Esci dall'applicazione");
         System.out.print("La tua scelta: ");
 
-        choice = scanner.nextInt();
+        if (scanner.hasNextInt()) {
+            choice = scanner.nextInt();
+        } else {
+            System.out.println("Input non valido!");
+            scanner.nextLine(); // pulizia del buffer
+        }
 
-        scanner.nextLine(); // Pulizia della linea
+        scanner.nextLine(); // pulizia della linea
         return choice;
     }
+
     // metodo per la registrazione
-    public static Utente registraUtente(ListaUtenti listaUtenti){
-        Scanner scanner = new Scanner(System.in); //per inserire i dati
+    public static Utente registraUtente(ListaUtenti listaUtenti, Scanner scanner){
+
         System.out.println("=== Registrazione ===");
         String nome = "";
         do{
@@ -139,7 +145,6 @@ public class Menu {
                 System.out.println("Password non valida");
             }
         } while (!valido);
-        scanner.close();
 
         //Storing del nuovo utente nel file
         Utente nuovoUtente = new Utente(email, nome, cognome, password, nazione, citta, ristoratore);
@@ -148,39 +153,30 @@ public class Menu {
             return nuovoUtente;
         }
         return null;
-
     }
 
     // metodo per il login
-    public static Utente loginUtente(ListaUtenti listaUtenti) {
-        boolean trovato = false; // Flag per controllare se il login riesce
-        Utente utente;
-        Scanner scanner = new Scanner(System.in);
-        do {
-            //inserimento dei dati
-            System.out.println("=== Login ===");
-            System.out.print("Inserisci la tua e-mail: ");
-            String email = scanner.nextLine().trim();
-            System.out.print("Inserisci la tua password: ");
-            //va fatta la cosa degli asterischi qui
-            String password = scanner.nextLine().trim();
-            //Fine inserimento dati da cercare
+    public static Utente loginUtente(ListaUtenti listaUtenti, Scanner scanner) {
+    while (true) {  // Sostituiamo il do-while con un while(true)
+        System.out.println("=== Login ===");
+        System.out.print("Inserisci la tua e-mail: ");
+        String email = scanner.nextLine().trim();
+        System.out.print("Inserisci la tua password: ");
+        String password = scanner.nextLine().trim();
 
-            //SCORRERE LA LISTA PER VEDERE SE ESISTE UN UTNTE CON QUESTI DATI
-            utente = listaUtenti.trovaUtente(email, password);
+        Utente utente = listaUtenti.trovaUtente(email, password);
 
-            //altrimenti
-            if (utente == null) {
-                System.out.println("Email o password errati!");
-                System.out.print("Vuoi riprovare? (sì/no): ");
-                String risposta = scanner.nextLine().trim();
-                if (risposta.equalsIgnoreCase("no")) {
-                    System.out.println("Grazie per aver usato il nostro servizio!");
-                    scanner.close();
-                    return null;
-                }
-            }
-        }while(!trovato);
-        return null;
+        if (utente != null) {
+            return utente;  // Ritorniamo l'utente se trovato
+        }
+
+        System.out.println("Email o password errati!");
+        System.out.print("Vuoi riprovare? (sì/no): ");
+        String risposta = scanner.nextLine().trim();
+        if (risposta.equalsIgnoreCase("no")) {
+            System.out.println("Grazie per aver usato il nostro servizio!");
+            return null;
+        }
     }
+}
 }
