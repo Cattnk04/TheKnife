@@ -76,7 +76,7 @@ public class Menu {
     // metodo per la registrazione
     public static Utente registraUtente(ListaUtenti listaUtenti, Scanner scanner){
 
-        System.out.println("=== Registrazione ===");
+        System.out.println("\n=== Registrazione ===");
         String nome = "";
         do{
             System.out.print("Inserisci il tuo nome: ");
@@ -160,7 +160,7 @@ public class Menu {
     // metodo per il login
     public static Utente loginUtente(ListaUtenti listaUtenti, Scanner scanner) {
     while (true) {  // Sostituiamo il do-while con un while(true)
-        System.out.println("=== Login ===");
+        System.out.println("\n=== Login ===");
         System.out.print("Inserisci la tua e-mail: ");
         String email = scanner.nextLine().trim();
         System.out.print("Inserisci la tua password: ");

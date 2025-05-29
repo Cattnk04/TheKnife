@@ -128,6 +128,11 @@ public class MenuUtenteLog {
 
     // Aggiunta ristorante ai preferiti dell'utente con controllo duplicati
     public void aggiungiPreferito() {
+        System.out.println("Inserisci il nome del ristorante da aggiungere ai preferiti:");
+        String nomeRistorante = scanner.nextLine();
+
+        String email = utenteCorrente.getEmail();
+
         if (email == null || nomeRistorante == null || email.trim().isEmpty() || nomeRistorante.trim().isEmpty()) {
             throw new IllegalArgumentException("Email e nome ristorante non possono essere vuoti");
         }
@@ -145,7 +150,11 @@ public class MenuUtenteLog {
     }
 
     // Rimuovi ristorante dai preferiti dell'utente
-    public void rimuoviPreferito(String email, String nomeRistorante) {
+    public void rimuoviPreferito() {
+        System.out.println("Inserisci il nome del ristorante da rimuovere dai preferiti:");
+        String nomeRistorante = scanner.nextLine();
+        String email = utenteCorrente.getEmail();
+
         if (preferiti.containsKey(email)) {
             List<String> listaPreferiti = preferiti.get(email);
             if (listaPreferiti.remove(nomeRistorante)) {
@@ -274,6 +283,83 @@ public class MenuUtenteLog {
     // Visualizza tutte le recensioni di un utente
     public Map<String, Recensione> visualizzaRecensioniUtente(String email) {
         return recensioni.getOrDefault(email, new HashMap<>());
+    }
+
+    private void aggiungiRecensione() {
+        System.out.println("Inserisci il nome del ristorante da recensire:");
+        String nomeRistorante = scanner.nextLine();
+        System.out.println("Inserisci il testo della recensione:");
+        String testo = scanner.nextLine();
+        System.out.println("Inserisci il numero di stelle (1-5):");
+        int stelle = scanner.nextInt();
+        scanner.nextLine(); // Pulizia buffer
+        
+        String email = utenteCorrente.getEmail();
+        
+        try {
+            if (stelle < 1 || stelle > 5) {
+                System.out.println("Il numero di stelle deve essere tra 1 e 5");
+                return;
+            }
+
+            Map<String, Recensione> recensioniUtente = recensioni.computeIfAbsent(email, k -> new HashMap<>());
+
+            if (recensioniUtente.containsKey(nomeRistorante)) {
+                System.out.println("Hai già recensito questo ristorante. Usa modificaRecensione per cambiare la recensione.");
+                return;
+            }
+
+            recensioniUtente.put(nomeRistorante, new Recensione(testo, stelle));
+            salvaRecensioniSuFile();
+            System.out.println("Recensione aggiunta con successo");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Errore: " + e.getMessage());
+        }
+    }
+
+    private void modificaRecensione() {
+        System.out.println("Inserisci il nome del ristorante da modificare:");
+        String nomeRistorante = scanner.nextLine();
+        System.out.println("Inserisci il nuovo testo della recensione:");
+        String nuovoTesto = scanner.nextLine();
+        System.out.println("Inserisci il nuovo numero di stelle (1-5):");
+        int nuoveStelle = scanner.nextInt();
+        scanner.nextLine(); // Pulizia buffer
+        
+        String email = utenteCorrente.getEmail();
+        
+        try {
+            if (nuoveStelle < 1 || nuoveStelle > 5) {
+                System.out.println("Il numero di stelle deve essere tra 1 e 5");
+                return;
+            }
+
+            if (!recensioni.containsKey(email) || !recensioni.get(email).containsKey(nomeRistorante)) {
+                System.out.println("Recensione non trovata");
+                return;
+            }
+
+            recensioni.get(email).put(nomeRistorante, new Recensione(nuovoTesto, nuoveStelle));
+            salvaRecensioniSuFile();
+            System.out.println("Recensione modificata con successo");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Errore: " + e.getMessage());
+        }
+    }
+
+    private void eliminaRecensione() {
+        System.out.println("Inserisci il nome del ristorante di cui eliminare la recensione:");
+        String nomeRistorante = scanner.nextLine();
+        String email = utenteCorrente.getEmail();
+
+        if (recensioni.containsKey(email)) {
+            if (recensioni.get(email).remove(nomeRistorante) != null) {
+                salvaRecensioniSuFile();
+                System.out.println("Recensione eliminata con successo");
+            } else {
+                System.out.println("Recensione non trovata");
+            }
+        }
     }
 
     // Classe interna Recensione modificata per accesso pubblico

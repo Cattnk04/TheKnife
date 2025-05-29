@@ -66,7 +66,7 @@ public class ListaRistoranti {
         //Inserimento filtro della località del ristorante
         Scanner scanner = new Scanner(System.in);
         String sn;
-        System.out.println("Inserici la città in cui vuoi cercare il ristorante: ");
+        System.out.print("Inserici la città in cui vuoi cercare il ristorante: ");
         String citta = scanner.nextLine().trim().toLowerCase();
         filtraPerCitta(filtrati, citta);
         System.out.println("Vuoi cercare per fascia di prezzo? [s/n]");
