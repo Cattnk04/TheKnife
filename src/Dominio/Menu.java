@@ -23,14 +23,14 @@ public class Menu {
                     utenteCorrente = registraUtente(listaUtenti, scanner);
                     if(utenteCorrente != null){
                         System.out.println("Registrazione avvenuta con successo!");
-                        MenuUtenteLog menuUtenteLog = new MenuUtenteLog();
+                        MenuUtenteLog menuUtenteLog = new MenuUtenteLog(utenteCorrente, scanner);
                     }
                     break;
                 case 2:
                     utenteCorrente = loginUtente(listaUtenti, scanner);
                     if(utenteCorrente != null){
                         System.out.println("Login avvenuto con successo!");
-                        MenuUtenteLog menuUtenteLog = new MenuUtenteLog();
+                        MenuUtenteLog menuUtenteLog = new MenuUtenteLog(utenteCorrente, scanner);
                     }
                     break;
                 case 3:
@@ -105,12 +105,14 @@ public class Menu {
         do{
             valido = true;
             System.out.print("Sei proprietario di un ristorante? [s/n]: ");
-            if(scanner.nextLine().trim().toLowerCase().equals("s")){
+            String risposta = scanner.nextLine().trim().toLowerCase(); // Salva l'input in una variabile
+            if(risposta.equals("s")){
                 ristoratore = true;
-            } else if  (scanner.nextLine().trim().toLowerCase().equals("n")){
+            } else if (risposta.equals("n")){
                 ristoratore = false;
+            } else {
+                valido = false;
             }
-            else valido = false;
         } while (!valido);
 
         String email = "";

@@ -12,7 +12,7 @@ public class MenuUtenteLog {
     private Utente utenteCorrente;
 
 
-    public MenuUtenteLog() {
+    public MenuUtenteLog(Utente utente, Scanner scanner) { // Aggiungi i parametri
         this.preferiti = new HashMap<>();
         this.recensioni = new HashMap<>();
         this.utenteCorrente = utente;
@@ -21,8 +21,6 @@ public class MenuUtenteLog {
         caricaPreferitiDaFile();
         caricaRecensioniDaFile();
         mostraMenuUtente();
-
-        System.out.println("Caricamento preferiti e recensioni completati");
     }
 
     public void mostraMenuUtente(){
@@ -57,13 +55,13 @@ public class MenuUtenteLog {
                         mostraRecensioni();
                         break;
                     case 5:
-                        aggiungiNuovaRecensione();
+                        aggiungiRecensione();
                         break;
                     case 6:
-                        modificaRecensioneEsistente();
+                        modificaRecensione();
                         break;
                     case 7:
-                        eliminaRecensioneEsistente();
+                        eliminaRecensione();
                         break;
                     case 0:
                         System.out.println("Logout effettuato con successo!");
@@ -72,7 +70,13 @@ public class MenuUtenteLog {
                         System.out.println("Scelta non valida!");
 
                 }
-        }
+            }
+            catch (InputMismatchException e) {
+                System.out.println("Inserire un numero valido!");
+                scanner.nextLine(); // Pulizia buffer
+                scelta = -1;
+            }
+        } while (scelta != 0);
     }
 
 
@@ -94,6 +98,7 @@ public class MenuUtenteLog {
         }
     }
 
+
     // Salva preferiti su file
     private void salvaPreferitiSuFile() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PREFERITI))) {
@@ -108,9 +113,21 @@ public class MenuUtenteLog {
             System.err.println("Errore durante il salvataggio dei preferiti: " + e.getMessage());
         }
     }
+    //Mostra i ristoranti preferiti dell'utente
+    private void mostraPreferiti() {
+        List<String> preferitiUtente = visualizzaPreferiti(utenteCorrente.getEmail());
+        if (preferitiUtente.isEmpty()) {
+            System.out.println("Non hai ancora aggiunto ristoranti ai preferiti.");
+        } else {
+            System.out.println("\nI tuoi ristoranti preferiti:");
+            for (String ristorante : preferitiUtente) {
+                System.out.println("- " + ristorante);
+            }
+        }
+    }
 
     // Aggiunta ristorante ai preferiti dell'utente con controllo duplicati
-    public void aggiungiPreferito(String email, String nomeRistorante) {
+    public void aggiungiPreferito() {
         if (email == null || nomeRistorante == null || email.trim().isEmpty() || nomeRistorante.trim().isEmpty()) {
             throw new IllegalArgumentException("Email e nome ristorante non possono essere vuoti");
         }
@@ -181,6 +198,20 @@ public class MenuUtenteLog {
             }
         } catch (IOException e) {
             System.err.println("Errore durante il salvataggio delle recensioni: " + e.getMessage());
+        }
+    }
+
+    //Mostra le recensioni dell'utente
+    private void mostraRecensioni() {
+        Map<String, Recensione> recensioniUtente = visualizzaRecensioniUtente(utenteCorrente.getEmail());
+        if (recensioniUtente.isEmpty()) {
+            System.out.println("Non hai ancora scritto recensioni.");
+        } else {
+            System.out.println("\nLe tue recensioni:");
+            for (Map.Entry<String, Recensione> entry : recensioniUtente.entrySet()) {
+                System.out.printf("Ristorante: %s\nValutazione: %d/5\nRecensione: %s\n\n",
+                        entry.getKey(), entry.getValue().getStelle(), entry.getValue().getTesto());
+            }
         }
     }
 
