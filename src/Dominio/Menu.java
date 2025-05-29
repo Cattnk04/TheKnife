@@ -12,7 +12,7 @@ public class Menu {
     Scanner scanner = new Scanner(System.in);  // Creiamo un solo Scanner
     ListaUtenti listaUtenti = new ListaUtenti();
     ListaRistoranti listaRistoranti = new ListaRistoranti();
-    int scelta = 0;
+    int scelta;
     Utente utenteCorrente;
     
     do {

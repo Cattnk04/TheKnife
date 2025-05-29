@@ -3,6 +3,7 @@ package Dominio;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class ListaRistoranti {
     public ListaRistoranti(){
@@ -59,10 +60,80 @@ public class ListaRistoranti {
         //funzione per l'inserimento di un nuovo ristorante nella lista
         listaRistoranti.add(ristorante);
     }
-    public Ristorante cercaRistorante(){
+    public List<Ristorante> cercaRistorante(){
         //funzione per la ricerca del ristorante nella lista
-
-        return null;
+        List<Ristorante> filtrati = new ArrayList<>();
+        //Inserimento filtro della località del ristorante
+        Scanner scanner = new Scanner(System.in);
+        String sn;
+        System.out.println("Inserici la città in cui vuoi cercare il ristorante: ");
+        String citta = scanner.nextLine().trim().toLowerCase();
+        filtraPerCitta(filtrati, citta);
+        System.out.println("Vuoi cercare per fascia di prezzo? [s/n]");
+        do{
+            sn = scanner.nextLine().trim().toLowerCase();
+        }while(!sn.equals("s") && !sn.equals("n"));
+        double prezzoMin, prezzoMax;
+        if(sn == "s"){
+            do{
+                System.out.println("Inserisci il prezzo minimo:");
+                prezzoMin = scanner.nextDouble();
+                System.out.println("Inserisci il prezzo massimo:");
+                prezzoMax = scanner.nextDouble();
+                if(prezzoMin > prezzoMax){
+                    System.out.println("Il prezzo minimo non può essere maggiore del prezzo massimo");
+                }
+            }while(prezzoMax < prezzoMin);
+            filtraPerPrezzo(filtrati, prezzoMax, prezzoMin);
+        }
+        System.out.println("Vuoi cercare solo i ristoranti con servizio delivery? [s/n]");
+        do{
+            sn = scanner.nextLine().trim().toLowerCase();
+        }while(!sn.equals("s") && !sn.equals("n"));
+        if(sn == "s" && !filtrati.isEmpty()){
+            filtraPerDelivery(filtrati);
+        }
+        System.out.println("Vuoi cercare ristoranti con solo prenotazione online? [s/n]");
+        do{
+            sn = scanner.nextLine().trim().toLowerCase();
+        }while(!sn.equals("s") && !sn.equals("n"));
+        if(sn == "s" && !filtrati.isEmpty()){
+            filtraPerPrenotazioneOnline(filtrati);
+        }
+        System.out.println("Vuoi cercare solo i ristoranti con un tipo di cucina specifico? [s/n]");
+        do{
+            sn = scanner.nextLine().trim().toLowerCase();
+        } while(!sn.equals("s") && !sn.equals("n"));
+        if(sn == "s" && !filtrati.isEmpty()){
+            System.out.println("Inserici il tipo di cucina specifico: ");
+            String tipoCucina = scanner.nextLine().trim().toLowerCase();
+            filtraPerTipoCucina(filtrati, tipoCucina);
+        }
+        scanner.close();
+        return filtrati;
     }
-
+    private void filtraPerCitta(List<Ristorante> filtrati, String citta){
+        for(Ristorante r : listaRistoranti){
+            if(r.getCitta().equals(citta)){
+                filtrati.add(r);
+            }
+        }
+        System.out.println("Filtro per città inserito");
+    }
+    private void filtraPerPrezzo(List<Ristorante> filtrati, double prezzoMax, double prezzoMin){
+        filtrati.removeIf(r -> r.getFasciaPrezzo() < prezzoMin || r.getFasciaPrezzo() > prezzoMax);
+        System.out.println("Filtro per prezzo medio inserito");
+    }
+    private void filtraPerDelivery(List<Ristorante> filtrati){
+        filtrati.removeIf(r -> !r.getServizioDelivery());
+        System.out.println("Filtro per delivery medio inserito");
+    }
+    private void filtraPerPrenotazioneOnline(List<Ristorante> filtrati){
+        filtrati.removeIf(r -> !r.getServizioPrenotazioneOnline());
+        System.out.println("Filtro per prenotazione online inserito");
+    }
+    private void filtraPerTipoCucina(List<Ristorante> filtrati, String tipoCucina){
+        filtrati.removeIf(r -> !r.getTipoCucina().equals(tipoCucina));
+        System.out.println("Filtro per tipo cucina inserito");
+    }
 }
