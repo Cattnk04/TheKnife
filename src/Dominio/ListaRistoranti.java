@@ -66,46 +66,46 @@ public class ListaRistoranti {
         //Inserimento filtro della località del ristorante
         Scanner scanner = new Scanner(System.in);
         String sn;
-        System.out.print("Inserici la città in cui vuoi cercare il ristorante: ");
+        System.out.print("\nInserici la città in cui vuoi cercare il ristorante: ");
         String citta = scanner.nextLine().trim().toLowerCase();
         filtraPerCitta(filtrati, citta);
-        System.out.println("Vuoi cercare per fascia di prezzo? [s/n]");
+        System.out.print("Vuoi cercare per fascia di prezzo? [s/n]: ");
         do{
             sn = scanner.nextLine().trim().toLowerCase();
         }while(!sn.equals("s") && !sn.equals("n"));
         double prezzoMin, prezzoMax;
         if(sn == "s"){
             do{
-                System.out.println("Inserisci il prezzo minimo:");
+                System.out.print("Inserisci il prezzo minimo: ");
                 prezzoMin = scanner.nextDouble();
-                System.out.println("Inserisci il prezzo massimo:");
+                System.out.print("Inserisci il prezzo massimo: ");
                 prezzoMax = scanner.nextDouble();
                 if(prezzoMin > prezzoMax){
-                    System.out.println("Il prezzo minimo non può essere maggiore del prezzo massimo");
+                    System.out.print("Il prezzo minimo non può essere maggiore del prezzo massimo.");
                 }
             }while(prezzoMax < prezzoMin);
             filtraPerPrezzo(filtrati, prezzoMax, prezzoMin);
         }
-        System.out.println("Vuoi cercare solo i ristoranti con servizio delivery? [s/n]");
+        System.out.print("Vuoi cercare solo i ristoranti con servizio delivery? [s/n]: ");
         do{
             sn = scanner.nextLine().trim().toLowerCase();
         }while(!sn.equals("s") && !sn.equals("n"));
         if(sn == "s" && !filtrati.isEmpty()){
             filtraPerDelivery(filtrati);
         }
-        System.out.println("Vuoi cercare ristoranti con solo prenotazione online? [s/n]");
+        System.out.print("Vuoi cercare ristoranti con solo prenotazione online? [s/n]: ");
         do{
             sn = scanner.nextLine().trim().toLowerCase();
         }while(!sn.equals("s") && !sn.equals("n"));
         if(sn == "s" && !filtrati.isEmpty()){
             filtraPerPrenotazioneOnline(filtrati);
         }
-        System.out.println("Vuoi cercare solo i ristoranti con un tipo di cucina specifico? [s/n]");
+        System.out.print("Vuoi cercare solo i ristoranti con un tipo di cucina specifico? [s/n]: ");
         do{
             sn = scanner.nextLine().trim().toLowerCase();
         } while(!sn.equals("s") && !sn.equals("n"));
         if(sn == "s" && !filtrati.isEmpty()){
-            System.out.println("Inserici il tipo di cucina specifico: ");
+            System.out.print("Inserisci il tipo di cucina specifico: ");
             String tipoCucina = scanner.nextLine().trim().toLowerCase();
             filtraPerTipoCucina(filtrati, tipoCucina);
         }
@@ -118,22 +118,22 @@ public class ListaRistoranti {
                 filtrati.add(r);
             }
         }
-        System.out.println("Filtro per città inserito");
+        System.out.println("Filtro per città inserito.");
     }
     private void filtraPerPrezzo(List<Ristorante> filtrati, double prezzoMax, double prezzoMin){
         filtrati.removeIf(r -> r.getFasciaPrezzo() < prezzoMin || r.getFasciaPrezzo() > prezzoMax);
-        System.out.println("Filtro per prezzo medio inserito");
+        System.out.println("Filtro per prezzo medio inserito.");
     }
     private void filtraPerDelivery(List<Ristorante> filtrati){
         filtrati.removeIf(r -> !r.getServizioDelivery());
-        System.out.println("Filtro per delivery medio inserito");
+        System.out.println("Filtro per delivery medio inserito.");
     }
     private void filtraPerPrenotazioneOnline(List<Ristorante> filtrati){
         filtrati.removeIf(r -> !r.getServizioPrenotazioneOnline());
-        System.out.println("Filtro per prenotazione online inserito");
+        System.out.println("Filtro per prenotazione online inserito.");
     }
     private void filtraPerTipoCucina(List<Ristorante> filtrati, String tipoCucina){
         filtrati.removeIf(r -> !r.getTipoCucina().equals(tipoCucina));
-        System.out.println("Filtro per tipo cucina inserito");
+        System.out.println("Filtro per tipo cucina inserito.");
     }
 }

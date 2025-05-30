@@ -81,4 +81,7 @@ public class Ristorante {
         return this.nome + + ',' + this.emailRistoratore + ',' + this.nazione + ',' + this.citta + ',' + this.indirizzo + ',' + this.fasciaPrezzo + ','+ this.servizioDelivery + ',' + this.servizioPrenotazioneOnline + ',' + this.tipoCucina;
     }
 
+    public Object getEmailRistoratore() {
+        return emailRistoratore;
+    }
 }
