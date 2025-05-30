@@ -23,14 +23,22 @@ public class Menu {
                     utenteCorrente = registraUtente(listaUtenti, scanner);
                     if(utenteCorrente != null){
                         System.out.println("Registrazione avvenuta con successo!");
-                        MenuUtenteLog menuUtenteLog = new MenuUtenteLog(utenteCorrente, scanner);
+                        if(utenteCorrente.getRistoratore()) {
+                            MenuRistoratore menuRistoratore = new MenuRistoratore(utenteCorrente, scanner);
+                        } else {
+                            MenuUtenteLog menuUtenteLog = new MenuUtenteLog(utenteCorrente, scanner);
+                        }
                     }
                     break;
                 case 2:
                     utenteCorrente = loginUtente(listaUtenti, scanner);
                     if(utenteCorrente != null){
                         System.out.println("Login avvenuto con successo!");
-                        MenuUtenteLog menuUtenteLog = new MenuUtenteLog(utenteCorrente, scanner);
+                        if(utenteCorrente.getRistoratore()) {
+                            MenuRistoratore menuRistoratore = new MenuRistoratore(utenteCorrente, scanner);
+                        } else {
+                            MenuUtenteLog menuUtenteLog = new MenuUtenteLog(utenteCorrente, scanner);
+                        }
                     }
                     break;
                 case 3:
