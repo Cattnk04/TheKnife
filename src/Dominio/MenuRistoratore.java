@@ -30,9 +30,10 @@ public class MenuRistoratore {
             try {
                 System.out.println("\n=== Menu Ristoratore ===");
                 System.out.println("1. Aggiungi ristorante");
-                System.out.println("2. Visualizza riepilogo recensioni");
-                System.out.println("3. Visualizza dettaglio recensioni");
-                System.out.println("4. Rispondi alle recensioni");
+                System.out.println("2. Visualizza i miei ristoranti");
+                System.out.println("3. Visualizza riepilogo recensioni");
+                System.out.println("4. Visualizza dettagli recensioni");
+                System.out.println("5. Rispondi alle recensioni"); // Nuova opzione
                 System.out.println("0. Esci");
                 System.out.print("La tua scelta: ");
 
@@ -44,12 +45,15 @@ public class MenuRistoratore {
                         aggiungiRistorante();
                         break;
                     case 2:
-                        visualizzaRiepilogo();
+                        visualizzaMieiRistoranti();
                         break;
                     case 3:
-                        visualizzaRecensioni();
+                        visualizzaRiepilogo();
                         break;
                     case 4:
+                        visualizzaRecensioni();
+                        break;
+                    case 5:
                         rispostaRecensioni();
                         break;
                     case 0:
@@ -84,14 +88,39 @@ public class MenuRistoratore {
         double fasciaPrezzo = scanner.nextDouble();
         scanner.nextLine();
 
-        /*
-        System.out.print("Servizio delivery (s/n): ");
-        boolean delivery = scanner.nextBoolean();
-        scanner.nextLine();
-                                                              DA SISTEMARE ANCORA
-        System.out.print("Prenotazione online (s/n): ");
-        boolean prenotazioneOnline = scanner.nextBoolean();
-        scanner.nextLine();*/
+        boolean delivery = false;
+        boolean prenotazioneOnline = false;
+
+        boolean inputValido;
+        do {
+            System.out.print("Servizio delivery (s/n): ");
+            String rispostaDelivery = scanner.nextLine().trim().toLowerCase();
+            if (rispostaDelivery.equals("s")) {
+                delivery = true;
+                inputValido = true;
+            } else if (rispostaDelivery.equals("n")) {
+                delivery = false;
+                inputValido = true;
+            } else {
+                System.out.println("Inserire 's' per sì o 'n' per no");
+                inputValido = false;
+            }
+        } while (!inputValido);
+
+        do {
+            System.out.print("Prenotazione online (s/n): ");
+            String rispostaPrenotazione = scanner.nextLine().trim().toLowerCase();
+            if (rispostaPrenotazione.equals("s")) {
+                prenotazioneOnline = true;
+                inputValido = true;
+            } else if (rispostaPrenotazione.equals("n")) {
+                prenotazioneOnline = false;
+                inputValido = true;
+            } else {
+                System.out.println("Inserire 's' per sì o 'n' per no");
+                inputValido = false;
+            }
+        } while (!inputValido);
 
         System.out.print("Tipo di cucina: ");
         String tipoCucina = scanner.nextLine();
@@ -100,6 +129,31 @@ public class MenuRistoratore {
         listaRistoranti.inserisciRistorante(ristorante);
         listaRistoranti.salvaRistorantiSuCSV();
         System.out.println("Ristorante aggiunto con successo!");
+    }
+
+    // Nuovo metodo per visualizzare i ristoranti del ristoratore
+    private void visualizzaMieiRistoranti() {
+        System.out.println("\n=== I Miei Ristoranti ===");
+        boolean trovati = false;
+
+        for (Ristorante r : listaRistoranti.getListaRistoranti()) {
+            if (r.getEmailRistoratore().equals(utenteCorrente.getEmail())) {
+                trovati = true;
+                System.out.println("\nNome: " + r.getNome());
+                System.out.println("Nazione: " + r.getNazione());
+                System.out.println("Città: " + r.getCitta());
+                System.out.println("Indirizzo: " + r.getIndirizzo());
+                System.out.println("Fascia di prezzo: " + r.getFasciaPrezzo());
+                System.out.println("Servizio delivery: " + (r.getServizioDelivery() ? "Sì" : "No"));
+                System.out.println("Prenotazione online: " + (r.getServizioPrenotazioneOnline() ? "Sì" : "No"));
+                System.out.println("Tipo di cucina: " + r.getTipoCucina());
+                System.out.println("----------------------------------------");
+            }
+        }
+
+        if (!trovati) {
+            System.out.println("Non hai ancora registrato alcun ristorante.");
+        }
     }
 
     //Metodo per la visualizzazione del riepilogo delle recensioni
@@ -132,7 +186,7 @@ public class MenuRistoratore {
         }
     }
     
-    // Metodo per la visualizzazione alle recensioni
+    // Metodo per la visualizzazione alle recensioni nel dettaglio
     private void visualizzaRecensioni() {
         System.out.println("\n=== Dettaglio Recensioni ===");
         for (Map.Entry<String, Map<String, MenuUtenteLog.Recensione>> entry : recensioni.entrySet()) {

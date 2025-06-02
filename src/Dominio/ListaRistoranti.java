@@ -19,15 +19,15 @@ public class ListaRistoranti {
         this.listaRistoranti = listaRistoranti;
     }
 
-    public void salvaRistorantiSuCSV(){
-        //Accesso al file Ristoranti.txt e scrittura dei dati dalla lista listaRistoranti
-        try {
-            FileWriter writer = new FileWriter("src/Data/Ristoranti.txt");
-            for(Ristorante r : listaRistoranti){
-                writer.append(r.toString() + "\n");
+    public void salvaRistorantiSuCSV() {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/Data/Ristoranti.txt"))) {
+            for (Ristorante r : listaRistoranti) {
+                writer.write(r.toString());
+                writer.newLine();
             }
-        }catch (IOException e){
-            e.printStackTrace();
+            writer.flush();
+        } catch (IOException e) {
+            System.err.println("Errore durante il salvataggio dei ristoranti: " + e.getMessage());
         }
     }
 
