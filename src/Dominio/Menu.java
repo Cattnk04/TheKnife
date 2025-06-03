@@ -23,14 +23,22 @@ public class Menu {
                     utenteCorrente = registraUtente(listaUtenti, scanner);
                     if(utenteCorrente != null){
                         System.out.println("Registrazione avvenuta con successo!");
-                        MenuUtenteLog menuUtenteLog = new MenuUtenteLog();
+                        if(utenteCorrente.getRistoratore()) {
+                            MenuRistoratore menuRistoratore = new MenuRistoratore(utenteCorrente, scanner);
+                        } else {
+                            MenuUtenteLog menuUtenteLog = new MenuUtenteLog(utenteCorrente, scanner);
+                        }
                     }
                     break;
                 case 2:
                     utenteCorrente = loginUtente(listaUtenti, scanner);
                     if(utenteCorrente != null){
                         System.out.println("Login avvenuto con successo!");
-                        MenuUtenteLog menuUtenteLog = new MenuUtenteLog();
+                        if(utenteCorrente.getRistoratore()) {
+                            MenuRistoratore menuRistoratore = new MenuRistoratore(utenteCorrente, scanner);
+                        } else {
+                            MenuUtenteLog menuUtenteLog = new MenuUtenteLog(utenteCorrente, scanner);
+                        }
                     }
                     break;
                 case 3:
@@ -76,7 +84,7 @@ public class Menu {
     // metodo per la registrazione
     public static Utente registraUtente(ListaUtenti listaUtenti, Scanner scanner){
 
-        System.out.println("=== Registrazione ===");
+        System.out.println("\n=== Registrazione ===");
         String nome = "";
         do{
             System.out.print("Inserisci il tuo nome: ");
@@ -105,12 +113,14 @@ public class Menu {
         do{
             valido = true;
             System.out.print("Sei proprietario di un ristorante? [s/n]: ");
-            if(scanner.nextLine().trim().toLowerCase().equals("s")){
+            String risposta = scanner.nextLine().trim().toLowerCase(); // Salva l'input in una variabile
+            if(risposta.equals("s")){
                 ristoratore = true;
-            } else if  (scanner.nextLine().trim().toLowerCase().equals("n")){
+            } else if (risposta.equals("n")){
                 ristoratore = false;
+            } else {
+                valido = false;
             }
-            else valido = false;
         } while (!valido);
 
         String email = "";
@@ -158,7 +168,7 @@ public class Menu {
     // metodo per il login
     public static Utente loginUtente(ListaUtenti listaUtenti, Scanner scanner) {
     while (true) {  // Sostituiamo il do-while con un while(true)
-        System.out.println("=== Login ===");
+        System.out.println("\n=== Login ===");
         System.out.print("Inserisci la tua e-mail: ");
         String email = scanner.nextLine().trim();
         System.out.print("Inserisci la tua password: ");

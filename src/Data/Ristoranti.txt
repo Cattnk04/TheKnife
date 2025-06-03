@@ -1,0 +1,1 @@
+La rosa,adminprova@gmail.com,Italia,Milano,Viale Monte Ceneri 11,25.0,false,false,italiana

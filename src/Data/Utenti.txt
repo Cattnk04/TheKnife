@@ -1,1 +1,2 @@
 adminprova@gmail.com,admin,prova,adminprova,italia,como,true
+adminprova2@gmail.com,Admin,Prova,adminprova2,italia,como,false
