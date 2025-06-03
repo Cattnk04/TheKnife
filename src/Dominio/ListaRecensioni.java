@@ -6,7 +6,9 @@ import java.util.List;
 
 public class ListaRecensioni {
     public ListaRecensioni() {
-        if (ListaRecensioni.isEmpty())
+        if (listaRecensioni.isEmpty()){
+            ricavaRecensioniDaCSV();
+        }
 
     }
     public List<Recensione> listaRecensioni = new ArrayList<>();
