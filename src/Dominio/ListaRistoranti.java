@@ -71,8 +71,8 @@ public class ListaRistoranti {
             }
         }
         System.out.print("Il nome del ristorante che hai inserito non esiste!");
+        scanner.close();
         return null;
-
     }
     public List<Ristorante> cercaRistorante(){
         //funzione per la ricerca del ristorante nella lista

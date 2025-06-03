@@ -14,6 +14,12 @@ public class Recensione {
         this.valutazione = valutazione();
         this.recensione = recensione();
     }
+    public Recensione(String email, String nomeRistorante, int valutazione, String recensione) {
+        this.email = email;
+        this.nomeRistorante = nomeRistorante;
+        this.valutazione = valutazione;
+        this.recensione = recensione;
+    }
     //GET
     public String getEmail(){
         return email;
@@ -36,11 +42,12 @@ public class Recensione {
     }
     //Metodo per inserire valutazione
     public int valutazione(){
+        Scanner scanner = new Scanner(System.in);
         do{
-            Scanner scanner = new Scanner(System.in);
             System.out.print("Puoi inserire una valutazione da 1 a 5: ");
             int valutazione = scanner.nextInt();
         } while (valutazione < 1 || valutazione > 5);
+        scanner.close();
         return valutazione;
     }
     //metodo per inserire recensione
@@ -48,6 +55,7 @@ public class Recensione {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Puoi inserire una recensione a questo ristorante: ");
         String recensione = scanner.nextLine();
+        scanner.close();
         return recensione;
     }
     @Override
