@@ -50,5 +50,9 @@ public class Recensione {
         String recensione = scanner.nextLine();
         return recensione;
     }
+    @Override
+    public String toString(){
+        return this.email + '*' + this.nomeRistorante + '*' + this.valutazione + '*' + this.recensione;
+    }
 
 }
