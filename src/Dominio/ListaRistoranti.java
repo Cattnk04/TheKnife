@@ -33,7 +33,7 @@ public class ListaRistoranti {
 
     public void ricavaRistorantiDaCSV(){
         //lettura del file Ristoranti.txt e salvataggio nella lista listaRistoranti
-        List<Ristorante> listaRistoranti = new ArrayList<>();
+        listaRistoranti.clear();
         try (BufferedReader reader = new BufferedReader(new FileReader("src/Data/Ristoranti.txt"))){
             String line;
             while((line = reader.readLine()) != null){

@@ -132,8 +132,12 @@ public class MenuUtenteLog {
 
     //Controllo se il ristorante esiste nel file
     private boolean esisteRistorante(String nomeRistorante) {
+        // Debug: stampa il nome ricercato
+        System.out.println("Cercando ristorante: '" + nomeRistorante + "'");
+        
         return listaRistoranti.getListaRistoranti().stream()
-                .anyMatch(r -> r.getNome().equalsIgnoreCase(nomeRistorante));
+                .peek(r -> System.out.println("Confrontando con: '" + r.getNome() + "'"))
+                .anyMatch(r -> r.getNome().trim().equalsIgnoreCase(nomeRistorante.trim()));
     }
 
     // Aggiunta ristorante ai preferiti dell'utente con controllo duplicati
