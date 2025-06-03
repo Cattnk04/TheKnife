@@ -1,2 +1,3 @@
 adminprova@gmail.com,admin,prova,adminprova,italia,como,true
 adminprova2@gmail.com,Admin,Prova,adminprova2,italia,como,false
+gt@gmail.com,Giacomo,Tancredi,password1,italia,como,false

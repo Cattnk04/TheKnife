@@ -17,10 +17,10 @@ public class Menu {
     
     do {
         try {
-            scelta = menuGuest(scanner);
+            scelta = menuGuest();
             switch(scelta){
                 case 1:
-                    utenteCorrente = registraUtente(listaUtenti, scanner);
+                    utenteCorrente = registraUtente(listaUtenti);
                     if(utenteCorrente != null){
                         System.out.println("Registrazione avvenuta con successo!");
                         if(utenteCorrente.getRistoratore()) {
@@ -60,7 +60,8 @@ public class Menu {
     scanner.close(); // Chiudiamo lo Scanner solo alla fine del programma
 }
     // metodo per la scelta dell'utente ospite
-    public static int menuGuest(Scanner scanner) {
+    public static int menuGuest() {
+        Scanner scanner = new Scanner(System.in);
         int choice = -1;
         System.out.println("Benvenuto nella schermata home ospite!\n");
         System.out.println("Scegli un'opzione:");
@@ -78,11 +79,13 @@ public class Menu {
         }
 
         scanner.nextLine(); // pulizia della linea
+        scanner.close();
         return choice;
     }
 
     // metodo per la registrazione
-    public static Utente registraUtente(ListaUtenti listaUtenti, Scanner scanner){
+    public static Utente registraUtente(ListaUtenti listaUtenti){
+        Scanner scanner = new Scanner(System.in);
 
         System.out.println("\n=== Registrazione ===");
         String nome = "";
@@ -106,7 +109,7 @@ public class Menu {
         nazione = scanner.nextLine();
 
         String citta = "";
-        System.out.print("Inserisci la provincia di domicilio (prima lettera maiuscola): ");
+        System.out.print("Inserisci la provincia di domicilio: ");
         citta = scanner.nextLine();
 
         boolean valido,ristoratore = false;
@@ -156,6 +159,7 @@ public class Menu {
             }
         } while (!valido);
 
+        scanner.close();
         //Storing del nuovo utente nel file
         Utente nuovoUtente = new Utente(email, nome, cognome, password, nazione, citta, ristoratore);
         if(!listaUtenti.utenteDuplicato(nuovoUtente)){

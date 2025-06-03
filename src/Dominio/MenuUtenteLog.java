@@ -4,40 +4,42 @@ import java.io.*;
 import java.util.*;
 
 public class MenuUtenteLog {
+
+    private ListaPreferiti listaPreferiti = new ListaPreferiti();
+    //private ListaRecensioni listaRecensioni = new ListaRecensioni();
+
     private Map<String, List<String>> preferiti;
     private Map<String, Map<String, Recensione>> recensioni;
     private static final String FILE_PREFERITI = "src/Data/Preferiti.txt";
     private static final String FILE_RECENSIONI = "src/Data/Recensioni.txt";
-    private Scanner scanner;
     private Utente utenteCorrente;
     private ListaRistoranti listaRistoranti;
 
 
 
-    public MenuUtenteLog(Utente utente, Scanner scanner) { // Aggiungi i parametri
+    public MenuUtenteLog(Utente utente) { // Aggiungi i parametri
+        listaPreferiti = new ListaPreferiti();
         this.preferiti = new HashMap<>();
         this.recensioni = new HashMap<>();
         this.utenteCorrente = utente;
-        this.scanner = scanner;
         this.listaRistoranti = new ListaRistoranti();
 
-        caricaPreferitiDaFile();
-        caricaRecensioniDaFile();
-        mostraMenuUtente();
     }
 
     public void mostraMenuUtente(){
         int scelta = 0;
+        Scanner scanner = new Scanner(System.in);
         do{
-            try{
+            try{ //il try catch è inutile in quanto c'è gia il caso di default
                 System.out.println("\n=== Menu Utente ===");
-                System.out.println("1. Visualizza i tuoi preferiti");
-                System.out.println("2. Aggiungi ristorante ai preferiti");
-                System.out.println("3. Rimuovi ristorante dai preferiti");
-                System.out.println("4. Visualizza le tue recensioni");
-                System.out.println("5. Aggiungi recensione");
-                System.out.println("6. Modifica recensione");
-                System.out.println("7. Elimina recensione");
+                System.out.println("1. Cerca un ristorante");
+                System.out.println("2. Visualizza i tuoi preferiti");
+                System.out.println("3. Aggiungi ristorante ai preferiti");
+                System.out.println("4. Rimuovi ristorante dai preferiti");
+                System.out.println("5. Visualizza le tue recensioni");
+                System.out.println("6. Aggiungi recensione");
+                System.out.println("7. Modifica recensione");
+                System.out.println("8. Elimina recensione");
                 System.out.println("0. Logout");
                 System.out.print("La tua scelta: ");
 
@@ -46,24 +48,27 @@ public class MenuUtenteLog {
 
                 switch (scelta) {
                     case 1:
-                        mostraPreferiti();
+                        listaRistoranti.cercaRistorante();
                         break;
                     case 2:
-                        aggiungiPreferito();
+                        mostraPreferiti();
                         break;
                     case 3:
-                        rimuoviPreferito();
+                        aggiungiPreferito();
                         break;
                     case 4:
-                        mostraRecensioni();
+                        rimuoviPreferito();
                         break;
                     case 5:
-                        aggiungiRecensione();
+                        mostraRecensioni();
                         break;
                     case 6:
-                        modificaRecensione();
+                        aggiungiRecensione();
                         break;
                     case 7:
+                        modificaRecensione();
+                        break;
+                    case 8:
                         eliminaRecensione();
                         break;
                     case 0:
@@ -80,52 +85,18 @@ public class MenuUtenteLog {
                 scelta = -1;
             }
         } while (scelta != 0);
-    }
-
-
-
-    // Carica preferiti dal file
-    private void caricaPreferitiDaFile() {
-        try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PREFERITI))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(",");
-                if (parts.length == 2) {
-                    String email = parts[0].trim();
-                    String ristorante = parts[1].trim();
-                    preferiti.computeIfAbsent(email, k -> new ArrayList<>()).add(ristorante);
-                }
-            }
-        } catch (IOException e) {
-            System.err.println("Errore durante la lettura del file preferiti: " + e.getMessage());
-        }
-    }
-
-
-    // Salva preferiti su file
-    private void salvaPreferitiSuFile() {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PREFERITI))) {
-            for (Map.Entry<String, List<String>> entry : preferiti.entrySet()) {
-                String email = entry.getKey();
-                for (String ristorante : entry.getValue()) {
-                    writer.write(email + "," + ristorante);
-                    writer.newLine();
-                }
-            }
-        } catch (IOException e) {
-            System.err.println("Errore durante il salvataggio dei preferiti: " + e.getMessage());
-        }
+        scanner.close();
     }
 
     //Mostra i ristoranti preferiti dell'utente
     private void mostraPreferiti() {
-        List<String> preferitiUtente = visualizzaPreferiti(utenteCorrente.getEmail());
+        List<Preferito> preferitiUtente = listaPreferiti.preferitiUtente(utenteCorrente);
         if (preferitiUtente.isEmpty()) {
             System.out.print("Non hai ancora aggiunto ristoranti ai preferiti.");
         } else {
             System.out.print("\nI tuoi ristoranti preferiti:");
-            for (String ristorante : preferitiUtente) {
-                System.out.print("- " + ristorante);
+            for (Preferito p : preferitiUtente) {
+                System.out.print("- " + p.getNomeRistorante());
             }
         }
     }
@@ -138,6 +109,12 @@ public class MenuUtenteLog {
 
     // Aggiunta ristorante ai preferiti dell'utente con controllo duplicati
     public void aggiungiPreferito() {
+
+        listaPreferiti.aggiungiPreferito(utenteCorrente, listaRistoranti);
+
+        // quiesto va fatto bnel gestore della lista dei preferiti non nella classe menù
+        //Le liste si gestiscono nelle loro classi
+        /*
         System.out.print("Inserisci il nome del ristorante da aggiungere ai preferiti: ");
         String nomeRistorante = scanner.nextLine();
 
@@ -161,7 +138,7 @@ public class MenuUtenteLog {
             System.out.print("Ristorante aggiunto ai preferiti con successo\n");
         } else {
             System.out.print("Il ristorante è già presente nei preferiti\n");
-        }
+        }*/
     }
 
     // Rimuovi ristorante dai preferiti dell'utente
@@ -181,10 +158,6 @@ public class MenuUtenteLog {
         }
     }
 
-    //Visualizza i ristoranti preferiti dell'utente
-    public List<String> visualizzaPreferiti(String userId) {
-        return preferiti.getOrDefault(userId, new ArrayList<>());
-    }
 
     // Carica recensioni dal file
     private void caricaRecensioniDaFile() {

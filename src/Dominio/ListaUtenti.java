@@ -7,32 +7,29 @@ import java.io.FileWriter;
 
 public class ListaUtenti {
     public ListaUtenti(){
-        ricavaUtentiDaCSV();
+        if (listaUtenti.isEmpty())
+            ricavaUtentiDaCSV();
     }
     public static List<Utente> listaUtenti = new ArrayList<Utente>();
     public List<Utente> getListaUtenti(){
         return listaUtenti;
     }
 
-    public void setListaUtenti(List<Utente> listaUtenti) {
-        this.listaUtenti = listaUtenti;
-    }
-
-public void salvaUtentiSuCSV(){
-    File file = new File("src/Data/Utenti.txt");
-    file.getParentFile().mkdirs(); // Crea le directory se non esistono
+    public void salvaUtentiSuCSV(){
+        File file = new File("src/Data/Utenti.txt");
+        file.getParentFile().mkdirs(); // Crea le directory se non esistono
     
-    try (FileWriter writer = new FileWriter(file)) {  // Uso del try-with-resources
-        for(Utente utente : listaUtenti){
-            writer.append(utente.toString() + "\n");
+        try (FileWriter writer = new FileWriter(file)) {  // Uso del try-with-resources
+            for(Utente utente : listaUtenti){
+                writer.append(utente.toString()).append("\n");
+            }
+        } catch (IOException e){
+            System.out.println("Errore durante il salvataggio: " + e.getMessage());
+            e.printStackTrace();
         }
-    } catch (IOException e){
-        System.out.println("Errore durante il salvataggio: " + e.getMessage());
-        e.printStackTrace();
     }
-}
 
-public void ricavaUtentiDaCSV() {
+private void ricavaUtentiDaCSV() {
     try {
         FileReader reader = new FileReader("src/Data/Utenti.txt");
         BufferedReader bufferedReader = new BufferedReader(reader);

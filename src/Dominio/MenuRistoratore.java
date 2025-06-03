@@ -5,7 +5,6 @@ import java.io.*;
 
 public class MenuRistoratore {
     private Utente utenteCorrente;
-    private Scanner scanner;
     private ListaRistoranti listaRistoranti;
     private Map<String, Map<String, MenuUtenteLog.Recensione>> recensioni;
     private Map<String, String> risposteRecensioni;
@@ -14,9 +13,8 @@ public class MenuRistoratore {
     private static final String FILE_RISPOSTE = "src/Data/RisposteRecensioni.txt";
 
 
-    public MenuRistoratore(Utente utente, Scanner scanner) {
+    public MenuRistoratore(Utente utente) {
         this.utenteCorrente = utente;
-        this.scanner = scanner;
         this.listaRistoranti = new ListaRistoranti();
         this.recensioni = new HashMap<>();
         this.risposteRecensioni = new HashMap<>();
@@ -26,6 +24,7 @@ public class MenuRistoratore {
 
     public void mostraMenuRistoratore() {
         int scelta = 0;
+        Scanner scanner = new Scanner(System.in);
         do {
             try {
                 System.out.println("\n=== Menu Ristoratore ===");
@@ -71,6 +70,7 @@ public class MenuRistoratore {
     }
 
     private void aggiungiRistorante() {
+        Scanner scanner = new Scanner(System.in);
         System.out.println("\n=== Aggiungi Nuovo Ristorante ===");
         System.out.print("Nome del ristorante: ");
         String nome = scanner.nextLine();
@@ -129,6 +129,7 @@ public class MenuRistoratore {
         listaRistoranti.inserisciRistorante(ristorante);
         listaRistoranti.salvaRistorantiSuCSV();
         System.out.println("Ristorante aggiunto con successo!");
+        scanner.close();
     }
 
     // Nuovo metodo per visualizzare i ristoranti del ristoratore
@@ -212,6 +213,7 @@ public class MenuRistoratore {
     }
     //Metodo per la risposta
     private void rispostaRecensioni() {
+        Scanner scanner = new Scanner(System.in);
         System.out.println("\n=== Rispondi alle Recensioni ===");
         System.out.print("Inserisci il nome del ristorante: ");
         String nomeRistorante = scanner.nextLine();
@@ -249,6 +251,7 @@ public class MenuRistoratore {
         if (!trovateRecensioni) {
             System.out.println("Non ci sono nuove recensioni da rispondere per questo ristorante.");
         }
+        scanner.close();
     }
     //controllo appartenenza ristorante al ristoratore
     private boolean appartienePropietario(String nomeRistorante) {

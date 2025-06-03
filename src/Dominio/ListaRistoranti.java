@@ -7,13 +7,10 @@ import java.util.Scanner;
 
 public class ListaRistoranti {
     public ListaRistoranti(){
-        ricavaRistorantiDaCSV();
+        if(listaRistoranti.isEmpty())
+            ricavaRistorantiDaCSV();
     }
     public List<Ristorante> listaRistoranti = new ArrayList<>();
-
-    public List<Ristorante> getListaRistoranti() {
-        return listaRistoranti;
-    }
 
     public void setListaRistoranti(List<Ristorante> listaRistoranti){
         this.listaRistoranti = listaRistoranti;
