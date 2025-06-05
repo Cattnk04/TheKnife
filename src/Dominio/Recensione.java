@@ -7,18 +7,21 @@ public class Recensione {
     String nomeRistorante;
     int valutazione;
     String recensione;
+    String risposta;
 
     public Recensione(Utente utente, ListaRistoranti ristoranti) {
         this.email = utente.getEmail();
-        this.nomeRistorante = ristoranti.cercaPerNome().getNome();
+        this.nomeRistorante = ristoranti.cercaPerNome("Inserisci il nome del ristorante a cui vuoi lasciare una recensione: ").getNome();
         this.valutazione = valutazione();
         this.recensione = recensione();
+        this.risposta = null;
     }
-    public Recensione(String email, String nomeRistorante, int valutazione, String recensione) {
+    public Recensione(String email, String nomeRistorante, int valutazione, String recensione, String risposta) {
         this.email = email;
         this.nomeRistorante = nomeRistorante;
         this.valutazione = valutazione;
         this.recensione = recensione;
+        this.risposta = risposta;
     }
     //GET
     public String getEmail(){
@@ -32,6 +35,9 @@ public class Recensione {
     }
     public String getRecensione(){
         return recensione;
+    }
+    public String getRisposta(){
+        return risposta;
     }
     //SET
     public void setRecensione(String recensione){
@@ -60,7 +66,7 @@ public class Recensione {
     }
     @Override
     public String toString(){
-        return this.email + '*' + this.nomeRistorante + '*' + this.valutazione + '*' + this.recensione;
+        return this.email + '*' + this.nomeRistorante + '*' + this.valutazione + '*' + this.recensione + '*' + this.risposta;
     }
 
 }

@@ -40,14 +40,29 @@ public class ListaRecensioni {
                 String nomeRistorante = riga[1];
                 Integer valutazione = Integer.parseInt(riga[2]);
                 String recensione = riga[3];
-                Recensione r = new Recensione(email, nomeRistorante, valutazione, recensione);
+                String risposta = riga[4];
+                Recensione r = new Recensione(email, nomeRistorante, valutazione, recensione, risposta);
                 listaRecensioni.add(r);
             }
         }catch(IOException e){
             System.err.println("Errore nel caricamento della recensione: " + e.getMessage());
         }
     }
-    public void inserisciRecensione(Recensione recensione){
-        listaRecensioni.add(recensione);
+    public void inserisciRecensione(Utente utente, ListaRistoranti listaRistoranti){
+        Recensione recensione = new Recensione(utente, listaRistoranti);
+        if (recensioneDuplicato(recensione)){
+            System.out.println("Hai già lasciato una recensione a questo ristorante!");
+        } else {
+            listaRecensioni.add(recensione);
+        }
     }
+    public boolean recensioneDuplicato(Recensione recensione){
+        for(Recensione r : listaRecensioni){
+            if(r.getEmail().equals(recensione.getEmail()) && r.getNomeRistorante().equals(recensione.getNomeRistorante())){
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
