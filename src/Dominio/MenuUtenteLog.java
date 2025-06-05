@@ -6,7 +6,7 @@ import java.util.*;
 public class MenuUtenteLog {
 
     private ListaPreferiti listaPreferiti = new ListaPreferiti();
-    //private ListaRecensioni listaRecensioni = new ListaRecensioni();
+    private ListaRecensioni listaRecensioni = new ListaRecensioni();
 
     private Map<String, List<String>> preferiti;
     private Map<String, Map<String, Recensione>> recensioni;
@@ -91,97 +91,17 @@ public class MenuUtenteLog {
     //Mostra i ristoranti preferiti dell'utente
     private void mostraPreferiti() {
         List<Preferito> preferitiUtente = listaPreferiti.preferitiUtente(utenteCorrente);
-        if (preferitiUtente.isEmpty()) {
-            System.out.print("Non hai ancora aggiunto ristoranti ai preferiti.");
-        } else {
-            System.out.print("\nI tuoi ristoranti preferiti:");
-            for (Preferito p : preferitiUtente) {
-                System.out.print("- " + p.getNomeRistorante());
-            }
-        }
     }
 
-    //Controllo se il ristorante esiste nel file
-    private boolean esisteRistorante(String nomeRistorante) {
-        // Debug: stampa il nome ricercato
-        System.out.println("Cercando ristorante: '" + nomeRistorante + "'");
-        
-        return listaRistoranti.getListaRistoranti().stream()
-                .peek(r -> System.out.println("Confrontando con: '" + r.getNome() + "'"))
-                .anyMatch(r -> r.getNome().trim().equalsIgnoreCase(nomeRistorante.trim()));
-    }
 
     // Aggiunta ristorante ai preferiti dell'utente con controllo duplicati
     public void aggiungiPreferito() {
-
         listaPreferiti.aggiungiPreferito(utenteCorrente, listaRistoranti);
-
-        // quiesto va fatto bnel gestore della lista dei preferiti non nella classe menù
-        //Le liste si gestiscono nelle loro classi
-        /*
-        System.out.print("Inserisci il nome del ristorante da aggiungere ai preferiti: ");
-        String nomeRistorante = scanner.nextLine();
-
-        String email = utenteCorrente.getEmail();
-
-        if (email == null || nomeRistorante == null || email.trim().isEmpty() || nomeRistorante.trim().isEmpty()) {
-            throw new IllegalArgumentException("Email e nome ristorante non possono essere vuoti \n");
-        }
-        // Controllo esistenza del ristorante
-        if (!esisteRistorante(nomeRistorante)) {
-            System.out.print("Il ristorante specificato non esiste nel sistema \n");
-            return;
-        }
-
-        List<String> listaPreferiti = preferiti.computeIfAbsent(email, k -> new ArrayList<>());
-
-        // Controllo duplicati
-        if (!listaPreferiti.contains(nomeRistorante)) {
-            listaPreferiti.add(nomeRistorante);
-            salvaPreferitiSuFile(); // Salva su file dopo ogni aggiunta
-            System.out.print("Ristorante aggiunto ai preferiti con successo\n");
-        } else {
-            System.out.print("Il ristorante è già presente nei preferiti\n");
-        }*/
     }
 
     // Rimuovi ristorante dai preferiti dell'utente
     public void rimuoviPreferito() {
-        System.out.print("Inserisci il nome del ristorante da rimuovere dai preferiti:");
-        String nomeRistorante = scanner.nextLine();
-        String email = utenteCorrente.getEmail();
-
-        if (preferiti.containsKey(email)) {
-            List<String> listaPreferiti = preferiti.get(email);
-            if (listaPreferiti.remove(nomeRistorante)) {
-                salvaPreferitiSuFile(); // Salva su file dopo ogni rimozione
-                System.out.print("Ristorante rimosso dai preferiti con successo\n");
-            } else {
-                System.out.print("Il ristorante non era presente nei preferiti\n");
-            }
-        }
-    }
-
-
-    // Carica recensioni dal file
-    private void caricaRecensioniDaFile() {
-        try (BufferedReader reader = new BufferedReader(new FileReader(FILE_RECENSIONI))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(",");
-                if (parts.length == 4) {
-                    String email = parts[0].trim();
-                    String ristorante = parts[1].trim();
-                    String testo = parts[2].trim();
-                    int stelle = Integer.parseInt(parts[3].trim());
-
-                    recensioni.computeIfAbsent(email, k -> new HashMap<>())
-                            .put(ristorante, new Recensione(testo, stelle));
-                }
-            }
-        } catch (IOException | NumberFormatException e) {
-            System.err.println("Errore durante la lettura del file recensioni: " + e.getMessage());
-        }
+        listaPreferiti.rimuoviPreferito(utenteCorrente, listaRistoranti);
     }
 
     // Salva recensioni su file

@@ -55,17 +55,41 @@ public class ListaPreferiti {
             System.out.println("Impossibile aggiungere il ristorante ai preferiti.");
     }
 
-    public boolean preferitoDuplicato(Preferito preferito){
+    public boolean preferitoDuplicato(Preferito nuovoPreferito){
         for(Preferito p : listaPreferiti){
-            if(p.getNomeRistorante().equals(preferito.getNomeRistorante()) && p.getEmailUtente().equals(preferito.getEmailUtente())){
+            if(p.getNomeRistorante().equals(nuovoPreferito.getNomeRistorante()) && p.getEmailUtente().equals(nuovoPreferito.getEmailUtente())){
                 return true;
             }
         }
         return false;
     }
-    // da fare
-    public void rimuoviPreferito(Utente utente){
 
+    public boolean mostraPreferiti(Utente utenteCorrente){
+        List<Preferito> preferitiUtente = preferitiUtente(utenteCorrente);
+        if (preferitiUtente.isEmpty()) {
+            System.out.println("Non hai ancora aggiunto ristoranti ai preferiti.");
+            return false;
+        } else {
+            System.out.println("I tuoi ristoranti preferiti:");
+            for (Preferito p : preferitiUtente) {
+                System.out.println("- " + p.getNomeRistorante());
+            }
+        }
+        return true;
+    }
+    // da fare
+    public void rimuoviPreferito(Utente utente, ListaRistoranti listaRistoranti){
+        Ristorante ristorante = null;
+        if(mostraPreferiti(utente)){
+            ristorante = listaRistoranti.cercaPerNome("Inserisci il nome del ristorante da rimuovere dai preferiti: ");
+        }
+        if(ristorante != null){
+            for(Preferito p : listaPreferiti){
+                if(p.getNomeRistorante().equals(ristorante) && p.getEmailUtente().equals(utente.getEmail())){
+                    listaPreferiti.remove(p);
+                }
+            }
+        }
     }
     public List<Preferito> preferitiUtente(Utente utenteCorrente){
         List<Preferito> preferitiUtente = new ArrayList<>();
