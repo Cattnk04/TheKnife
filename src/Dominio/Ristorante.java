@@ -2,6 +2,7 @@ package Dominio;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Scanner;
 
 public class Ristorante {
     private String nome;
@@ -14,7 +15,7 @@ public class Ristorante {
     private boolean servizioPrenotazioneOnline;
     private String tipoCucina;
 
-    Ristorante(String nome, String emailRistoratore, String nazione, String citta, String indirizzo, double fasciaPrezzo, boolean servizioDelivery, boolean servizioPrenotazioneOnline, String tipoCucina){
+    public Ristorante(String nome, String emailRistoratore, String nazione, String citta, String indirizzo, double fasciaPrezzo, boolean servizioDelivery, boolean servizioPrenotazioneOnline, String tipoCucina){
         this.nome = nome.trim();
         this.emailRistoratore = emailRistoratore.trim();
         this.nazione = nazione.trim();
@@ -24,6 +25,11 @@ public class Ristorante {
         this.servizioDelivery = servizioDelivery;
         this.servizioPrenotazioneOnline = servizioPrenotazioneOnline;
         this.tipoCucina = tipoCucina.trim();
+    }
+
+    public Ristorante(Utente utenteRistoratore){
+        this.emailRistoratore = utenteRistoratore.getEmail();
+        inserisciDatiRistorante();
     }
 
     public String getNome(){
@@ -63,7 +69,7 @@ public class Ristorante {
     public void setIndirizzo(String indirizzo){
         this.indirizzo = indirizzo;
     }
-    public void setFasciaPrezzo(Integer fasciaPrezzo){
+    public void setFasciaPrezzo(double fasciaPrezzo){
         this.fasciaPrezzo = fasciaPrezzo;
     }
     public void setServizioDelivery(boolean servizioDelivery){
@@ -83,5 +89,47 @@ public class Ristorante {
 
     public Object getEmailRistoratore() {
         return emailRistoratore;
+    }
+    private void inserisciDatiRistorante(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Inserisci il nome del ristorante:");
+        this.setNome(scanner.nextLine());
+        System.out.print("Inserisci il nazione del ristorante:");
+        this.setNazione(scanner.nextLine());
+        System.out.print("Inserisci la citta del ristorante:");
+        this.setCitta(scanner.nextLine());
+        System.out.print("Inserisci l'indirizzo del ristorante:");
+        this.setIndirizzo(scanner.nextLine());
+        System.out.print("Inserisci il prezzo medio del ristorante:");
+        this.setFasciaPrezzo(scanner.nextDouble());
+        boolean valido;
+        do{
+            valido = true;
+            System.out.print("Il ristorante fornisce il servizio delivery? [s/n]");
+            String risposta = scanner.nextLine().trim().toLowerCase(); // Salva l'input in una variabile
+            if(risposta.equals("s")){
+                this.setServizioDelivery(true);
+            } else if (risposta.equals("n")){
+                this.setServizioDelivery(false);
+            } else {
+                System.out.println("Devi inserire 's' o 'n'");
+                valido = false;
+            }
+        } while (!valido);
+        do{
+            valido = true;
+            System.out.println("Il ristorante accetta prenotazioni online? [s/n]");
+            String risposta = scanner.nextLine().trim().toLowerCase();
+            if(risposta.equals("s")){
+                this.setServizioPrenotazioneOnline(true);
+            } else if (risposta.equals("n")){
+                this.setServizioPrenotazioneOnline(false);
+            } else {
+                System.out.println("Devi inserire 's' o 'n'");
+                valido = false;
+            }
+        } while (!valido);
+        System.out.println("Inserisci il tipo di cucina del ristorante: ");
+        this.setTipoCucina(scanner.nextLine());
     }
 }

@@ -24,20 +24,20 @@ public class Menu {
                     if(utenteCorrente != null){
                         System.out.println("Registrazione avvenuta con successo!");
                         if(utenteCorrente.getRistoratore()) {
-                            MenuRistoratore menuRistoratore = new MenuRistoratore(utenteCorrente, scanner);
+                            MenuRistoratore menuRistoratore = new MenuRistoratore(utenteCorrente);
                         } else {
-                            MenuUtenteLog menuUtenteLog = new MenuUtenteLog(utenteCorrente, scanner);
+                            MenuUtenteLog menuUtenteLog = new MenuUtenteLog(utenteCorrente);
                         }
                     }
                     break;
                 case 2:
-                    utenteCorrente = loginUtente(listaUtenti, scanner);
+                    utenteCorrente = loginUtente(listaUtenti);
                     if(utenteCorrente != null){
                         System.out.println("Login avvenuto con successo!");
                         if(utenteCorrente.getRistoratore()) {
-                            MenuRistoratore menuRistoratore = new MenuRistoratore(utenteCorrente, scanner);
+                            new MenuRistoratore(utenteCorrente);
                         } else {
-                            MenuUtenteLog menuUtenteLog = new MenuUtenteLog(utenteCorrente, scanner);
+                            new MenuUtenteLog(utenteCorrente);
                         }
                     }
                     break;
@@ -85,93 +85,15 @@ public class Menu {
 
     // metodo per la registrazione
     public static Utente registraUtente(ListaUtenti listaUtenti){
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("\n=== Registrazione ===");
-        String nome = "";
-        do{
-            System.out.print("Inserisci il tuo nome: ");
-            nome = scanner.nextLine();
-            if(nome.length()<=1)
-                System.out.println("Nome non valido");
-        }while (nome.length()<=1);
-        String cognome = "";
-        do{
-            System.out.print("Inserisci il tuo cognome: ");
-            cognome = scanner.nextLine();
-            if(cognome.length()<=1){
-                System.out.println("Cognome non valido");
-            }
-        } while (cognome.length()<=1);
-
-        String nazione = "";
-        System.out.print("Inserisci la Nazione: ");
-        nazione = scanner.nextLine();
-
-        String citta = "";
-        System.out.print("Inserisci la provincia di domicilio: ");
-        citta = scanner.nextLine();
-
-        boolean valido,ristoratore = false;
-        do{
-            valido = true;
-            System.out.print("Sei proprietario di un ristorante? [s/n]: ");
-            String risposta = scanner.nextLine().trim().toLowerCase(); // Salva l'input in una variabile
-            if(risposta.equals("s")){
-                ristoratore = true;
-            } else if (risposta.equals("n")){
-                ristoratore = false;
-            } else {
-                valido = false;
-            }
-        } while (!valido);
-
-        String email = "";
-        do{
-            valido = true;
-            System.out.print("Inserisci la tua email: ");
-            email = scanner.nextLine();
-            email = email.toLowerCase();
-            if(!email.contains("@") || !email.contains(".")){
-                valido = false;
-                System.out.println("Email non valida");
-            }
-        } while (!valido);
-        String password = "";
-        do{
-            valido = true;
-            System.out.print("Inserisci la tua password: ");
-            password = scanner.nextLine();
-            //VEDERE COME FAR VISUALIZZARE GLI ASTERISCHI INVECE DELLA STRINGA
-                /*devono essere visualizzate mentre scrive o dopo?
-                Perchè se vogliamo gli asterischi per ogni carattere immesso,
-                bisogna simulare un meccanismo in cui intercetti i tasti premuti e
-                visualizzi solo gli asterischi al posto dei caratteri.
-                Questo richiede l'uso della libreria esterna come Jline.
-                Se invece vogliamo mantenere nascosta la password,
-                è meglio usare Console oppure JPasswordField, che è per applicazioni grafiche
-                 */
-            if(password.length()<8){
-                //SE VOGLIAMO POSSIAMO METTERE QUI ALTRE CONDIZIONI
-                // TIPO CARETTERI SPECIALI O MAIUSCOLE/MINUSCOLE
-                valido = false;
-                System.out.println("Password non valida");
-            }
-        } while (!valido);
-
-        scanner.close();
         //Storing del nuovo utente nel file
-        Utente nuovoUtente = new Utente(email, nome, cognome, password, nazione, citta, ristoratore);
-        if(!listaUtenti.utenteDuplicato(nuovoUtente)){
-            listaUtenti.aggiungiUtente(nuovoUtente);
-            return nuovoUtente;
-        }
-        return null;
+        Utente nuovoUtente = new Utente();
+        return listaUtenti.aggiungiUtente(nuovoUtente);
     }
 
     // metodo per il login
-    public static Utente loginUtente(ListaUtenti listaUtenti, Scanner scanner) {
+    public static Utente loginUtente(ListaUtenti listaUtenti) {
     while (true) {  // Sostituiamo il do-while con un while(true)
+        Scanner scanner = new Scanner(System.in);
         System.out.println("\n=== Login ===");
         System.out.print("Inserisci la tua e-mail: ");
         String email = scanner.nextLine().trim();
@@ -187,6 +109,7 @@ public class Menu {
         System.out.println("Email o password errati!");
         System.out.print("Vuoi riprovare? (sì/no): ");
         String risposta = scanner.nextLine().trim();
+        scanner.close();
         if (risposta.equalsIgnoreCase("no")) {
             System.out.println("Grazie per aver usato il nostro servizio!");
             return null;

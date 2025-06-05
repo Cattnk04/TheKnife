@@ -61,12 +61,15 @@ private void ricavaUtentiDaCSV() {
     }
 }
 
-    public void aggiungiUtente(Utente nuovoUtente){
-        listaUtenti.add(nuovoUtente);
-        salvaUtentiSuCSV(); // Aggiungi questa riga per salvare su file
+    public Utente aggiungiUtente(Utente nuovoUtente){
+        if(nuovoUtente != null && !utenteDuplicato(nuovoUtente)){
+            listaUtenti.add(nuovoUtente);
+            return nuovoUtente;
+        } else
+            return null;
     }
 
-public Utente trovaUtente(String email, String password) {
+    public Utente trovaUtente(String email, String password) {
     
     for(Utente utente : listaUtenti) {
         if(utente.getEmail().equals(email)) {
@@ -82,7 +85,7 @@ public Utente trovaUtente(String email, String password) {
     return null;
 }
     public boolean utenteDuplicato(Utente nuovoUtente){
-        //scorrere la lista e verificare se esitono altri utenti con la stessa email del nuovo utente e in caso tornare true
+        //scorrere la lista e verificare se esistono altri utenti con la stessa email del nuovo utente e in caso tornare true
         for(Utente utente : listaUtenti){
             if(utente.getEmail().equals(nuovoUtente.getEmail())){
                 return true;

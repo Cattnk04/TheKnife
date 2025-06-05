@@ -1,25 +1,79 @@
 package Dominio;
 
 import java.io.*;
+import java.util.Locale;
+import java.util.Scanner;
 
 public class Utente {
     public static final String FILE_UTENTI = "src/Data/Utenti.txt";
     private String nome;
     private String cognome;
-    private final String email;
+    private String email;
     private String nazione;
     private String citta;
-    private final boolean ristoratore;
+    private boolean ristoratore;
     private String password;
 
     public Utente() {
-        this.nome = "";
-        this.cognome = "";
-        this.email = "";
-        this.nazione = "";
-        this.citta = "";
-        this.ristoratore = false;
-        this.password = "";
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("\n=== Registrazione ===");
+        do{
+            System.out.print("Inserisci il tuo nome: ");
+            this.nome = scanner.nextLine();
+            if(this.nome.length()<=1)
+                System.out.println("Nome non valido");
+        }while (this.nome.length()<=1);
+        do{
+            System.out.print("Inserisci il tuo cognome: ");
+            this.cognome = scanner.nextLine();
+            if(this.cognome.length()<=1){
+                System.out.println("Cognome non valido");
+            }
+        } while (this.cognome.length()<=1);
+
+        System.out.print("Inserisci la Nazione: ");
+        this.nazione = scanner.nextLine();
+
+        System.out.print("Inserisci la provincia di domicilio: ");
+        this.citta = scanner.nextLine();
+
+        boolean valido = false;
+        do{
+            valido = true;
+            System.out.print("Sei proprietario di un ristorante? [s/n]: ");
+            String risposta = scanner.nextLine().trim().toLowerCase(); // Salva l'input in una variabile
+            if(risposta.equals("s"))
+                this.ristoratore = true;
+            else if (risposta.equals("n"))
+                this.ristoratore = false;
+             else
+                valido = false;
+
+        } while (!valido);
+
+        String email = "";
+        do{
+            valido = true;
+            System.out.print("Inserisci la tua email: ");
+            this.email = scanner.nextLine().toLowerCase();
+            if(!this.email.contains("@") || !email.contains(".")){
+                valido = false;
+                System.out.println("Email non valida");
+            }
+        } while (!valido);
+        String password = "";
+        do{
+            valido = true;
+            System.out.print("Inserisci la tua password: ");
+            this.password = scanner.nextLine();
+            //VEDERE COME FAR VISUALIZZARE GLI ASTERISCHI INVECE DELLA STRINGA
+            if(password.length()<8){
+                valido = false;
+                System.out.println("Password troppo corta, inserirne una più lunga.");
+            }
+        } while (!valido);
+
+        scanner.close();
     }
     public Utente(String email, String nome, String cognome, String password, String nazione, String citta, boolean ristoratore) throws RuntimeException{
         this.email = email.trim();

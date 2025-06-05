@@ -12,10 +12,6 @@ public class ListaRistoranti {
     }
     public List<Ristorante> listaRistoranti = new ArrayList<>();
 
-    public void setListaRistoranti(List<Ristorante> listaRistoranti){
-        this.listaRistoranti = listaRistoranti;
-    }
-
     public void salvaRistorantiSuCSV() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/Data/Ristoranti.txt"))) {
             for (Ristorante r : listaRistoranti) {
@@ -55,7 +51,18 @@ public class ListaRistoranti {
     }
     public void inserisciRistorante(Ristorante ristorante) {
         //funzione per l'inserimento di un nuovo ristorante nella lista
-        listaRistoranti.add(ristorante);
+        if(ristorante != null && !ristoranteDuplicato(ristorante))
+            listaRistoranti.add(ristorante);
+        else
+            System.out.println("impossibile aggiungere il ristorante");
+    }
+
+    private boolean ristoranteDuplicato(Ristorante ristorante) {
+        for (Ristorante r : listaRistoranti) {
+            if(r.getNome().equals(ristorante.getNome()))
+                return true;
+        }
+        return false;
     }
     public Ristorante cercaPerNome(String messaggio){
         //Funzione per cercare un ristorante in base al suo nome
