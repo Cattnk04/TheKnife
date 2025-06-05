@@ -129,7 +129,6 @@ public class MenuRistoratore {
         listaRistoranti.inserisciRistorante(ristorante);
         listaRistoranti.salvaRistorantiSuCSV();
         System.out.println("Ristorante aggiunto con successo!");
-        scanner.close();
     }
 
     // Nuovo metodo per visualizzare i ristoranti del ristoratore
@@ -251,7 +250,6 @@ public class MenuRistoratore {
         if (!trovateRecensioni) {
             System.out.println("Non ci sono nuove recensioni da rispondere per questo ristorante.");
         }
-        scanner.close();
     }
     //controllo appartenenza ristorante al ristoratore
     private boolean appartienePropietario(String nomeRistorante) {

@@ -92,28 +92,30 @@ public class Menu {
 
     // metodo per il login
     public static Utente loginUtente(ListaUtenti listaUtenti) {
-    while (true) {  // Sostituiamo il do-while con un while(true)
         Scanner scanner = new Scanner(System.in);
-        System.out.println("\n=== Login ===");
-        System.out.print("Inserisci la tua e-mail: ");
-        String email = scanner.nextLine().trim();
-        System.out.print("Inserisci la tua password: ");
-        String password = scanner.nextLine().trim();
 
-        Utente utente = listaUtenti.trovaUtente(email, password);
+        while (true) {
+            System.out.println("\n=== Login ===");
+            System.out.print("Inserisci la tua e-mail: ");
+            String email = scanner.nextLine().trim();
+            System.out.print("Inserisci la tua password: ");
+            String password = scanner.nextLine().trim();
 
-        if (utente != null) {
-            return utente;  // Ritorniamo l'utente se trovato
-        }
+            Utente utente = listaUtenti.trovaUtente(email, password);
 
-        System.out.println("Email o password errati!");
-        System.out.print("Vuoi riprovare? (sì/no): ");
-        String risposta = scanner.nextLine().trim();
-        scanner.close();
-        if (risposta.equalsIgnoreCase("no")) {
-            System.out.println("Grazie per aver usato il nostro servizio!");
-            return null;
+            if (utente != null) {
+                return utente;  // Ritorniamo l'utente se trovato
+            }
+
+            System.out.println("Email o password errati!");
+            System.out.print("Vuoi riprovare? (sì/no): ");
+            String risposta = scanner.nextLine().trim();
+
+            if (risposta.equalsIgnoreCase("no")) {
+                System.out.println("Grazie per aver usato il nostro servizio!");
+                return null;
+            }
         }
     }
-}
+
 }

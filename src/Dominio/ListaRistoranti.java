@@ -10,6 +10,11 @@ public class ListaRistoranti {
         if(listaRistoranti.isEmpty())
             ricavaRistorantiDaCSV();
     }
+
+    public List<Ristorante> getListaRistoranti() {
+        return this.listaRistoranti;
+    }
+
     public List<Ristorante> listaRistoranti = new ArrayList<>();
 
     public void salvaRistorantiSuCSV() {
@@ -154,4 +159,5 @@ public class ListaRistoranti {
         filtrati.removeIf(r -> !r.getTipoCucina().equals(tipoCucina));
         System.out.println("Filtro per tipo cucina inserito.");
     }
+
 }
