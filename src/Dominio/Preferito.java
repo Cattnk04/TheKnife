@@ -5,8 +5,9 @@ public class Preferito {
     String nomeRistorante;
     public Preferito(Utente utente, ListaRistoranti listaRistoranti) {
         this.emailUtente = utente.getEmail();
-        if(listaRistoranti.cercaPerNome() != null)
-            this.nomeRistorante = listaRistoranti.cercaPerNome().getNome();
+        Ristorante ristorante = listaRistoranti.cercaPerNome("Inserisci il nome del ristorante che vuoi aggiungere alla tua lista dei preferiti: ");
+        if(ristorante != null)
+            this.nomeRistorante = ristorante.getNome();
         else
             this.nomeRistorante = null;
     }

@@ -11,7 +11,7 @@ public class Recensione {
 
     public Recensione(Utente utente, ListaRistoranti ristoranti) {
         this.email = utente.getEmail();
-        this.nomeRistorante = ristoranti.cercaPerNome().getNome();
+        this.nomeRistorante = ristoranti.cercaPerNome("Inserisci il nome del ristorante a cui vuoi lasciare una recensione: ").getNome();
         this.valutazione = valutazione();
         this.recensione = recensione();
         this.risposta = null;

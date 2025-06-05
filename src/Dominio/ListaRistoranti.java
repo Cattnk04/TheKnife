@@ -57,10 +57,10 @@ public class ListaRistoranti {
         //funzione per l'inserimento di un nuovo ristorante nella lista
         listaRistoranti.add(ristorante);
     }
-    public Ristorante cercaPerNome(){
+    public Ristorante cercaPerNome(String messaggio){
         //Funzione per cercare un ristorante in base al suo nome
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Inserisci il nome del ristorante che vuoi cercare: ");
+        System.out.print(messaggio);
         String nomeRistorante = scanner.nextLine();
         for (Ristorante r : listaRistoranti) {
             if(nomeRistorante.equals(r.getNome())){
