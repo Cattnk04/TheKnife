@@ -6,10 +6,10 @@ import java.util.InputMismatchException;
 
 public class Menu {
     private static final String FILE_UTENTI = "src/Data/Utenti.txt";
+    private static final Scanner scanner = new Scanner(System.in);
 
     public Menu(){
     //Creazione delle diverse liste per l'accesso ai dati
-    Scanner scanner = new Scanner(System.in);  // Creiamo un solo Scanner
     ListaUtenti listaUtenti = new ListaUtenti();
     ListaRistoranti listaRistoranti = new ListaRistoranti();
     int scelta;
@@ -56,8 +56,7 @@ public class Menu {
             scelta = -1;
         }
     } while (scelta != 0);
-    
-    scanner.close(); // Chiudiamo lo Scanner solo alla fine del programma
+
 }
     // metodo per la scelta dell'utente ospite
     public static int menuGuest() {
@@ -79,7 +78,6 @@ public class Menu {
         }
 
         scanner.nextLine(); // pulizia della linea
-        scanner.close();
         return choice;
     }
 

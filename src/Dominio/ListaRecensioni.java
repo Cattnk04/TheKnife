@@ -20,7 +20,7 @@ public class ListaRecensioni {
         this.listaRecensioni = listaRecensione;
     }
     public void salvaRecensioniSuCSV() {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("/scr/Data/Recensioni.txt"))){
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/Data/Recensioni.txt"))){
             for (Recensione r :listaRecensioni){
                 writer.write(r.toString() + "\n");
                 writer.newLine();
@@ -32,7 +32,7 @@ public class ListaRecensioni {
     }
     public void ricavaRecensioniDaCSV(){
         List<Recensione> listaRecensioni = new ArrayList<>();
-        try(BufferedReader reader = new BufferedReader(new FileReader("/scr/Data/Recensioni.txt"))){
+        try(BufferedReader reader = new BufferedReader(new FileReader("src/Data/Recensioni.txt"))){
             String line;
             while((line = reader.readLine()) != null){
                 String[] riga = line.split(",");

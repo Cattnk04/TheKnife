@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class Utente {
     public static final String FILE_UTENTI = "src/Data/Utenti.txt";
+    private static final Scanner scanner = new Scanner(System.in);
     private String nome;
     private String cognome;
     private String email;
@@ -15,27 +16,26 @@ public class Utente {
     private String password;
 
     public Utente() {
-        Scanner scanner = new Scanner(System.in);
         System.out.println("\n=== Registrazione ===");
         do{
             System.out.print("Inserisci il tuo nome: ");
-            this.nome = scanner.nextLine();
+            this.nome = scanner.nextLine().trim();
             if(this.nome.length()<=1)
                 System.out.println("Nome non valido");
         }while (this.nome.length()<=1);
         do{
             System.out.print("Inserisci il tuo cognome: ");
-            this.cognome = scanner.nextLine();
+            this.cognome = scanner.nextLine().trim();
             if(this.cognome.length()<=1){
                 System.out.println("Cognome non valido");
             }
         } while (this.cognome.length()<=1);
 
         System.out.print("Inserisci la Nazione: ");
-        this.nazione = scanner.nextLine();
+        this.nazione = scanner.nextLine().trim();
 
         System.out.print("Inserisci la provincia di domicilio: ");
-        this.citta = scanner.nextLine();
+        this.citta = scanner.nextLine().trim();
 
         boolean valido = false;
         do{
@@ -55,7 +55,7 @@ public class Utente {
         do{
             valido = true;
             System.out.print("Inserisci la tua email: ");
-            this.email = scanner.nextLine().toLowerCase();
+            this.email = scanner.nextLine().trim().toLowerCase();
             if(!this.email.contains("@") || !email.contains(".")){
                 valido = false;
                 System.out.println("Email non valida");
@@ -73,7 +73,6 @@ public class Utente {
             }
         } while (!valido);
 
-        scanner.close();
     }
     public Utente(String email, String nome, String cognome, String password, String nazione, String citta, boolean ristoratore) throws RuntimeException{
         this.email = email.trim();

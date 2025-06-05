@@ -6,8 +6,11 @@ import java.util.List;
 
 public class ListaPreferiti {
     private static List<Preferito> listaPreferiti;
+
+
     public ListaPreferiti(){
-            ricavaPreferitiDaCSV();
+        this.listaPreferiti = new ArrayList<>();
+        ricavaPreferitiDaCSV();
     }
     private void ricavaPreferitiDaCSV(){
         try {

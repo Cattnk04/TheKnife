@@ -1,5 +1,6 @@
 package Dominio;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Recensione {
@@ -52,11 +53,22 @@ public class Recensione {
     //Metodo per inserire valutazione
     public int valutazione(){
         Scanner scanner = new Scanner(System.in);
+        int valutazione;
         do{
             System.out.print("Puoi inserire una valutazione da 1 a 5: ");
-            int valutazione = scanner.nextInt();
-        } while (valutazione < 1 || valutazione > 5);
-        return valutazione;
+            try {
+                valutazione = scanner.nextInt();
+                scanner.nextLine(); // consuma il newline
+                if (valutazione >= 1 && valutazione <= 5) {
+                    return valutazione;
+                }
+                System.out.println("Per favore inserisci un numero tra 1 e 5.");
+            } catch (InputMismatchException e) {
+                System.out.println("Per favore inserisci un numero valido.");
+                scanner.nextLine(); // pulisce l'input non valido
+                valutazione = 0;
+            }
+        } while (true);
     }
 
     //metodo per inserire recensione
