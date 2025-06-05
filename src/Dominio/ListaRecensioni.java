@@ -40,7 +40,8 @@ public class ListaRecensioni {
                 String nomeRistorante = riga[1];
                 Integer valutazione = Integer.parseInt(riga[2]);
                 String recensione = riga[3];
-                Recensione r = new Recensione(email, nomeRistorante, valutazione, recensione);
+                String risposta = riga[4];
+                Recensione r = new Recensione(email, nomeRistorante, valutazione, recensione, risposta);
                 listaRecensioni.add(r);
             }
         }catch(IOException e){
@@ -50,4 +51,5 @@ public class ListaRecensioni {
     public void inserisciRecensione(Recensione recensione){
         listaRecensioni.add(recensione);
     }
+
 }
