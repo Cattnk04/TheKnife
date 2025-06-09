@@ -11,6 +11,7 @@ public class MenuRistoratore {
     private static final String FILE_RISTORANTI = "src/Data/Ristoranti.txt";
     private static final String FILE_RECENSIONI = "src/Data/Recensioni.txt";
     private static final String FILE_RISPOSTE = "src/Data/RisposteRecensioni.txt";
+    private static final Scanner scanner = new Scanner(System.in);
 
 
     public MenuRistoratore(Utente utente) {
@@ -24,7 +25,6 @@ public class MenuRistoratore {
 
     public void mostraMenuRistoratore() {
         int scelta = 0;
-        Scanner scanner = new Scanner(System.in);
         do {
             try {
                 System.out.println("\n=== Menu Ristoratore ===");
@@ -70,7 +70,6 @@ public class MenuRistoratore {
     }
 
     private void aggiungiRistorante() {
-        Scanner scanner = new Scanner(System.in);
         System.out.println("\n=== Aggiungi Nuovo Ristorante ===");
         System.out.print("Nome del ristorante: ");
         String nome = scanner.nextLine();
