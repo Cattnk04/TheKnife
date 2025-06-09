@@ -6,8 +6,7 @@ import java.io.*;
 public class MenuRistoratore {
     private Utente utenteCorrente;
     private ListaRistoranti listaRistoranti;
-    private Map<String, Map<String, MenuUtenteLog.Recensione>> recensioni;
-    private Map<String, String> risposteRecensioni;
+    private ListaRecensioni listaRecensioni;
     private static final String FILE_RISTORANTI = "src/Data/Ristoranti.txt";
     private static final String FILE_RECENSIONI = "src/Data/Recensioni.txt";
     private static final String FILE_RISPOSTE = "src/Data/RisposteRecensioni.txt";
@@ -17,9 +16,7 @@ public class MenuRistoratore {
     public MenuRistoratore(Utente utente) {
         this.utenteCorrente = utente;
         this.listaRistoranti = new ListaRistoranti();
-        this.recensioni = new HashMap<>();
-        this.risposteRecensioni = new HashMap<>();
-        caricaRisposteDaFile();
+        this.listaRecensioni = new ListaRecensioni();
         mostraMenuRistoratore();
     }
 
@@ -50,7 +47,7 @@ public class MenuRistoratore {
                         visualizzaRiepilogo();
                         break;
                     case 4:
-                        visualizzaRecensioni();
+                        visualizzaRecensioniRistorante();
                         break;
                     case 5:
                         rispostaRecensioni();
@@ -156,7 +153,7 @@ public class MenuRistoratore {
     }
 
     //Metodo per la visualizzazione del riepilogo delle recensioni
-    private void visualizzaRiepilogo() {
+    private void visualizzaRiepilogo() {/*
         System.out.println("\n=== Riepilogo Recensioni ===");
         Map<String, Integer> numeroRecensioni = new HashMap<>();
         Map<String, Double> mediaStelle = new HashMap<>();
@@ -182,11 +179,35 @@ public class MenuRistoratore {
             System.out.printf("Ristorante: %s\n", nomeRistorante);
             System.out.printf("Numero recensioni: %d\n", numRec);
             System.out.printf("Media stelle: %.1f\n\n", media);
-        }
+        }*/
     }
     
     // Metodo per la visualizzazione alle recensioni nel dettaglio
-    private void visualizzaRecensioni() {
+    private void visualizzaRecensioniRistorante() {
+        System.out.println("\n=== Dettaglio Recensioni ===");
+        Scanner scanner = new Scanner(System.in);
+        int cont = 0;
+        for(Ristorante r : listaRistoranti.getListaRistoranti()) {
+            if (r.getEmailRistoratore().equals(utenteCorrente.getEmail())) {
+                cont++;
+                System.out.println(cont + ": " + r.getNome());
+            }
+        }
+        Ristorante ristorante = null;
+        System.out.println("Inserisci il nome del tuo ristorante del quale vuoi vedere le recensioni: ");
+        String nomeRistorante = scanner.nextLine();
+        for(Ristorante r : listaRistoranti.getListaRistoranti()) {
+            if (r.getEmailRistoratore().equals(utenteCorrente.getEmail()) && r.getNome().equals(nomeRistorante)) {
+                ristorante = r;
+            }
+        }
+        if(ristorante == null) {
+            System.out.println("Hai inserito un nome errato");
+        } else {
+            for(Recensione rec : listaRecensioni.recensioniRistorante(ristorante.getNome())) {
+                System.out.println(rec.stampaRecensione());
+            }
+        }/*
         System.out.println("\n=== Dettaglio Recensioni ===");
         for (Map.Entry<String, Map<String, MenuUtenteLog.Recensione>> entry : recensioni.entrySet()) {
             for (Map.Entry<String, MenuUtenteLog.Recensione> recensione : entry.getValue().entrySet()) {
@@ -207,10 +228,10 @@ public class MenuRistoratore {
                     System.out.println();
                 }
             }
-        }
+        }*/
     }
     //Metodo per la risposta
-    private void rispostaRecensioni() {
+    private void rispostaRecensioni() {/*
         Scanner scanner = new Scanner(System.in);
         System.out.println("\n=== Rispondi alle Recensioni ===");
         System.out.print("Inserisci il nome del ristorante: ");
@@ -248,7 +269,7 @@ public class MenuRistoratore {
 
         if (!trovateRecensioni) {
             System.out.println("Non ci sono nuove recensioni da rispondere per questo ristorante.");
-        }
+        }*/
     }
     //controllo appartenenza ristorante al ristoratore
     private boolean appartienePropietario(String nomeRistorante) {
@@ -256,33 +277,4 @@ public class MenuRistoratore {
                 .anyMatch(r -> r.getNome().equals(nomeRistorante) &&
                         r.getEmailRistoratore().equals(utenteCorrente.getEmail()));
     }
-    
-    //Metodo per caricare le risposte sul file
-    private void caricaRisposteDaFile() {
-        try (BufferedReader reader = new BufferedReader(new FileReader(FILE_RISPOSTE))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(",", 3);
-                if (parts.length == 3) {
-                    String chiave = parts[0] + "," + parts[1];
-                    risposteRecensioni.put(chiave, parts[2]);
-                }
-            }
-        } catch (IOException e) {
-            System.err.println("Errore durante la lettura delle risposte: " + e.getMessage());
-        }
-    }
-    
-    // Metodo per salvare le risposte sul file
-    private void salvaRisposteSuFile() {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_RISPOSTE))) {
-            for (Map.Entry<String, String> entry : risposteRecensioni.entrySet()) {
-                String[] parts = entry.getKey().split(",");
-                writer.write(String.format("%s,%s,%s\n", parts[0], parts[1], entry.getValue()));
-            }
-        } catch (IOException e) {
-            System.err.println("Errore durante il salvataggio delle risposte: " + e.getMessage());
-        }
-    }
-
 }
