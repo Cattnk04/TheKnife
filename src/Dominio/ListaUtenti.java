@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.List;
 import java.util.ArrayList;
 import java.io.FileWriter;
+import java.util.Scanner;
 
 public class ListaUtenti {
     public ListaUtenti(){
@@ -69,6 +70,32 @@ private void ricavaUtentiDaCSV() {
             return null;
     }
 
+    public Utente loginUtente(){
+        Scanner scanner = new Scanner(System.in);
+
+        while (true) {
+            System.out.println("\n=== Login ===");
+            System.out.print("Inserisci la tua e-mail: ");
+            String email = scanner.nextLine().trim();
+            System.out.print("Inserisci la tua password: ");
+            String password = scanner.nextLine().trim();
+
+            Utente utente = trovaUtente(email, password);
+
+            if (utente != null) {
+                return utente;  // Ritorniamo l'utente se trovato
+            } else {
+                System.out.println("Email o password errati!");
+                System.out.print("Vuoi riprovare? (sì/no): ");
+                String risposta = scanner.nextLine().trim();
+
+                if (risposta.equalsIgnoreCase("no")) {
+                    System.out.println("Grazie per aver usato il nostro servizio!");
+                    return null;
+                }
+            }
+        }
+    }
     public Utente trovaUtente(String email, String password) {
     
     for(Utente utente : listaUtenti) {

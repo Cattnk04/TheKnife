@@ -34,11 +34,11 @@ public class Menu {
                     utenteCorrente = loginUtente(listaUtenti);
                     if(utenteCorrente != null){
                         System.out.println("Login avvenuto con successo!");
-                        if(utenteCorrente.getRistoratore()) {
+                        if(utenteCorrente.getRistoratore())
                             new MenuRistoratore(utenteCorrente);
-                        } else {
+                        else
                             new MenuUtenteLog(utenteCorrente);
-                        }
+
                     }
                     break;
                 case 3:
@@ -90,30 +90,8 @@ public class Menu {
 
     // metodo per il login
     public static Utente loginUtente(ListaUtenti listaUtenti) {
-        Scanner scanner = new Scanner(System.in);
+        return listaUtenti.loginUtente();
 
-        while (true) {
-            System.out.println("\n=== Login ===");
-            System.out.print("Inserisci la tua e-mail: ");
-            String email = scanner.nextLine().trim();
-            System.out.print("Inserisci la tua password: ");
-            String password = scanner.nextLine().trim();
-
-            Utente utente = listaUtenti.trovaUtente(email, password);
-
-            if (utente != null) {
-                return utente;  // Ritorniamo l'utente se trovato
-            }
-
-            System.out.println("Email o password errati!");
-            System.out.print("Vuoi riprovare? (sì/no): ");
-            String risposta = scanner.nextLine().trim();
-
-            if (risposta.equalsIgnoreCase("no")) {
-                System.out.println("Grazie per aver usato il nostro servizio!");
-                return null;
-            }
-        }
     }
 
 }
