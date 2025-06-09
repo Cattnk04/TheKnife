@@ -64,5 +64,31 @@ public class ListaRecensioni {
         }
         return false;
     }
+    public List<Recensione> recensioniRistorante(String nomeRistorante){
+        List<Recensione> recensioniRistorante = new ArrayList<>();
+        for(Recensione r : listaRecensioni){
+            if(r.getNomeRistorante().equals(nomeRistorante)){
+                recensioniRistorante.add(r);
+            }
+        }
+        if(recensioniRistorante.isEmpty()){
+            return null;
+        } else {
+            return recensioniRistorante;
+        }
+    }
 
+    public List<Recensione> recensioniUtente(Utente utente){
+        List<Recensione> recensioniUtente = new ArrayList<>();
+        for(Recensione r : listaRecensioni){
+            if(r.getEmail().equals(utente.getEmail())){
+                recensioniUtente.add(r);
+            }
+        }
+        if(recensioniUtente.isEmpty()){
+            return null;
+        } else {
+            return recensioniUtente;
+        }
+    }
 }

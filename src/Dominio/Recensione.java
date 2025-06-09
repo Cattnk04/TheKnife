@@ -84,4 +84,12 @@ public class Recensione {
         return this.email + '*' + this.nomeRistorante + '*' + this.valutazione + '*' + this.recensione + '*' + this.risposta;
     }
 
+    public String stampaRecensione(){
+        String stringa =  "Valutazione: " + getValutazione() + "\nRecensione: " + getRecensione();
+        if(getRisposta() != null){
+            stringa += "\nRisposta: " + getRisposta();
+        }
+        return stringa;
+    }
+
 }
