@@ -6,31 +6,32 @@ import java.io.*;
 public class MenuRistoratore {
     private Utente utenteCorrente;
     private ListaRistoranti listaRistoranti;
-    private ListaRecensioni listaRecensioni;
     private Map<String, Map<String, MenuUtenteLog.Recensione>> recensioni;
     private Map<String, String> risposteRecensioni;
     private static final String FILE_RISTORANTI = "src/Data/Ristoranti.txt";
     private static final String FILE_RECENSIONI = "src/Data/Recensioni.txt";
     private static final String FILE_RISPOSTE = "src/Data/RisposteRecensioni.txt";
+    private static final Scanner scanner = new Scanner(System.in);
 
 
     public MenuRistoratore(Utente utente) {
         this.utenteCorrente = utente;
         this.listaRistoranti = new ListaRistoranti();
-        this.listaRecensioni = new ListaRecensioni();
+        this.recensioni = new HashMap<>();
+        this.risposteRecensioni = new HashMap<>();
+        caricaRisposteDaFile();
         mostraMenuRistoratore();
     }
 
     public void mostraMenuRistoratore() {
         int scelta = 0;
-        Scanner scanner = new Scanner(System.in);
         do {
             try {
                 System.out.println("\n=== Menu Ristoratore ===");
                 System.out.println("1. Aggiungi ristorante");
                 System.out.println("2. Visualizza i miei ristoranti");
                 System.out.println("3. Visualizza riepilogo recensioni");
-                System.out.println("4. Visualizza recensioni ristorante");
+                System.out.println("4. Visualizza dettagli recensioni");
                 System.out.println("5. Rispondi alle recensioni"); // Nuova opzione
                 System.out.println("0. Esci");
                 System.out.print("La tua scelta: ");
@@ -49,7 +50,7 @@ public class MenuRistoratore {
                         visualizzaRiepilogo();
                         break;
                     case 4:
-                        visualizzaRecensioniRistorante();
+                        visualizzaRecensioni();
                         break;
                     case 5:
                         rispostaRecensioni();
@@ -69,9 +70,6 @@ public class MenuRistoratore {
     }
 
     private void aggiungiRistorante() {
-        listaRistoranti.inserisciRistorante(new Ristorante(utenteCorrente));
-        /*
-        Scanner scanner = new Scanner(System.in);
         System.out.println("\n=== Aggiungi Nuovo Ristorante ===");
         System.out.print("Nome del ristorante: ");
         String nome = scanner.nextLine();
@@ -129,7 +127,7 @@ public class MenuRistoratore {
         Ristorante ristorante = new Ristorante(nome, utenteCorrente.getEmail(), nazione, citta, indirizzo, fasciaPrezzo, delivery, prenotazioneOnline, tipoCucina);
         listaRistoranti.inserisciRistorante(ristorante);
         listaRistoranti.salvaRistorantiSuCSV();
-        System.out.println("Ristorante aggiunto con successo!");*/
+        System.out.println("Ristorante aggiunto con successo!");
     }
 
     // Nuovo metodo per visualizzare i ristoranti del ristoratore
@@ -151,6 +149,7 @@ public class MenuRistoratore {
                 System.out.println("----------------------------------------");
             }
         }
+
         if (!trovati) {
             System.out.println("Non hai ancora registrato alcun ristorante.");
         }
@@ -187,32 +186,9 @@ public class MenuRistoratore {
     }
     
     // Metodo per la visualizzazione alle recensioni nel dettaglio
-    private void visualizzaRecensioniRistorante() {
+    private void visualizzaRecensioni() {
         System.out.println("\n=== Dettaglio Recensioni ===");
-        Scanner scanner = new Scanner(System.in);
-        int cont = 0;
-        for(Ristorante r : listaRistoranti.getListaRistoranti()) {
-            if (r.getEmailRistoratore().equals(utenteCorrente.getEmail())) {
-                cont++;
-                System.out.println(cont + ": " + r.getNome());
-            }
-        }
-        Ristorante ristorante = null;
-        System.out.println("Inserisci il nome del tuo ristorante del quale vuoi vedere le recensioni: ");
-        String nomeRistorante = scanner.nextLine();
-        for(Ristorante r : listaRistoranti.getListaRistoranti()) {
-            if (r.getEmailRistoratore().equals(utenteCorrente.getEmail()) && r.getNome().equals(nomeRistorante)) {
-                ristorante = r;
-            }
-        }
-        if(ristorante == null) {
-            System.out.println("Hai inserito un nome errato");
-        } else {
-            for(Recensione rec : listaRecensioni.recensioniRistorante(ristorante.getNome())) {
-                System.out.println(rec.stampaRecensione());
-            }
-        }
-        /*for (Map.Entry<String, Map<String, MenuUtenteLog.Recensione>> entry : recensioni.entrySet()) {
+        for (Map.Entry<String, Map<String, MenuUtenteLog.Recensione>> entry : recensioni.entrySet()) {
             for (Map.Entry<String, MenuUtenteLog.Recensione> recensione : entry.getValue().entrySet()) {
                 String nomeRistorante = recensione.getKey();
 
@@ -231,7 +207,7 @@ public class MenuRistoratore {
                     System.out.println();
                 }
             }
-        }*/
+        }
     }
     //Metodo per la risposta
     private void rispostaRecensioni() {

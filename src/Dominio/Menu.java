@@ -7,6 +7,9 @@ import java.util.InputMismatchException;
 public class Menu {
     private static final String FILE_UTENTI = "src/Data/Utenti.txt";
     private static final Scanner scanner = new Scanner(System.in);
+    private MenuRistoratore menuRistoratore;
+    private MenuUtenteLog menuUtenteLog;
+
 
     public Menu(){
     //Creazione delle diverse liste per l'accesso ai dati
@@ -25,21 +28,33 @@ public class Menu {
                         System.out.println("Registrazione avvenuta con successo!");
                         if(utenteCorrente.getRistoratore()) {
                             MenuRistoratore menuRistoratore = new MenuRistoratore(utenteCorrente);
+                            menuRistoratore.mostraMenuRistoratore();
+
                         } else {
                             MenuUtenteLog menuUtenteLog = new MenuUtenteLog(utenteCorrente);
+                            menuUtenteLog.mostraMenuUtente();
+
                         }
                     }
+                    /*else{
+                        System.out.println("Prova funzionamento");
+                    }*/
                     break;
                 case 2:
                     utenteCorrente = loginUtente(listaUtenti);
                     if(utenteCorrente != null){
                         System.out.println("Login avvenuto con successo!");
-                        if(utenteCorrente.getRistoratore())
-                            new MenuRistoratore(utenteCorrente);
-                        else
-                            new MenuUtenteLog(utenteCorrente);
-
+                        if(utenteCorrente.getRistoratore()) {
+                            MenuRistoratore menuRistoratore = new MenuRistoratore(utenteCorrente);
+                            menuRistoratore.mostraMenuRistoratore();
+                        } else {
+                            MenuUtenteLog menuUtenteLog = new MenuUtenteLog(utenteCorrente);
+                            menuUtenteLog.mostraMenuUtente();
+                        }
                     }
+                    /*else{
+                        System.out.println("Prova funzionamento");
+                    }*/
                     break;
                 case 3:
                     listaRistoranti.cercaRistorante();
@@ -60,7 +75,6 @@ public class Menu {
 }
     // metodo per la scelta dell'utente ospite
     public static int menuGuest() {
-        Scanner scanner = new Scanner(System.in);
         int choice = -1;
         System.out.println("Benvenuto nella schermata home ospite!\n");
         System.out.println("Scegli un'opzione:");
