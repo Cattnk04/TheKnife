@@ -55,24 +55,25 @@ public class Utente {
         do{
             valido = true;
             System.out.print("Inserisci la tua email: ");
-            this.email = scanner.nextLine().trim().toLowerCase();
-            if(!this.email.contains("@") || !email.contains(".")){
+            email = scanner.nextLine().trim().toLowerCase();
+            if(!email.contains("@") || !email.contains(".")){
                 valido = false;
                 System.out.println("Email non valida");
             }
         } while (!valido);
+        this.email = email;
         String password = "";
         do{
             valido = true;
             System.out.print("Inserisci la tua password: ");
-            this.password = scanner.nextLine();
+            password = scanner.nextLine();
             //VEDERE COME FAR VISUALIZZARE GLI ASTERISCHI INVECE DELLA STRINGA
             if(password.length()<8){
                 valido = false;
                 System.out.println("Password troppo corta, inserirne una più lunga.");
             }
         } while (!valido);
-
+        this.password = password;
     }
     public Utente(String email, String nome, String cognome, String password, String nazione, String citta, boolean ristoratore) throws RuntimeException{
         this.email = email.trim();
