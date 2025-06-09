@@ -5,9 +5,9 @@ import java.util.*;
 
 public class MenuUtenteLog {
 
+    private static final Scanner scanner = new Scanner(System.in);
     private ListaPreferiti listaPreferiti = new ListaPreferiti();
     private ListaRecensioni listaRecensioni = new ListaRecensioni();
-    Scanner scanner = new Scanner(System.in);
     private Map<String, List<String>> preferiti;
     private Map<String, Map<String, Recensione>> recensioni;
     private static final String FILE_PREFERITI = "src/Data/Preferiti.txt";
