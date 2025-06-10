@@ -1,7 +1,6 @@
 package Dominio;
 
 import java.util.*;
-import java.io.*;
 
 public class MenuRistoratore {
     private Utente utenteCorrente;
@@ -231,7 +230,42 @@ public class MenuRistoratore {
         }*/
     }
     //Metodo per la risposta
-    private void rispostaRecensioni() {/*
+    private void rispostaRecensioni() {
+        System.out.println("\n=== Rispondi alle Recensioni ===");
+        System.out.print("Inserisci il nome del ristorante: ");
+        String nomeRistorante = scanner.nextLine();
+
+        if (!appartienePropietario(nomeRistorante)) {
+            System.out.println("Il ristorante specificato non ti appartiene!");
+            return;
+        }
+
+        boolean trovateRecensioni = false;
+        for (Recensione recensione : listaRecensioni.getListaRecensione()) {
+            if (recensione.getNomeRistorante().equals(nomeRistorante) && recensione.getRisposta() == null) {
+                trovateRecensioni = true;
+                System.out.printf("\nRecensione di %s:\n", recensione.getEmail());
+                System.out.printf("Valutazione: %d\n", recensione.getValutazione());
+                System.out.printf("Testo: %s\n", recensione.getRecensione());
+
+                System.out.print("Vuoi rispondere a questa recensione? (s/n): ");
+                String scelta = scanner.nextLine();
+
+                if (scelta.equalsIgnoreCase("s")) {
+                    System.out.print("Inserisci la tua risposta: ");
+                    String risposta = scanner.nextLine();
+                    recensione.risposta = risposta;
+                    listaRecensioni.salvaRecensioniSuCSV();
+                    System.out.println("Risposta aggiunta con successo!");
+                }
+            }
+        }
+
+        if (!trovateRecensioni) {
+            System.out.println("Non ci sono nuove recensioni da rispondere per questo ristorante.");
+        }
+    }
+    /*private void rispostaRecensioni() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("\n=== Rispondi alle Recensioni ===");
         System.out.print("Inserisci il nome del ristorante: ");
@@ -269,8 +303,8 @@ public class MenuRistoratore {
 
         if (!trovateRecensioni) {
             System.out.println("Non ci sono nuove recensioni da rispondere per questo ristorante.");
-        }*/
-    }
+        }
+    }*/
     //controllo appartenenza ristorante al ristoratore
     private boolean appartienePropietario(String nomeRistorante) {
         return listaRistoranti.getListaRistoranti().stream()

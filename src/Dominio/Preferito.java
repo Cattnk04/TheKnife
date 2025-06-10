@@ -11,16 +11,22 @@ public class Preferito {
         else
             this.nomeRistorante = null;
     }
+
+    //Costruttore
     public Preferito(String emailUtente, String nomeRistorante) {
         this.emailUtente = emailUtente;
         this.nomeRistorante = nomeRistorante;
     }
+
+    //Medoto Get
     public String getEmailUtente() {
         return emailUtente;
     }
     public String getNomeRistorante() {
         return nomeRistorante;
     }
+
+    //Metodo to string
     @Override
     public String toString(){
         return this.emailUtente + "," + nomeRistorante;

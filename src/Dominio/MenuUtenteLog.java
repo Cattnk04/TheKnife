@@ -1,6 +1,5 @@
 package Dominio;
 
-import java.io.*;
 import java.util.*;
 
 public class MenuUtenteLog {
@@ -25,7 +24,6 @@ public class MenuUtenteLog {
 
     public void mostraMenuUtente(){
         int scelta = 0;
-        Scanner scanner = new Scanner(System.in);
         do{
             try{ //il try catch è inutile in quanto c'è gia il caso di default
                 System.out.println("\n=== Menu Utente ===");
@@ -57,7 +55,7 @@ public class MenuUtenteLog {
                         rimuoviPreferito();
                         break;
                     case 5:
-                        //mostraRecensioni();
+                        mostraRecensioni();
                         break;
                     case 6:
                         aggiungiRecensione();
@@ -90,7 +88,6 @@ public class MenuUtenteLog {
         List<Preferito> preferitiUtente = listaPreferiti.preferitiUtente(utenteCorrente);
     }
 
-
     // Aggiunta ristorante ai preferiti dell'utente con controllo duplicati
     public void aggiungiPreferito() {
         listaPreferiti.aggiungiPreferito(utenteCorrente, listaRistoranti);
@@ -104,19 +101,8 @@ public class MenuUtenteLog {
     // Salva recensioni su file
     private void salvaRecensioniSuFile() { listaRecensioni.ricavaRecensioniDaCSV();}
 
-    /*//Mostra le recensioni dell'utente
-    private void mostraRecensioni() {
-        Map<String, Recensione> recensioniUtente = visualizzaRecensioniUtente(utenteCorrente.getEmail());
-        if (recensioniUtente.isEmpty()) {
-            System.out.print("Non hai ancora scritto recensioni.\n");
-        } else {
-            System.out.print("\nLe tue recensioni:");
-            for (Map.Entry<String, Recensione> entry : recensioniUtente.entrySet()) {
-                System.out.printf("Ristorante: %s\nValutazione: %d/5\nRecensione: %s\n\n",
-                        entry.getKey(), entry.getValue().getStelle(), entry.getValue().getTesto());
-            }
-        }
-    }*/
+    //Mostra le recensioni dell'utente
+    private void mostraRecensioni() { listaRecensioni.recensioniUtente(utenteCorrente);}
 
     // Aggiunta recensione
     public void aggiungiRecensione() { listaRecensioni.inserisciRecensione(utenteCorrente, listaRistoranti);}
@@ -126,9 +112,4 @@ public class MenuUtenteLog {
 
     // Elimina recensione
     public void eliminaRecensione() { listaRecensioni.eliminaRecensione(utenteCorrente);}
-
-    /*// Visualizza tutte le recensioni di un utente
-    public Map<String, Recensione> visualizzaRecensioniUtente(String email) {
-        return recensioni.getOrDefault(email, new HashMap<>());
-    }*/
 }

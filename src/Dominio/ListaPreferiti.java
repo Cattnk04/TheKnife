@@ -12,6 +12,8 @@ public class ListaPreferiti {
         this.listaPreferiti = new ArrayList<>();
         ricavaPreferitiDaCSV();
     }
+
+    //Metodo per leggere i preferiti da CSV
     private void ricavaPreferitiDaCSV(){
         try {
             FileReader reader = new FileReader("src/Data/Preferiti.txt");
@@ -37,6 +39,8 @@ public class ListaPreferiti {
             System.out.println("Errore durante la lettura del file: " + e.getMessage());
         }
     }
+
+    //Metood per salvare su CSV
     public void salvaPreferitiSuCSV(){
         File file = new File("src/Data/Preferiti.txt");
         file.getParentFile().mkdirs(); // Crea le directory se non esistono
@@ -50,6 +54,8 @@ public class ListaPreferiti {
             e.printStackTrace();
         }
     }
+
+    //Metodo per aggiungere un preferito
     public void aggiungiPreferito(Utente utenteCorrente, ListaRistoranti listaRistoranti){
         Preferito nuovoPreferito = new Preferito(utenteCorrente, listaRistoranti);
         if(nuovoPreferito.getNomeRistorante() != null && !preferitoDuplicato(nuovoPreferito))
@@ -58,6 +64,7 @@ public class ListaPreferiti {
             System.out.println("Impossibile aggiungere il ristorante ai preferiti.");
     }
 
+    //Controllo del duplicato
     public boolean preferitoDuplicato(Preferito nuovoPreferito){
         for(Preferito p : listaPreferiti){
             if(p.getNomeRistorante().equals(nuovoPreferito.getNomeRistorante()) && p.getEmailUtente().equals(nuovoPreferito.getEmailUtente())){
@@ -67,6 +74,7 @@ public class ListaPreferiti {
         return false;
     }
 
+    //Metodo per mostrare i preferiti
     public boolean mostraPreferiti(Utente utenteCorrente){
         List<Preferito> preferitiUtente = preferitiUtente(utenteCorrente);
         if (preferitiUtente.isEmpty()) {
@@ -80,7 +88,8 @@ public class ListaPreferiti {
         }
         return true;
     }
-    // da fare
+
+    // Metodo per rimuovere i preferiti
     public void rimuoviPreferito(Utente utente, ListaRistoranti listaRistoranti){
         Ristorante ristorante = null;
         if(mostraPreferiti(utente)){
@@ -94,7 +103,9 @@ public class ListaPreferiti {
             }
         }
     }
-    public List<Preferito> preferitiUtente(Utente utenteCorrente){
+
+    //Metodo per stampare i preferiti
+    public List<Preferito> preferitiUtente (Utente utenteCorrente){
         List<Preferito> preferitiUtente = new ArrayList<>();
         for (Preferito p : listaPreferiti) {
             if(p.getEmailUtente().equals(utenteCorrente.getEmail())){
