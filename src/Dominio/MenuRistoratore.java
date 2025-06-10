@@ -26,7 +26,7 @@ public class MenuRistoratore {
                 System.out.println("\n=== Menu Ristoratore ===");
                 System.out.println("1. Aggiungi ristorante");
                 System.out.println("2. Visualizza i miei ristoranti");
-                System.out.println("3. Visualizza riepilogo recensioni");
+                System.out.println("3. Visualizza riepilogo recensioni di tutti i ristoranti");
                 System.out.println("4. Visualizza dettagli recensioni");
                 System.out.println("5. Rispondi alle recensioni"); // Nuova opzione
                 System.out.println("0. Esci");
@@ -151,37 +151,7 @@ public class MenuRistoratore {
         }
     }
 
-    //Metodo per la visualizzazione del riepilogo delle recensioni
-    private void visualizzaRiepilogo() {/*
-        System.out.println("\n=== Riepilogo Recensioni ===");
-        Map<String, Integer> numeroRecensioni = new HashMap<>();
-        Map<String, Double> mediaStelle = new HashMap<>();
-
-        // Calcola statistiche per i ristoranti dell'utente corrente
-        for (Map.Entry<String, Map<String, MenuUtenteLog.Recensione>> entry : recensioni.entrySet()) {
-            for (Map.Entry<String, MenuUtenteLog.Recensione> recensione : entry.getValue().entrySet()) {
-                String nomeRistorante = recensione.getKey();
-
-                // Verifica se il ristorante appartiene al ristoratore corrente
-                if (appartienePropietario(nomeRistorante)) {
-                    numeroRecensioni.merge(nomeRistorante, 1, Integer::sum);
-                    mediaStelle.merge(nomeRistorante,
-                            (double) recensione.getValue().getStelle(),
-                            Double::sum);
-                }
-            }
-        }
-        // Calcola e mostra le medie
-        for (String nomeRistorante : numeroRecensioni.keySet()) {
-            int numRec = numeroRecensioni.get(nomeRistorante);
-            double media = mediaStelle.get(nomeRistorante) / numRec;
-            System.out.printf("Ristorante: %s\n", nomeRistorante);
-            System.out.printf("Numero recensioni: %d\n", numRec);
-            System.out.printf("Media stelle: %.1f\n\n", media);
-        }*/
-    }
-    
-    // Metodo per la visualizzazione alle recensioni nel dettaglio
+    //Metodo per la visualizzazione nel dettaglio la recensione
     private void visualizzaRecensioniRistorante() {
         System.out.println("\n=== Dettaglio Recensioni ===");
         Scanner scanner = new Scanner(System.in);
@@ -193,7 +163,7 @@ public class MenuRistoratore {
             }
         }
         Ristorante ristorante = null;
-        System.out.println("Inserisci il nome del tuo ristorante del quale vuoi vedere le recensioni: ");
+        System.out.print("\nInserisci il nome del tuo ristorante del quale vuoi vedere le recensioni: ");
         String nomeRistorante = scanner.nextLine();
         for(Ristorante r : listaRistoranti.getListaRistoranti()) {
             if (r.getEmailRistoratore().equals(utenteCorrente.getEmail()) && r.getNome().equals(nomeRistorante)) {
@@ -231,80 +201,106 @@ public class MenuRistoratore {
     }
     //Metodo per la risposta
     private void rispostaRecensioni() {
-        System.out.println("\n=== Rispondi alle Recensioni ===");
-        System.out.print("Inserisci il nome del ristorante: ");
-        String nomeRistorante = scanner.nextLine();
-
-        if (!appartienePropietario(nomeRistorante)) {
-            System.out.println("Il ristorante specificato non ti appartiene!");
-            return;
-        }
-
-        boolean trovateRecensioni = false;
-        for (Recensione recensione : listaRecensioni.getListaRecensione()) {
-            if (recensione.getNomeRistorante().equals(nomeRistorante) && recensione.getRisposta() == null) {
-                trovateRecensioni = true;
-                System.out.printf("\nRecensione di %s:\n", recensione.getEmail());
-                System.out.printf("Valutazione: %d\n", recensione.getValutazione());
-                System.out.printf("Testo: %s\n", recensione.getRecensione());
-
-                System.out.print("Vuoi rispondere a questa recensione? (s/n): ");
-                String scelta = scanner.nextLine();
-
-                if (scelta.equalsIgnoreCase("s")) {
-                    System.out.print("Inserisci la tua risposta: ");
-                    String risposta = scanner.nextLine();
-                    recensione.risposta = risposta;
-                    listaRecensioni.salvaRecensioniSuCSV();
-                    System.out.println("Risposta aggiunta con successo!");
-                }
-            }
-        }
-
-        if (!trovateRecensioni) {
-            System.out.println("Non ci sono nuove recensioni da rispondere per questo ristorante.");
+    System.out.println("\n=== Rispondi alle Recensioni ===");
+    
+    // Lista dei ristoranti del proprietario corrente
+    List<Ristorante> mieiRistoranti = new ArrayList<>();
+    int contatore = 1;
+    
+    // Mostra la lista dei ristoranti del proprietario
+    System.out.println("I tuoi ristoranti:");
+    for (Ristorante r : listaRistoranti.getListaRistoranti()) {
+        if (r.getEmailRistoratore().equals(utenteCorrente.getEmail())) {
+            System.out.printf("%d. %s\n", contatore++, r.getNome());
+            mieiRistoranti.add(r);
         }
     }
-    /*private void rispostaRecensioni() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("\n=== Rispondi alle Recensioni ===");
-        System.out.print("Inserisci il nome del ristorante: ");
-        String nomeRistorante = scanner.nextLine();
-
-        if (!appartienePropietario(nomeRistorante)) {
-            System.out.println("Il ristorante specificato non ti appartiene!");
-            return;
+    
+    if (mieiRistoranti.isEmpty()) {
+        System.out.println("Non possiedi ancora nessun ristorante.");
+        return;
+    }
+    
+    System.out.print("\nInserisci il nome del ristorante: ");
+    String nomeRistorante = scanner.nextLine();
+    
+    // Verifica che il ristorante appartenga al proprietario
+    if (!appartienePropietario(nomeRistorante)) {
+        System.out.println("Il ristorante specificato non ti appartiene!");
+        return;
+    }
+    
+    boolean trovateRecensioni = false;
+    
+    for (Recensione recensione : listaRecensioni.getListaRecensione()) {
+        if (recensione.getNomeRistorante().equals(nomeRistorante) && 
+            (recensione.getRisposta() == null || recensione.getRisposta().equals("null"))) {
+            
+            trovateRecensioni = true;
+            System.out.println("\n----------------------------------------");
+            System.out.printf("Recensione di: %s\n", recensione.getEmail());
+            System.out.printf("Valutazione: %d/5\n", recensione.getValutazione());
+            System.out.printf("Testo: %s\n", recensione.getRecensione());
+            
+            System.out.print("\nVuoi rispondere a questa recensione? (s/n): ");
+            String scelta = scanner.nextLine().trim().toLowerCase();
+            
+            if (scelta.equals("s")) {
+                System.out.print("Inserisci la tua risposta: ");
+                String risposta = scanner.nextLine();
+                recensione.risposta = risposta;
+                listaRecensioni.salvaRecensioniSuCSV();
+                System.out.println("Risposta aggiunta con successo!");
+            }
         }
+    }
+    
+    if (!trovateRecensioni) {
+        System.out.println("Non ci sono nuove recensioni da rispondere per questo ristorante.");
+    }
+}
 
-        // Mostra recensioni senza risposta
-        boolean trovateRecensioni = false;
-        for (Map.Entry<String, Map<String, MenuUtenteLog.Recensione>> entry : recensioni.entrySet()) {
-            if (entry.getValue().containsKey(nomeRistorante)) {
-                String chiaveRisposta = entry.getKey() + "," + nomeRistorante;
-                if (!risposteRecensioni.containsKey(chiaveRisposta)) {
-                    trovateRecensioni = true;
-                    System.out.printf("\nRecensione di %s:\n", entry.getKey());
-                    System.out.printf("Stelle: %d\n", entry.getValue().get(nomeRistorante).getStelle());
-                    System.out.printf("Testo: %s\n", entry.getValue().get(nomeRistorante).getTesto());
+    //Metodo per visualizzare il riepilogo delle recensioni di tutti i ristoranti (la media e il numero di recensioni)
+    private void visualizzaRiepilogo() {
+        System.out.println("\n=== Riepilogo Recensioni ===");
 
-                    System.out.print("Vuoi rispondere a questa recensione? (s/n): ");
-                    String scelta = scanner.nextLine();
+        // Per ogni ristorante del proprietario
+        for (Ristorante ristorante : listaRistoranti.getListaRistoranti()) {
+            if (ristorante.getEmailRistoratore().equals(utenteCorrente.getEmail())) {
 
-                    if (scelta.equalsIgnoreCase("s")) {
-                        System.out.print("Inserisci la tua risposta: ");
-                        String risposta = scanner.nextLine();
-                        risposteRecensioni.put(chiaveRisposta, risposta);
-                        salvaRisposteSuFile();
-                        System.out.println("Risposta aggiunta con successo!");
+                // Variabili per calcolare le statistiche
+                int numeroRecensioni = 0;
+                double sommaStelle = 0;
+
+                // Cerca tutte le recensioni per questo ristorante
+                List<Recensione> recensioniRistorante = new ArrayList<>();
+                for (Recensione recensione : listaRecensioni.getListaRecensione()) {
+                    if (recensione.getNomeRistorante().equals(ristorante.getNome())) {
+                        recensioniRistorante.add(recensione);
+                        numeroRecensioni++;
+                        sommaStelle += recensione.getValutazione();
                     }
+                }
+
+                // Stampa le statistiche del ristorante
+                System.out.printf("\nRistorante: %s\n", ristorante.getNome());
+
+                if (numeroRecensioni > 0) {
+                    double mediaStelle = sommaStelle / numeroRecensioni;
+                    System.out.printf("Numero recensioni: %d\n", numeroRecensioni);
+                    System.out.printf("Media stelle: %.1f\n", mediaStelle);
+                } else {
+                    System.out.println("Nessuna recensione presente");
                 }
             }
         }
 
-        if (!trovateRecensioni) {
-            System.out.println("Non ci sono nuove recensioni da rispondere per questo ristorante.");
+        // Se non ci sono ristoranti per il proprietario
+        if (!listaRistoranti.getListaRistoranti().stream()
+                .anyMatch(r -> r.getEmailRistoratore().equals(utenteCorrente.getEmail()))) {
+            System.out.println("Non possiedi ancora nessun ristorante.");
         }
-    }*/
+    }
     //controllo appartenenza ristorante al ristoratore
     private boolean appartienePropietario(String nomeRistorante) {
         return listaRistoranti.getListaRistoranti().stream()
