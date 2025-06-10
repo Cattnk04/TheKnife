@@ -6,50 +6,63 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ListaRecensioni {
+
+    private List<Recensione> listaRecensioni = new ArrayList<>();
+    private static final String FILE_PATH = "src/Data/Recensioni.txt";
+
+    //Costruttore
     public ListaRecensioni() {
         if (listaRecensioni.isEmpty()){
             ricavaRecensioniDaCSV();
         }
 
     }
-    public List<Recensione> listaRecensioni = new ArrayList<>();
 
+    //Metodi Get e Set
     public List<Recensione> getListaRecensione() {
         return listaRecensioni;
     }
     public void setListaRecensione(List<Recensione> listaRecensione) {
         this.listaRecensioni = listaRecensione;
     }
+
+    //Metodo epr salavare su CSV
     public void salvaRecensioniSuCSV() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/Data/Recensioni.txt"))){
             for (Recensione r :listaRecensioni){
-                writer.write(r.toString() + "\n");
+                writer.write(r.toString());
                 writer.newLine();
             }
-            writer.flush();
-    }catch(IOException e){
+    } catch(IOException e){
             System.err.println("Errore durante il salvataggio della recensione: " + e.getMessage());
         }
     }
-    public void ricavaRecensioniDaCSV(){
-        List<Recensione> listaRecensioni = new ArrayList<>();
-        try(BufferedReader reader = new BufferedReader(new FileReader("src/Data/Recensioni.txt"))){
+
+    //Metodo per ricavare da CSV
+    public void ricavaRecensioniDaCSV() {
+        try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
             String line;
-            while((line = reader.readLine()) != null){
-                String[] riga = line.split(",");
-                String email = riga[0];
-                String nomeRistorante = riga[1];
-                Integer valutazione = Integer.parseInt(riga[2]);
-                String recensione = riga[3];
-                String risposta = riga[4];
-                Recensione r = new Recensione(email, nomeRistorante, valutazione, recensione, risposta);
-                listaRecensioni.add(r);
+            while ((line = reader.readLine()) != null) {
+                if (!line.trim().isEmpty()) {  // Ignora le righe vuote
+                    String[] riga = line.split("\\*");  // Usa \\* come separatore
+                    if (riga.length >= 5) {
+                        String email = riga[0];
+                        String nomeRistorante = riga[1];
+                        Integer valutazione = Integer.parseInt(riga[2]);
+                        String recensione = riga[3];
+                        String risposta = riga[4];
+                        Recensione r = new Recensione(email, nomeRistorante, valutazione, recensione, risposta);
+                        listaRecensioni.add(r);
+                    }
+                }
             }
-        }catch(IOException e){
-            System.err.println("Errore nel caricamento della recensione: " + e.getMessage());
+        } catch (IOException e) {
+            System.err.println("Errore nel caricamento delle recensioni: " + e.getMessage());
+        } catch (NumberFormatException e) {
+            System.err.println("Errore nel parsing della valutazione: " + e.getMessage());
         }
     }
-    
+
     //Metodo per aggiungere una recensione al file di recensioni
     public void inserisciRecensione(Utente utente, ListaRistoranti listaRistoranti){
         Recensione recensione = new Recensione(utente, listaRistoranti);
@@ -57,6 +70,7 @@ public class ListaRecensioni {
             System.out.println("Hai già lasciato una recensione a questo ristorante!");
         } else {
             listaRecensioni.add(recensione);
+            salvaRecensioniSuCSV();
         }
     }
     
