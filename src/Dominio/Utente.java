@@ -15,6 +15,58 @@ public class Utente {
     private boolean ristoratore;
     private String password;
 
+    public Utente(String email, String nome, String cognome, String password, String nazione, String citta, boolean ristoratore) throws RuntimeException{
+        this.email = email.trim();
+        this.nome = nome.trim();
+        this.cognome = cognome.trim();
+        this.nazione = nazione.trim();
+        this.citta = citta.trim();
+        this.ristoratore = ristoratore;
+        this.password = password;
+    }
+
+    //Metodo Get
+    public String getNome(){
+        return  this.nome;
+    }
+    public String getCognome(){
+        return  this.cognome;
+    }
+    public String getEmail(){
+        return  this.email;
+    }
+    public String getNazione(){
+        return  this.nazione;
+    }
+    public String getCitta(){
+        return  this.citta;
+    }
+    public boolean getRistoratore(){
+        return  this.ristoratore;
+    }
+    public String getPassword(){return this.password;}
+
+    //Metodo Set
+    public void setNome(String nome){
+        this.nome = nome;
+    }
+    public void setCognome(String cognome){
+        this.cognome = cognome;
+    }
+    public void setNazione(String nazione){
+        this.nazione = nazione;
+    }
+    public void setCitta(String citta){
+        this.citta = citta;
+    }
+
+    //Metodo to String
+    @Override
+    public String toString(){
+        return email.trim().toLowerCase() + "," + nome.trim() + "," + cognome.trim() + "," + password.trim() + ","+ nazione.trim().toLowerCase() + ","+ citta.trim().toLowerCase() + "," + ristoratore;
+    }
+
+    //Metodo per la registrazione
     public Utente() {
         System.out.println("\n=== Registrazione ===");
         do{
@@ -46,7 +98,7 @@ public class Utente {
                 this.ristoratore = true;
             else if (risposta.equals("n"))
                 this.ristoratore = false;
-             else
+            else
                 valido = false;
 
         } while (!valido);
@@ -75,51 +127,4 @@ public class Utente {
         } while (!valido);
         this.password = password;
     }
-    public Utente(String email, String nome, String cognome, String password, String nazione, String citta, boolean ristoratore) throws RuntimeException{
-        this.email = email.trim();
-        this.nome = nome.trim();
-        this.cognome = cognome.trim();
-        this.nazione = nazione.trim();
-        this.citta = citta.trim();
-        this.ristoratore = ristoratore;
-        this.password = password;
-    }
-
-    public String getNome(){
-        return  this.nome;
-    }
-    public void setNome(String nome){
-        this.nome = nome;
-    }
-    public String getCognome(){
-        return  this.cognome;
-    }
-    public void setCognome(String cognome){
-        this.cognome = cognome;
-    }
-    public String getEmail(){
-        return  this.email;
-    }
-    public String getNazione(){
-        return  this.nazione;
-    }
-    public void setNazione(String nazione){
-        this.nazione = nazione;
-    }
-    public String getCitta(){
-        return  this.citta;
-    }
-    public void setCitta(String citta){
-        this.citta = citta;
-    }
-    public boolean getRistoratore(){
-        return  this.ristoratore;
-    }
-    public String getPassword(){return this.password;}
-
-    @Override
-    public String toString(){
-        return email.trim().toLowerCase() + "," + nome.trim() + "," + cognome.trim() + "," + password.trim() + ","+ nazione.trim().toLowerCase() + ","+ citta.trim().toLowerCase() + "," + ristoratore;
-    }
-
 }

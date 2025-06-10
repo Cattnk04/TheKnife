@@ -4,12 +4,14 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Recensione {
+
     String email;
     String nomeRistorante;
     int valutazione;
     String recensione;
     String risposta;
 
+    //Costruttore 1
     public Recensione(Utente utente, ListaRistoranti ristoranti) {
         this.email = utente.getEmail();
         this.nomeRistorante = ristoranti.cercaPerNome("Inserisci il nome del ristorante a cui vuoi lasciare una recensione: ").getNome();
@@ -18,6 +20,7 @@ public class Recensione {
         this.risposta = null;
     }
 
+    //Costruttore 2
     public Recensione(String email, String nomeRistorante, int valutazione, String recensione, String risposta) {
         this.email = email;
         this.nomeRistorante = nomeRistorante;
@@ -25,6 +28,7 @@ public class Recensione {
         this.recensione = recensione;
         this.risposta = risposta;
     }
+
     //GET
     public String getEmail(){
         return email;
@@ -71,7 +75,7 @@ public class Recensione {
         } while (true);
     }
 
-    //metodo per inserire recensione
+    //Metodo per inserire recensione
     public String recensione(){
         Scanner scanner = new Scanner(System.in);
         System.out.print("Puoi inserire una recensione a questo ristorante: ");
@@ -79,11 +83,13 @@ public class Recensione {
         return recensione;
     }
 
+    //Metodo to String
     @Override
     public String toString(){
         return this.email + '*' + this.nomeRistorante + '*' + this.valutazione + '*' + this.recensione + '*' + this.risposta;
     }
 
+    //Metodo per stampare le recensioni
     public String stampaRecensione(){
         String stringa =  "Valutazione: " + getValutazione() + "\nRecensione: " + getRecensione();
         if(getRisposta() != null){

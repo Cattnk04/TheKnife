@@ -25,7 +25,7 @@ public class ListaRecensioni {
         this.listaRecensioni = listaRecensione;
     }
 
-    //Metodo epr salavare su CSV
+    //Metodo per salvare su CSV
     public void salvaRecensioniSuCSV() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/Data/Recensioni.txt"))){
             for (Recensione r :listaRecensioni){
@@ -84,7 +84,7 @@ public class ListaRecensioni {
         return false;
     }
 
-    // Modifica recensione
+    //Metodo per modificare una recensione
     public void modificaRecensione(Utente utente) {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Inserisci il nome del ristorante da modificare: ");
@@ -164,7 +164,7 @@ public class ListaRecensioni {
     }
 
 
-    //Metodo per la stampa delle recensioni per il menu ristoratore
+    //Metodo per filtrare e restituire solo per le recensioni appartenenti al ristorante inserito
     public List<Recensione> recensioniRistorante(String nomeRistorante){
         List<Recensione> recensioniRistorante = new ArrayList<>();
         for(Recensione r : listaRecensioni){
@@ -179,7 +179,7 @@ public class ListaRecensioni {
         }
     }
 
-    //Metodo per la stampa delle recensioni per il menu utente log
+    //Metodo per filtrare e restituire solo le recensioni dell'utente corrente
     public List<Recensione> recensioniUtente(Utente utente) {
         List<Recensione> recensioniUtente = new ArrayList<>();
         for (Recensione r : listaRecensioni) {

@@ -99,9 +99,8 @@ public class MenuUtenteLog {
         listaPreferiti.rimuoviPreferito(utenteCorrente, listaRistoranti);
     }
 
-    /* Salva recensioni su file
-    private void salvaRecensioniSuFile() { listaRecensioni.ricavaRecensioniDaCSV();}
-    non sembra servire */
+    //Salva recensioni su file
+    private void salvaRecensioniSuFile() { listaRecensioni.ricavaRecensioniDaCSV();}  //non sembra servire
 
     //Mostra le recensioni dell'utente
     private void mostraRecensioni() { listaRecensioni.mostraRecensioniUtente(utenteCorrente);}

@@ -94,7 +94,6 @@ public class ListaRistoranti {
     }
 
     //Metodo per stampare i ristoranti filtrati
-
     private void stampaRistorantiFiltrati(List<Ristorante> ristoranti) {
         if (ristoranti.isEmpty()) {
             System.out.println("\nNessun ristorante trovato con i criteri specificati.");
@@ -114,7 +113,7 @@ public class ListaRistoranti {
         }
     }
 
-    //Metodo per la ricerca
+    //Metodo per la ricerca dei ristoranti
     public List<Ristorante> cercaRistorante(){
         //funzione per la ricerca del ristorante nella lista
         List<Ristorante> filtrati = new ArrayList<>();

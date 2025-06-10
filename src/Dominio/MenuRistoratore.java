@@ -3,6 +3,7 @@ package Dominio;
 import java.util.*;
 
 public class MenuRistoratore {
+
     private Utente utenteCorrente;
     private ListaRistoranti listaRistoranti;
     private ListaRecensioni listaRecensioni;
@@ -11,7 +12,7 @@ public class MenuRistoratore {
     private static final String FILE_RISPOSTE = "src/Data/RisposteRecensioni.txt";
     private static final Scanner scanner = new Scanner(System.in);
 
-
+    //Costruttore
     public MenuRistoratore(Utente utente) {
         this.utenteCorrente = utente;
         this.listaRistoranti = new ListaRistoranti();
@@ -19,6 +20,7 @@ public class MenuRistoratore {
         mostraMenuRistoratore();
     }
 
+    //Metodo per la "costruzione" del menu
     public void mostraMenuRistoratore() {
         int scelta = 0;
         do {
@@ -65,6 +67,7 @@ public class MenuRistoratore {
         } while (scelta != 0);
     }
 
+    //Metodo per aggiungere un ristorante
     private void aggiungiRistorante() {
         System.out.println("\n=== Aggiungi Nuovo Ristorante ===");
         System.out.print("Nome del ristorante: ");
@@ -126,7 +129,7 @@ public class MenuRistoratore {
         System.out.println("Ristorante aggiunto con successo!");
     }
 
-    // Nuovo metodo per visualizzare i ristoranti del ristoratore
+    //Metodo per visualizzare i ristoranti del ristoratore
     private void visualizzaMieiRistoranti() {
         System.out.println("\n=== I Miei Ristoranti ===");
         boolean trovati = false;
@@ -151,7 +154,7 @@ public class MenuRistoratore {
         }
     }
 
-    //Metodo per la visualizzazione nel dettaglio la recensione
+    //Metodo per la visualizzazione nel dettaglio le recensioni di un ristorante nello specifico
     private void visualizzaRecensioniRistorante() {
         System.out.println("\n=== Dettaglio Recensioni ===");
         Scanner scanner = new Scanner(System.in);
@@ -200,7 +203,7 @@ public class MenuRistoratore {
         }*/
     }
 
-    //Metodo per la risposta
+    //Metodo per la risposta delle recensioni
     private void rispostaRecensioni() {
         System.out.println("\n=== Rispondi alle Recensioni ===");
 

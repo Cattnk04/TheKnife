@@ -8,7 +8,7 @@ import java.util.Iterator;
 public class ListaPreferiti {
     private static List<Preferito> listaPreferiti;
 
-
+    //Costruttore
     public ListaPreferiti(){
         this.listaPreferiti = new ArrayList<>();
         ricavaPreferitiDaCSV();
@@ -41,7 +41,7 @@ public class ListaPreferiti {
         }
     }
 
-    //Metood per salvare su CSV
+    //Metodo per salvare su CSV
     public void salvaPreferitiSuCSV(){
         File file = new File("src/Data/Preferiti.txt");
         file.getParentFile().mkdirs(); // Crea le directory se non esistono
@@ -120,7 +120,7 @@ public class ListaPreferiti {
         }
     }
 
-    //Metodo per stampare i preferiti
+    //Metodo per filtrare e restituire solo i preferiti dell'utente corrente
     public List<Preferito> preferitiUtente (Utente utenteCorrente){
         List<Preferito> preferitiUtente = new ArrayList<>();
         for (Preferito p : listaPreferiti) {

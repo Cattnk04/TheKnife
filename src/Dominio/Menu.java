@@ -5,12 +5,13 @@ import java.util.Scanner;
 import java.util.InputMismatchException;
 
 public class Menu {
+
     private static final String FILE_UTENTI = "src/Data/Utenti.txt";
     private static final Scanner scanner = new Scanner(System.in);
     private MenuRistoratore menuRistoratore;
     private MenuUtenteLog menuUtenteLog;
 
-
+    // Menu principale
     public Menu(){
     //Creazione delle diverse liste per l'accesso ai dati
     ListaUtenti listaUtenti = new ListaUtenti();
@@ -73,7 +74,7 @@ public class Menu {
     } while (scelta != 0);
 
 }
-    // metodo per la scelta dell'utente ospite
+    //Metodo per la scelta fatta dell'utente ospite
     public static int menuGuest() {
         int choice = -1;
         System.out.println("Benvenuto nella schermata home ospite!\n");
@@ -95,17 +96,15 @@ public class Menu {
         return choice;
     }
 
-    // metodo per la registrazione
+    //Metodo per la registrazione
     public static Utente registraUtente(ListaUtenti listaUtenti){
         //Storing del nuovo utente nel file
         Utente nuovoUtente = new Utente();
         return listaUtenti.aggiungiUtente(nuovoUtente);
     }
 
-    // metodo per il login
+    //Metodo per il login
     public static Utente loginUtente(ListaUtenti listaUtenti) {
         return listaUtenti.loginUtente();
-
     }
-
 }

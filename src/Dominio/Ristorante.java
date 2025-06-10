@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Ristorante {
+
     private String nome;
     private String emailRistoratore;
     private String nazione;
@@ -15,6 +16,7 @@ public class Ristorante {
     private boolean servizioPrenotazioneOnline;
     private String tipoCucina;
 
+    //Costruttore 1
     public Ristorante(String nome, String emailRistoratore, String nazione, String citta, String indirizzo, double fasciaPrezzo, boolean servizioDelivery, boolean servizioPrenotazioneOnline, String tipoCucina){
         this.nome = nome.trim();
         this.emailRistoratore = emailRistoratore.trim();
@@ -32,6 +34,7 @@ public class Ristorante {
         inserisciDatiRistorante();
     }
 
+    // Metodo get
     public String getNome(){
         return this.nome;
     }
@@ -56,7 +59,11 @@ public class Ristorante {
     public String getTipoCucina(){
         return this.tipoCucina;
     }
+    public Object getEmailRistoratore() {
+        return emailRistoratore;
+    }
 
+    //Metodo set
     public void setNome(String nome){
         this.nome = nome;
     }
@@ -82,14 +89,13 @@ public class Ristorante {
         this.tipoCucina = tipoCucina;
     }
 
+    //Metodo to string
     @Override
     public String toString(){
         return this.nome + ',' + this.emailRistoratore + ',' + this.nazione + ',' + this.citta + ',' + this.indirizzo + ',' + this.fasciaPrezzo + ','+ this.servizioDelivery + ',' + this.servizioPrenotazioneOnline + ',' + this.tipoCucina;
     }
 
-    public Object getEmailRistoratore() {
-        return emailRistoratore;
-    }
+    //Metodo per creare un ristorante
     private void inserisciDatiRistorante(){
         Scanner scanner = new Scanner(System.in);
         System.out.print("Inserisci il nome del ristorante:");
