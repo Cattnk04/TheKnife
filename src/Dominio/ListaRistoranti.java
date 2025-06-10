@@ -6,17 +6,21 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ListaRistoranti {
+
+    public List<Ristorante> listaRistoranti = new ArrayList<>();
+
+    //Costruttore
     public ListaRistoranti(){
         if(listaRistoranti.isEmpty())
             ricavaRistorantiDaCSV();
     }
 
+    //Metodo Get
     public List<Ristorante> getListaRistoranti() {
         return this.listaRistoranti;
     }
 
-    public List<Ristorante> listaRistoranti = new ArrayList<>();
-
+    //Metodo per salvare sul CSV
     public void salvaRistorantiSuCSV() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/Data/Ristoranti.txt"))) {
             for (Ristorante r : listaRistoranti) {
@@ -29,6 +33,7 @@ public class ListaRistoranti {
         }
     }
 
+    //Metodo per ricavare il ristorante dal CSV
     public void ricavaRistorantiDaCSV(){
         //lettura del file Ristoranti.txt e salvataggio nella lista listaRistoranti
         listaRistoranti.clear();
@@ -54,6 +59,8 @@ public class ListaRistoranti {
             System.out.println("Errore nel caricamento dei ristoranti: " + e.getMessage());
         }
     }
+
+    //Metodo per inserire un ristorante
     public void inserisciRistorante(Ristorante ristorante) {
         //funzione per l'inserimento di un nuovo ristorante nella lista
         if(ristorante != null && !ristoranteDuplicato(ristorante))
@@ -69,6 +76,8 @@ public class ListaRistoranti {
         }
         return false;
     }
+
+    //Cerca ristorante con filtri
     public Ristorante cercaPerNome(String messaggio){
         //Funzione per cercare un ristorante in base al suo nome
         Scanner scanner = new Scanner(System.in);
