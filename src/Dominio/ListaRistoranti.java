@@ -92,6 +92,29 @@ public class ListaRistoranti {
         scanner.close();
         return null;
     }
+
+    //Metodo per stampare i ristoranti filtrati
+
+    private void stampaRistorantiFiltrati(List<Ristorante> ristoranti) {
+        if (ristoranti.isEmpty()) {
+            System.out.println("\nNessun ristorante trovato con i criteri specificati.");
+            return;
+        }
+
+        System.out.println("\n=== Ristoranti trovati ===");
+        for (Ristorante r : ristoranti) {
+            System.out.println("\nNome: " + r.getNome());
+            System.out.println("Città: " + r.getCitta());
+            System.out.println("Indirizzo: " + r.getIndirizzo());
+            System.out.println("Fascia di prezzo: " + r.getFasciaPrezzo() + "€");
+            System.out.println("Tipo di cucina: " + r.getTipoCucina());
+            System.out.println("Servizio delivery: " + (r.getServizioDelivery() ? "Sì" : "No"));
+            System.out.println("Prenotazione online: " + (r.getServizioPrenotazioneOnline() ? "Sì" : "No"));
+            System.out.println("----------------------------------------");
+        }
+    }
+
+    //Metodo per la ricerca
     public List<Ristorante> cercaRistorante(){
         //funzione per la ricerca del ristorante nella lista
         List<Ristorante> filtrati = new ArrayList<>();
@@ -141,9 +164,11 @@ public class ListaRistoranti {
             String tipoCucina = scanner.nextLine().trim().toLowerCase();
             filtraPerTipoCucina(filtrati, tipoCucina);
         }
-        scanner.close();
+        stampaRistorantiFiltrati(filtrati);
         return filtrati;
     }
+
+    //Filtri
     private void filtraPerCitta(List<Ristorante> filtrati, String citta){
         for(Ristorante r : listaRistoranti){
             if(r.getCitta().equals(citta)){

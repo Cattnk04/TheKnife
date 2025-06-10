@@ -13,7 +13,7 @@ public class MenuUtenteLog {
     private ListaRistoranti listaRistoranti;
 
 
-
+    //Costruttore
     public MenuUtenteLog(Utente utente) { // Aggiungi i parametri
         listaPreferiti = new ListaPreferiti();
         listaRecensioni = new ListaRecensioni();
@@ -22,6 +22,7 @@ public class MenuUtenteLog {
 
     }
 
+    //Menu utente
     public void mostraMenuUtente(){
         int scelta = 0;
         do{
