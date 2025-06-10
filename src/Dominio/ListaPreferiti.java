@@ -59,10 +59,13 @@ public class ListaPreferiti {
     //Metodo per aggiungere un preferito
     public void aggiungiPreferito(Utente utenteCorrente, ListaRistoranti listaRistoranti){
         Preferito nuovoPreferito = new Preferito(utenteCorrente, listaRistoranti);
-        if(nuovoPreferito.getNomeRistorante() != null && !preferitoDuplicato(nuovoPreferito))
+        if(nuovoPreferito.getNomeRistorante() != null && !preferitoDuplicato(nuovoPreferito)) {
             listaPreferiti.add(nuovoPreferito);
-        else
+            salvaPreferitiSuCSV();
+            System.out.println("Ristorante aggiunto ai preferiti con successo.");
+        } else {
             System.out.println("Impossibile aggiungere il ristorante ai preferiti.");
+        }
     }
 
     //Controllo del duplicato
