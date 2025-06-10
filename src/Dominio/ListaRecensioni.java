@@ -15,7 +15,6 @@ public class ListaRecensioni {
         if (listaRecensioni.isEmpty()){
             ricavaRecensioniDaCSV();
         }
-
     }
 
     //Metodi Get e Set
@@ -71,6 +70,7 @@ public class ListaRecensioni {
         } else {
             listaRecensioni.add(recensione);
             salvaRecensioniSuCSV();
+            System.out.println("Recensione aggiunta con successo!");
         }
     }
     
@@ -87,11 +87,11 @@ public class ListaRecensioni {
     // Modifica recensione
     public void modificaRecensione(Utente utente) {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Inserisci il nome del ristorante da modificare:");
+        System.out.print("Inserisci il nome del ristorante da modificare: ");
         String nomeRistorante = scanner.nextLine();
-        System.out.print("Inserisci il nuovo testo della recensione:");
+        System.out.print("Inserisci il nuovo testo della recensione: ");
         String nuovoTesto = scanner.nextLine();
-        System.out.print("Inserisci il nuovo numero di stelle (1-5):");
+        System.out.print("Inserisci il nuovo numero di stelle (1-5): ");
         int nuoveStelle = scanner.nextInt();
         scanner.nextLine(); // Pulizia buffer
         String emailUtente = utente.getEmail();
@@ -127,7 +127,7 @@ public class ListaRecensioni {
     //Metodo per eliminare una recensione
     public void eliminaRecensione(Utente utente) {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Inserisci il nome del ristorante di cui eliminare la recensione:");
+        System.out.print("Inserisci il nome del ristorante di cui eliminare la recensione: ");
         String nomeRistorante = scanner.nextLine();
         String email = utente.getEmail();
 
@@ -147,6 +147,22 @@ public class ListaRecensioni {
             System.out.println("Recensione non trovata\n");
         }
     }
+
+    //Metodo per la stampa delle recensioni per il menu utente log
+    public void mostraRecensioniUtente(Utente utente) {
+        List<Recensione> recensioni = recensioniUtente(utente);
+        if (recensioni == null || recensioni.isEmpty()) {
+            System.out.println("Non hai ancora scritto recensioni.");
+        } else {
+            System.out.println("\n=== Le tue recensioni ===");
+            for (Recensione r : recensioni) {
+                System.out.println("\nRistorante: " + r.getNomeRistorante());
+                System.out.println(r.stampaRecensione());
+                System.out.println("------------------------");
+            }
+        }
+    }
+
 
     //Metodo per la stampa delle recensioni per il menu ristoratore
     public List<Recensione> recensioniRistorante(String nomeRistorante){

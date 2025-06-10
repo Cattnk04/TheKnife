@@ -74,7 +74,7 @@ public class Recensione {
     //metodo per inserire recensione
     public String recensione(){
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Puoi inserire una recensione a questo ristorante: ");
+        System.out.print("Puoi inserire una recensione a questo ristorante: ");
         String recensione = scanner.nextLine();
         return recensione;
     }
