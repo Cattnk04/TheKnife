@@ -80,12 +80,12 @@ public class MenuUtenteLog {
                 scelta = -1;
             }
         } while (scelta != 0);
-        scanner.close();
     }
 
     //Mostra i ristoranti preferiti dell'utente
     private void mostraPreferiti() {
-        List<Preferito> preferitiUtente = listaPreferiti.preferitiUtente(utenteCorrente);
+        //List<Preferito> preferitiUtente = listaPreferiti.preferitiUtente(utenteCorrente);
+        listaPreferiti.mostraPreferiti(utenteCorrente);
     }
 
     // Aggiunta ristorante ai preferiti dell'utente con controllo duplicati

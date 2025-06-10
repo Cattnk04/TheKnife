@@ -3,6 +3,7 @@ package Dominio;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Iterator;
 
 public class ListaPreferiti {
     private static List<Preferito> listaPreferiti;
@@ -78,12 +79,12 @@ public class ListaPreferiti {
     public boolean mostraPreferiti(Utente utenteCorrente){
         List<Preferito> preferitiUtente = preferitiUtente(utenteCorrente);
         if (preferitiUtente.isEmpty()) {
-            System.out.println("Non hai ancora aggiunto ristoranti ai preferiti.");
+            System.out.println("\nNon hai ancora aggiunto ristoranti ai preferiti.");
             return false;
         } else {
-            System.out.println("I tuoi ristoranti preferiti:");
+            System.out.println("\nI tuoi ristoranti preferiti:");
             for (Preferito p : preferitiUtente) {
-                System.out.println("- " + p.getNomeRistorante());
+                System.out.println(p.getNomeRistorante() + " - ");
             }
         }
         return true;
@@ -91,14 +92,26 @@ public class ListaPreferiti {
 
     // Metodo per rimuovere i preferiti
     public void rimuoviPreferito(Utente utente, ListaRistoranti listaRistoranti){
-        Ristorante ristorante = null;
         if(mostraPreferiti(utente)){
-            ristorante = listaRistoranti.cercaPerNome("Inserisci il nome del ristorante da rimuovere dai preferiti: ");
-        }
-        if(ristorante != null){
-            for(Preferito p : listaPreferiti){
-                if(p.getNomeRistorante().equals(ristorante) && p.getEmailUtente().equals(utente.getEmail())){
-                    listaPreferiti.remove(p);
+            Ristorante ristorante = listaRistoranti.cercaPerNome("Inserisci il nome del ristorante da rimuovere dai preferiti: ");
+            if(ristorante != null){
+                // Utilizziamo Iterator per evitare ConcurrentModificationException
+                Iterator<Preferito> iterator = listaPreferiti.iterator();
+                boolean rimosso = false;
+                while(iterator.hasNext()) {
+                    Preferito p = iterator.next();
+                    if(p.getNomeRistorante().equals(ristorante.getNome()) && 
+                       p.getEmailUtente().equals(utente.getEmail())){
+                        iterator.remove();
+                        rimosso = true;
+                        break;
+                    }
+                }
+                if(rimosso) {
+                    System.out.println("Ristorante rimosso dai preferiti.");
+                    salvaPreferitiSuCSV(); // Salva le modifiche su file
+                } else {
+                    System.out.println("Il ristorante non è presente nei tuoi preferiti.");
                 }
             }
         }
