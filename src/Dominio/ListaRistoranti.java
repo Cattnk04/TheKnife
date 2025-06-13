@@ -114,21 +114,24 @@ public class ListaRistoranti {
     }
 
     //Metodo per la ricerca dei ristoranti
-    public List<Ristorante> cercaRistorante(){
+    /*public List<Ristorante> cercaRistorante(){
         //funzione per la ricerca del ristorante nella lista
         List<Ristorante> filtrati = new ArrayList<>();
         //Inserimento filtro della località del ristorante
         Scanner scanner = new Scanner(System.in);
         String sn;
+
         System.out.print("\nInserici la città in cui vuoi cercare il ristorante: ");
         String citta = scanner.nextLine().trim().toLowerCase();
         filtraPerCitta(filtrati, citta);
+
         System.out.print("Vuoi cercare per fascia di prezzo? [s/n]: ");
         do{
             sn = scanner.nextLine().trim().toLowerCase();
         }while(!sn.equals("s") && !sn.equals("n"));
+
         double prezzoMin, prezzoMax;
-        if(sn == "s"){
+        if(sn.equals("s")){
             do{
                 System.out.print("Inserisci il prezzo minimo: ");
                 prezzoMin = scanner.nextDouble();
@@ -140,41 +143,140 @@ public class ListaRistoranti {
             }while(prezzoMax < prezzoMin);
             filtraPerPrezzo(filtrati, prezzoMax, prezzoMin);
         }
+
         System.out.print("Vuoi cercare solo i ristoranti con servizio delivery? [s/n]: ");
         do{
             sn = scanner.nextLine().trim().toLowerCase();
         }while(!sn.equals("s") && !sn.equals("n"));
-        if(sn == "s" && !filtrati.isEmpty()){
+        if(sn.equals("s")&& !filtrati.isEmpty()){
             filtraPerDelivery(filtrati);
         }
+
         System.out.print("Vuoi cercare ristoranti con solo prenotazione online? [s/n]: ");
         do{
             sn = scanner.nextLine().trim().toLowerCase();
         }while(!sn.equals("s") && !sn.equals("n"));
-        if(sn == "s" && !filtrati.isEmpty()){
+        if(sn.equals("s") && !filtrati.isEmpty()){
             filtraPerPrenotazioneOnline(filtrati);
         }
+
         System.out.print("Vuoi cercare solo i ristoranti con un tipo di cucina specifico? [s/n]: ");
         do{
             sn = scanner.nextLine().trim().toLowerCase();
         } while(!sn.equals("s") && !sn.equals("n"));
-        if(sn == "s" && !filtrati.isEmpty()){
+        if(sn.equals("s") && !filtrati.isEmpty()){
             System.out.print("Inserisci il tipo di cucina specifico: ");
             String tipoCucina = scanner.nextLine().trim().toLowerCase();
             filtraPerTipoCucina(filtrati, tipoCucina);
         }
         stampaRistorantiFiltrati(filtrati);
         return filtrati;
+    }*/
+    public List<Ristorante> cercaRistorante(){
+        List<Ristorante> filtrati = new ArrayList<>();
+        Scanner scanner = new Scanner(System.in);
+        String sn;
+
+        // Filtro per città (obbligatorio)
+        boolean cittaTrovata = false;
+        while (!cittaTrovata) {
+            System.out.print("\nInserici la città in cui vuoi cercare il ristorante: ");
+            String citta = scanner.nextLine().trim().toLowerCase();
+            filtrati.clear(); // Puliamo la lista prima di ogni nuovo tentativo
+
+            if (!filtraPerCitta(filtrati, citta)) {
+                System.out.println("Nessun ristorante trovato in questa città.");
+                System.out.print("Vuoi cercare in un'altra città? [s/n]: ");
+                String risposta;
+                do {
+                    risposta = scanner.nextLine().trim().toLowerCase();
+                } while (!risposta.equals("s") && !risposta.equals("n"));
+
+                if (risposta.equals("n")) {
+                    return new ArrayList<>(); // Ritorna una lista vuota se l'utente non vuole continuare
+                }
+                // Se l'utente risponde 's', il ciclo continua e chiede una nuova città
+            } else {
+                cittaTrovata = true;
+            }
+        }
+        // Filtro per prezzo
+        System.out.print("Vuoi cercare per fascia di prezzo? [s/n]: ");
+        do{
+            sn = scanner.nextLine().trim().toLowerCase();
+        }while(!sn.equals("s") && !sn.equals("n"));
+
+        if(sn.equals("s")){
+            double prezzoMin, prezzoMax;
+            do{
+                System.out.print("Inserisci il prezzo minimo: ");
+                prezzoMin = scanner.nextDouble();
+                System.out.print("Inserisci il prezzo massimo: ");
+                prezzoMax = scanner.nextDouble();
+                if(prezzoMin > prezzoMax){
+                    System.out.println("Il prezzo minimo non può essere maggiore del prezzo massimo.");
+                }
+            }while(prezzoMax < prezzoMin);
+            filtraPerPrezzo(filtrati, prezzoMax, prezzoMin);
+            scanner.nextLine(); // Consumare il newline rimasto
+        }
+        // Filtro per delivery
+        System.out.print("Vuoi cercare solo i ristoranti con servizio delivery? [s/n]: ");
+        do{
+            sn = scanner.nextLine().trim().toLowerCase();
+        }while(!sn.equals("s") && !sn.equals("n"));
+        if(sn.equals("s")){  // Rimosso il controllo !filtrati.isEmpty()
+            filtraPerDelivery(filtrati);
+        }
+        // Filtro per prenotazione online
+        System.out.print("Vuoi cercare ristoranti con solo prenotazione online? [s/n]: ");
+        do{
+            sn = scanner.nextLine().trim().toLowerCase();
+        }while(!sn.equals("s") && !sn.equals("n"));
+        if(sn.equals("s")){  // Rimosso il controllo !filtrati.isEmpty()
+            filtraPerPrenotazioneOnline(filtrati);
+        }
+        // Filtro per tipo cucina
+        System.out.print("Vuoi cercare solo i ristoranti con un tipo di cucina specifico? [s/n]: ");
+        do{
+            sn = scanner.nextLine().trim().toLowerCase();
+        }while(!sn.equals("s") && !sn.equals("n"));
+        if(sn.equals("s")){  // Rimosso il controllo !filtrati.isEmpty()
+            System.out.print("Inserisci il tipo di cucina specifico: ");
+            String tipoCucina = scanner.nextLine().trim().toLowerCase();
+            filtraPerTipoCucina(filtrati, tipoCucina);
+        }
+
+        stampaRistorantiFiltrati(filtrati);
+        return filtrati;
     }
 
     //Filtri
-    private void filtraPerCitta(List<Ristorante> filtrati, String citta){
+    /*private void filtraPerCitta(List<Ristorante> filtrati, String citta){
         for(Ristorante r : listaRistoranti){
-            if(r.getCitta().equals(citta)){
+            if(r.getCitta().toLowerCase().equals(citta)){
                 filtrati.add(r);
             }
         }
         System.out.println("Filtro per città inserito.");
+        if(filtrati.isEmpty()) {
+            System.out.println("Non sono stati trovati ristoranti nella città: " + citta);
+        } else {
+            System.out.println("Trovati " + filtrati.size() + " ristoranti in " + citta);
+        }
+    }*/
+    private boolean filtraPerCitta(List<Ristorante> filtrati, String citta){
+        for(Ristorante r : listaRistoranti){
+            if(r.getCitta().toLowerCase().equals(citta)){
+                filtrati.add(r);
+            }
+        }
+        System.out.println("Filtro per prezzo medio inserito.");
+        if(filtrati.isEmpty()) {
+            return false;
+        } else {
+            return true;
+        }
     }
     private void filtraPerPrezzo(List<Ristorante> filtrati, double prezzoMax, double prezzoMin){
         filtrati.removeIf(r -> r.getFasciaPrezzo() < prezzoMin || r.getFasciaPrezzo() > prezzoMax);

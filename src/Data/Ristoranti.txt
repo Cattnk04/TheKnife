@@ -1,1 +1,2 @@
 La rosa,adminprova@gmail.com,Italia,Milano,Viale Monte Ceneri 11,25.0,false,false,italiana
+La rosa - Roma,adminprova@gmail.com,Italia,Roma,Via Ferdinando Gregorovius 32,25.0,false,true,italiana
