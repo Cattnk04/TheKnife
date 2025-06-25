@@ -19,7 +19,7 @@ public class MenuUtenteLog {
         listaRecensioni = new ListaRecensioni();
         this.utenteCorrente = utente;
         this.listaRistoranti = new ListaRistoranti();
-
+        mostraMenuUtente();
     }
 
     //Menu utente

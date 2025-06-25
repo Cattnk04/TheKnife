@@ -271,7 +271,7 @@ public class ListaRistoranti {
                 filtrati.add(r);
             }
         }
-        System.out.println("Filtro per prezzo la città inserito");
+        System.out.println("Filtro per città inserito");
         if(filtrati.isEmpty()) {
             return null;
         } else {
