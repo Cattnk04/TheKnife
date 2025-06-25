@@ -37,9 +37,6 @@ public class Menu {
 
                         }
                     }
-                    /*else{
-                        System.out.println("Prova funzionamento");
-                    }*/
                     break;
                 case 2:
                     utenteCorrente = loginUtente(listaUtenti);

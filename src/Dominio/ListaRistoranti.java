@@ -184,7 +184,7 @@ public class ListaRistoranti {
             String citta = scanner.nextLine().trim().toLowerCase();
             filtrati.clear(); // Puliamo la lista prima di ogni nuovo tentativo
 
-            if (!filtraPerCitta(filtrati, citta)) {
+            if (filtraPerCitta(filtrati, citta).isEmpty()) {
                 System.out.println("Nessun ristorante trovato in questa città.");
                 System.out.print("Vuoi cercare in un'altra città? [s/n]: ");
                 String risposta;
@@ -265,7 +265,7 @@ public class ListaRistoranti {
             System.out.println("Trovati " + filtrati.size() + " ristoranti in " + citta);
         }
     }*/
-    private boolean filtraPerCitta(List<Ristorante> filtrati, String citta){
+    private List<Ristorante> filtraPerCitta(List<Ristorante> filtrati, String citta){
         for(Ristorante r : listaRistoranti){
             if(r.getCitta().toLowerCase().equals(citta)){
                 filtrati.add(r);
@@ -273,9 +273,9 @@ public class ListaRistoranti {
         }
         System.out.println("Filtro per prezzo medio inserito.");
         if(filtrati.isEmpty()) {
-            return false;
+            return null;
         } else {
-            return true;
+            return filtrati;
         }
     }
     private void filtraPerPrezzo(List<Ristorante> filtrati, double prezzoMax, double prezzoMin){
