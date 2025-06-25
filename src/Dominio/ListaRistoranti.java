@@ -184,7 +184,7 @@ public class ListaRistoranti {
             String citta = scanner.nextLine().trim().toLowerCase();
             filtrati.clear(); // Puliamo la lista prima di ogni nuovo tentativo
 
-            if (filtraPerCitta(filtrati, citta).isEmpty()) {
+            if (filtraPerCitta(filtrati, citta) == null) {
                 System.out.println("Nessun ristorante trovato in questa città.");
                 System.out.print("Vuoi cercare in un'altra città? [s/n]: ");
                 String risposta;
@@ -271,7 +271,7 @@ public class ListaRistoranti {
                 filtrati.add(r);
             }
         }
-        System.out.println("Filtro per prezzo medio inserito.");
+        System.out.println("Filtro per prezzo la città inserito");
         if(filtrati.isEmpty()) {
             return null;
         } else {
