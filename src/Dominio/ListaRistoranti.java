@@ -82,9 +82,9 @@ public class ListaRistoranti {
         //Funzione per cercare un ristorante in base al suo nome
         Scanner scanner = new Scanner(System.in);
         System.out.print(messaggio);
-        String nomeRistorante = scanner.nextLine();
+        String nomeRistorante = scanner.nextLine().toLowerCase().trim();
         for (Ristorante r : listaRistoranti) {
-            if(nomeRistorante.equals(r.getNome())){
+            if(nomeRistorante.equals(r.getNome().toLowerCase().trim())){
                 return r;
             }
         }

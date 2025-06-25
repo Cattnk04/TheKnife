@@ -40,10 +40,8 @@ public class Menu {
                         System.out.println("Login avvenuto con successo!");
                         if(utenteCorrente.getRistoratore()) {
                             MenuRistoratore menuRistoratore = new MenuRistoratore(utenteCorrente);
-                            menuRistoratore.mostraMenuRistoratore();
                         } else {
                             MenuUtenteLog menuUtenteLog = new MenuUtenteLog(utenteCorrente);
-                            menuUtenteLog.mostraMenuUtente();
                         }
                     }
                     /*else{

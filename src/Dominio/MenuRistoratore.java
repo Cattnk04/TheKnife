@@ -179,28 +179,7 @@ public class MenuRistoratore {
             for(Recensione rec : listaRecensioni.recensioniRistorante(ristorante.getNome())) {
                 System.out.println(rec.stampaRecensione());
             }
-        }/*
-        System.out.println("\n=== Dettaglio Recensioni ===");
-        for (Map.Entry<String, Map<String, MenuUtenteLog.Recensione>> entry : recensioni.entrySet()) {
-            for (Map.Entry<String, MenuUtenteLog.Recensione> recensione : entry.getValue().entrySet()) {
-                String nomeRistorante = recensione.getKey();
-
-                if (appartienePropietario(nomeRistorante)) {
-                    MenuUtenteLog.Recensione rec = recensione.getValue();
-                    System.out.printf("Ristorante: %s\n", nomeRistorante);
-                    System.out.printf("Utente: %s\n", entry.getKey());
-                    System.out.printf("Stelle: %d\n", rec.getStelle());
-                    System.out.printf("Recensione: %s\n", rec.getTesto());
-
-                    // Mostra risposta se presente
-                    String chiaveRisposta = entry.getKey() + "," + nomeRistorante;
-                    if (risposteRecensioni.containsKey(chiaveRisposta)) {
-                        System.out.printf("Risposta: %s\n", risposteRecensioni.get(chiaveRisposta));
-                    }
-                    System.out.println();
-                }
-            }
-        }*/
+        }
     }
 
     //Metodo per la risposta delle recensioni
