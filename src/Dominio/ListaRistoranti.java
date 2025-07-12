@@ -150,7 +150,12 @@ public class ListaRistoranti {
             switch (scelta) {
                 case "1":
                     ListaRecensioni listaRecensioni = new ListaRecensioni();
-                    listaRecensioni.mostraRecensioniRistorante(ristorante);
+                    List<Recensione> recensioniRistorante = listaRecensioni.recensioniRistorante(ristorante.getNome());
+                    if (recensioniRistorante != null) {
+                        listaRecensioni.mostraRecensioniRistorante(ristorante);
+                    } else {
+                        System.out.println("Non ci sono ancora recensioni per questo ristorante.");
+                    }
                     break;
                 case "2":
                     return false; // Torna alla lista dei ristoranti

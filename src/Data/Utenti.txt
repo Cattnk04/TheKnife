@@ -2,3 +2,63 @@ adminprova@gmail.com,admin,prova,adminprova,italia,como,true
 adminprova2@gmail.com,Admin,Prova,adminprova2,italia,como,false
 gt@gmail.com,Giacomo,Tancredi,password1,italia,como,false
 dklsnckj@kjsackj.com,Elena,Catelli,dsnvdjknv,italia,co,false
+mario.rossi@email.com,Mario,Rossi,password123,italia,milano,false
+laura.bianchi@email.com,Laura,Bianchi,pwd567890,italia,roma,false
+marco.verdi@email.com,Marco,Verdi,secure789,italia,torino,false
+giulia.ferrari@email.com,Giulia,Ferrari,pass4321,italia,firenze,false
+andrea.romano@email.com,Andrea,Romano,pwdandrea1,italia,bologna,false
+sofia.colombo@email.com,Sofia,Colombo,sofiapwd22,italia,venezia,false
+luca.ricci@email.com,Luca,Ricci,lucapwd123,italia,genova,false
+chiara.marino@email.com,Chiara,Marino,chiarapw99,italia,palermo,false
+alessandro.greco@email.com,Alessandro,Greco,alepwd567,italia,napoli,false
+valentina.conti@email.com,Valentina,Conti,vale12345,italia,bari,false
+roberto.mancini@email.com,Roberto,Mancini,robpwd789,italia,verona,false
+francesca.serra@email.com,Francesca,Serra,frapwd234,italia,padova,false
+davide.leone@email.com,Davide,Leone,davidpwd1,italia,trieste,false
+elena.martini@email.com,Elena,Martini,elenapw56,italia,brescia,false
+paolo.galli@email.com,Paolo,Galli,paolopwd7,italia,bergamo,false
+silvia.rizzi@email.com,Silvia,Rizzi,silviapw8,italia,pisa,false
+michele.costa@email.com,Michele,Costa,mikepwd99,italia,parma,false
+claudia.moretti@email.com,Claudia,Moretti,claupwd12,italia,modena,false
+stefano.barbieri@email.com,Stefano,Barbieri,stefpwd34,italia,livorno,false
+beatrice.villa@email.com,Beatrice,Villa,beapwd567,italia,ravenna,false
+trattoria.sapori@rest.com,Giuseppe,Esposito,rest1234,italia,milano,true
+osteria.antica@rest.com,Antonio,Romano,rest5678,italia,roma,true
+ristorante.bella@rest.com,Maria,Caruso,rest9012,italia,firenze,true
+locanda.mare@rest.com,Francesco,Marino,rest3456,italia,napoli,true
+pizzeria.napoli@rest.com,Salvatore,Russo,rest7890,italia,palermo,true
+taverna.siciliana@rest.com,Carmela,Ferrara,rest2345,italia,catania,true
+osteria.toscana@rest.com,Lorenzo,Toscano,rest6789,italia,siena,true
+ristorante.venezia@rest.com,Marco,Veneziano,rest0123,italia,venezia,true
+trattoria.emilia@rest.com,Paolo,Emiliano,rest4567,italia,bologna,true
+cucina.ligure@rest.com,Anna,Genovese,rest8901,italia,genova,true
+osteria.pugliese@rest.com,Vito,Pugliese,rest2345,italia,bari,true
+ristorante.adriatico@rest.com,Luigi,Adriani,rest6789,italia,pescara,true
+locanda.alpina@rest.com,Giovanni,Alpini,rest0123,italia,trento,true
+trattoria.roma@rest.com,Roberto,Romani,rest4567,italia,roma,true
+cucina.piemonte@rest.com,Carlo,Piemontesi,rest8901,italia,torino,true
+osteria.umbra@rest.com,Federico,Umbri,rest2345,italia,perugia,true
+ristorante.marche@rest.com,Andrea,Marchetti,rest6789,italia,ancona,true
+locanda.calabra@rest.com,Domenico,Calabrese,rest0123,italia,reggio calabria,true
+trattoria.sarda@rest.com,Gavino,Sardi,rest4567,italia,cagliari,true
+cucina.abruzzo@rest.com,Bruno,Abruzzese,rest8901,italia,pescara,true
+john.smith@email.com,John,Smith,johnpwd123,inghilterra,londra,false
+marie.dubois@email.com,Marie,Dubois,mariepwd456,francia,parigi,false
+hans.mueller@email.com,Hans,Mueller,hanspwd789,germania,berlino,false
+ana.garcia@email.com,Ana,Garcia,anapwd234,spagna,madrid,false
+erik.johansson@email.com,Erik,Johansson,erikpwd567,svezia,stoccolma,false
+yuki.tanaka@email.com,Yuki,Tanaka,yukipwd890,giappone,tokyo,false
+carlos.santos@email.com,Carlos,Santos,carlospwd12,portogallo,lisbona,false
+sophie.anderson@email.com,Sophie,Anderson,sophiepwd34,usa,new york,false
+wang.lei@email.com,Wang,Lei,wangpwd567,cina,shanghai,false
+pedro.martinez@email.com,Pedro,Martinez,pedropwd89,messico,città del messico,false
+london.cuisine@rest.com,James,Wilson,rest5678,inghilterra,londra,true
+paris.bistro@rest.com,Pierre,Laurent,rest1234,francia,parigi,true
+berlin.haus@rest.com,Michael,Schmidt,rest9012,germania,berlino,true
+madrid.tapas@rest.com,Javier,Rodriguez,rest3456,spagna,madrid,true
+stockholm.nordic@rest.com,Lars,Andersson,rest7890,svezia,stoccolma,true
+tokyo.sushi@rest.com,Hiroshi,Sato,rest2345,giappone,tokyo,true
+nyc.kitchen@rest.com,David,Thompson,rest6789,usa,new york,true
+shanghai.dragon@rest.com,Li,Wei,rest0123,cina,shanghai,true
+lisboa.porto@rest.com,Manuel,Silva,rest4567,portogallo,lisbona,true
+mexico.cantina@rest.com,Miguel,Lopez,rest8901,messico,città del messico,true

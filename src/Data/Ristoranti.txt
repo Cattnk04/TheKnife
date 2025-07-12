@@ -1,2 +1,32 @@
 La rosa,adminprova@gmail.com,Italia,Milano,Viale Monte Ceneri 11,25.0,false,false,italiana
 La rosa - Roma,adminprova@gmail.com,Italia,Roma,Via Ferdinando Gregorovius 32,25.0,false,true,italiana
+Sapori d'Elite,trattoria.sapori@rest.com,italia,milano,Via Monte Napoleone 15,45.0,true,true,francese
+Antica Osteria del Centro,osteria.antica@rest.com,italia,roma,Via del Corso 234,35.0,false,true,italiana
+Bella Vista,ristorante.bella@rest.com,italia,firenze,Piazza della Signoria 8,55.0,false,true,fusion
+Mare Blu,locanda.mare@rest.com,italia,napoli,Via Caracciolo 45,30.0,true,false,pesce
+Pizza & Delizie,pizzeria.napoli@rest.com,italia,palermo,Via Maqueda 67,20.0,true,true,pizzeria
+Il Cantuccio,taverna.siciliana@rest.com,italia,catania,Via Etnea 123,28.0,true,false,internazionale
+La Terrazza,osteria.toscana@rest.com,italia,siena,Piazza del Campo 9,40.0,false,true,gourmet
+Canal Grande,ristorante.venezia@rest.com,italia,venezia,Fondamenta Nuove 456,60.0,false,true,pesce
+Bottega del Gusto,trattoria.emilia@rest.com,italia,bologna,Via dell'Indipendenza 78,32.0,true,true,internazionale
+Porto Antico,cucina.ligure@rest.com,italia,genova,Via al Porto Antico 12,38.0,true,false,italiana
+Masseria Pugliese,osteria.pugliese@rest.com,italia,bari,Corso Vittorio Emanuele 89,25.0,true,true,tradizionale
+Vista Mare,ristorante.adriatico@rest.com,italia,pescara,Lungomare Matteotti 34,42.0,false,true,pesce
+Baita Montana,locanda.alpina@rest.com,italia,trento,Via delle Dolomiti 56,48.0,false,true,internazionale
+Giardino Romano,trattoria.roma@rest.com,italia,roma,Via Appia Antica 78,52.0,true,true,fusion
+La Piazzetta,cucina.piemonte@rest.com,italia,torino,Via Roma 234,36.0,true,false,gourmet
+Il Portico,osteria.umbra@rest.com,italia,perugia,Corso Vannucci 45,33.0,true,true,tradizionale
+Borgo Antico,ristorante.marche@rest.com,italia,ancona,Via del Porto 67,29.0,false,true,pesce
+Terrazza Calabra,locanda.calabra@rest.com,italia,reggio calabria,Lungomare Falcomatà 90,27.0,true,false,italiana
+Il Faro,trattoria.sarda@rest.com,italia,cagliari,Via Roma 123,44.0,true,true,pesce
+Cucina d'Autore,cucina.abruzzo@rest.com,italia,pescara,Corso Umberto 56,39.0,false,true,gourmet
+The Crown & Lion,london.cuisine@rest.com,inghilterra,londra,Baker Street 221B,55.0,true,true,british
+Le Petit Bistrot,paris.bistro@rest.com,francia,parigi,Rue de Rivoli 156,65.0,true,true,francese
+Berliner Küche,berlin.haus@rest.com,germania,berlino,Unter den Linden 78,48.0,false,true,tedesca
+La Mesa Bonita,madrid.tapas@rest.com,spagna,madrid,Calle Mayor 25,35.0,true,true,spagnola
+Nordic Haven,stockholm.nordic@rest.com,svezia,stoccolma,Drottninggatan 45,70.0,false,true,nordica
+Sakura House,tokyo.sushi@rest.com,giappone,tokyo,Shibuya 3-15-6,80.0,true,true,giapponese
+Manhattan Grill,nyc.kitchen@rest.com,usa,new york,5th Avenue 789,65.0,true,true,americana
+Golden Dragon,shanghai.dragon@rest.com,cina,shanghai,Nanjing Road 234,40.0,true,false,cinese
+Casa do Porto,lisboa.porto@rest.com,portogallo,lisbona,Rua Augusta 67,38.0,true,true,portoghese
+Cantina Mexicana,mexico.cantina@rest.com,messico,città del messico,Av. Insurgentes 123,30.0,true,false,messicana
