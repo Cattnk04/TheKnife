@@ -148,6 +148,22 @@ public class ListaRecensioni {
         }
     }
 
+    //Metodo per visuallizare le recensioni del ristorante selezionato dopo il cerca RiSTORANTE
+    public void mostraRecensioniRistorante(Ristorante ristorante) {
+        List<Recensione> recensioniRistorante = recensioniRistorante(ristorante.getNome());
+
+        if (recensioniRistorante == null || recensioniRistorante.isEmpty()) {
+            System.out.println("\nNon ci sono ancora recensioni per questo ristorante.");
+            return;
+        }
+
+        System.out.println("\n=== Recensioni del ristorante ===");
+        for (Recensione recensione : recensioniRistorante) {
+            System.out.println("\n" + recensione.stampaRecensione());
+            System.out.println("----------------------------------------");
+        }
+    }
+
     //Metodo per la stampa delle recensioni per il menu utente log
     public void mostraRecensioniUtente(Utente utente) {
         List<Recensione> recensioni = recensioniUtente(utente);
