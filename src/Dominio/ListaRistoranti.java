@@ -93,54 +93,75 @@ public class ListaRistoranti {
         return null;
     }
 
-    //Metodo per stampare i ristoranti filtrati
+    
     private void stampaRistorantiFiltrati(List<Ristorante> ristoranti) {
         if (ristoranti.isEmpty()) {
             System.out.println("\nNessun ristorante trovato con i criteri specificati.");
             return;
         }
 
-        System.out.println("\n=== Ristoranti trovati ===");
-        for (int i = 0; i < ristoranti.size(); i++) {
-            System.out.println((i + 1) + ". " + ristoranti.get(i).getNome());
-        }
+        boolean continua = true;
+        while (continua) {
+            System.out.println("\n=== Ristoranti trovati ===");
+            for (int i = 0; i < ristoranti.size(); i++) {
+                System.out.println((i + 1) + ". " + ristoranti.get(i).getNome());
+            }
+            System.out.println("0. Esci");
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("\nInserisci il numero del ristorante per visualizzare più dettagli (0 per uscire): ");
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("\nInserisci il numero del ristorante per visualizzare più dettagli (0 per uscire): ");
         
-        try {
-            int scelta = Integer.parseInt(scanner.nextLine().trim());
-            if (scelta == 0) {
-                return;
+            try {
+                int scelta = Integer.parseInt(scanner.nextLine().trim());
+                if (scelta == 0) {
+                    continua = false;
+                } else if (scelta >= 1 && scelta <= ristoranti.size()) {
+                    if (mostraDettagliRistorante(ristoranti.get(scelta - 1))) {
+                        return; // Ritorna al menu principale
+                    }
+                } else {
+                    System.out.println("Numero non valido!");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Input non valido! Devi inserire un numero.");
             }
-            if (scelta >= 1 && scelta <= ristoranti.size()) {
-                mostraDettagliRistorante(ristoranti.get(scelta - 1));
-            } else {
-                System.out.println("Numero non valido!");
-            }
-        } catch (NumberFormatException e) {
-            System.out.println("Input non valido! Devi inserire un numero.");
         }
     }
 
-    private void mostraDettagliRistorante(Ristorante ristorante) {
-        System.out.println("\n=== Dettagli del ristorante ===");
-        System.out.println("Nome: " + ristorante.getNome());
-        System.out.println("Città: " + ristorante.getCitta());
-        System.out.println("Indirizzo: " + ristorante.getIndirizzo());
-        System.out.println("Fascia di prezzo: " + ristorante.getFasciaPrezzo() + "€");
-        System.out.println("Tipo di cucina: " + ristorante.getTipoCucina());
-        System.out.println("Servizio delivery: " + (ristorante.getServizioDelivery() ? "Sì" : "No"));
-        System.out.println("Prenotazione online: " + (ristorante.getServizioPrenotazioneOnline() ? "Sì" : "No"));
-        System.out.println("----------------------------------------");
+    private boolean mostraDettagliRistorante(Ristorante ristorante) {
+        boolean tornaAllaLista = false;
+    
+        while (!tornaAllaLista) {
+            System.out.println("\n=== Dettagli del ristorante ===");
+            System.out.println("Nome: " + ristorante.getNome());
+            System.out.println("Città: " + ristorante.getCitta());
+            System.out.println("Indirizzo: " + ristorante.getIndirizzo());
+            System.out.println("Fascia di prezzo: " + ristorante.getFasciaPrezzo() + "€");
+            System.out.println("Tipo di cucina: " + ristorante.getTipoCucina());
+            System.out.println("Servizio delivery: " + (ristorante.getServizioDelivery() ? "Sì" : "No"));
+            System.out.println("Prenotazione online: " + (ristorante.getServizioPrenotazioneOnline() ? "Sì" : "No"));
+            System.out.println("----------------------------------------");
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("\nVuoi visualizzare le recensioni del ristorante? [s/n]: ");
-
-        if (scanner.nextLine().trim().toLowerCase().equals("s")) {
-            ListaRecensioni listaRecensioni = new ListaRecensioni();
-            listaRecensioni.mostraRecensioniRistorante(ristorante);
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("\nVuoi: \n1. Visualizzare le recensioni del ristorante\n2. Tornare alla lista dei ristoranti\n3. Tornare al menu principale\nScelta: ");
+        
+            String scelta = scanner.nextLine().trim();
+            switch (scelta) {
+                case "1":
+                    ListaRecensioni listaRecensioni = new ListaRecensioni();
+                    listaRecensioni.mostraRecensioniRistorante(ristorante);
+                    System.out.print("\nPremi INVIO per continuare...");
+                    scanner.nextLine();
+                    break;
+                case "2":
+                    return false; // Torna alla lista dei ristoranti
+                case "3":
+                    return true;  // Torna al menu principale
+                default:
+                    System.out.println("Scelta non valida!");
+            }
         }
+        return false;
     }
 
     //Metodo per la ricerca dei ristoranti
