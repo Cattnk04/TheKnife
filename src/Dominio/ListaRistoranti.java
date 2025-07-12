@@ -129,20 +129,21 @@ public class ListaRistoranti {
     }
 
     private boolean mostraDettagliRistorante(Ristorante ristorante) {
-        boolean tornaAllaLista = false;
-    
-        while (!tornaAllaLista) {
-            System.out.println("\n=== Dettagli del ristorante ===");
-            System.out.println("Nome: " + ristorante.getNome());
-            System.out.println("Città: " + ristorante.getCitta());
-            System.out.println("Indirizzo: " + ristorante.getIndirizzo());
-            System.out.println("Fascia di prezzo: " + ristorante.getFasciaPrezzo() + "€");
-            System.out.println("Tipo di cucina: " + ristorante.getTipoCucina());
-            System.out.println("Servizio delivery: " + (ristorante.getServizioDelivery() ? "Sì" : "No"));
-            System.out.println("Prenotazione online: " + (ristorante.getServizioPrenotazioneOnline() ? "Sì" : "No"));
-            System.out.println("----------------------------------------");
+        // Mostra i dettagli del ristorante solo la prima volta
+        System.out.println("\n=== Dettagli del ristorante ===");
+        System.out.println("Nome: " + ristorante.getNome());
+        System.out.println("Città: " + ristorante.getCitta());
+        System.out.println("Indirizzo: " + ristorante.getIndirizzo());
+        System.out.println("Fascia di prezzo: " + ristorante.getFasciaPrezzo() + "€");
+        System.out.println("Tipo di cucina: " + ristorante.getTipoCucina());
+        System.out.println("Servizio delivery: " + (ristorante.getServizioDelivery() ? "Sì" : "No"));
+        System.out.println("Prenotazione online: " + (ristorante.getServizioPrenotazioneOnline() ? "Sì" : "No"));
+        System.out.println("----------------------------------------");
 
-            Scanner scanner = new Scanner(System.in);
+        boolean continua = true;
+        Scanner scanner = new Scanner(System.in);
+        
+        while (continua) {
             System.out.print("\nVuoi: \n1. Visualizzare le recensioni del ristorante\n2. Tornare alla lista dei ristoranti\n3. Tornare al menu principale\nScelta: ");
         
             String scelta = scanner.nextLine().trim();
@@ -150,8 +151,6 @@ public class ListaRistoranti {
                 case "1":
                     ListaRecensioni listaRecensioni = new ListaRecensioni();
                     listaRecensioni.mostraRecensioniRistorante(ristorante);
-                    System.out.print("\nPremi INVIO per continuare...");
-                    scanner.nextLine();
                     break;
                 case "2":
                     return false; // Torna alla lista dei ristoranti

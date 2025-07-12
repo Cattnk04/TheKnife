@@ -68,7 +68,7 @@ public class Menu {
     //Metodo per la scelta fatta dell'utente ospite
     public static int menuGuest() {
         int choice = -1;
-        System.out.println("\nBenvenuto nella schermata home ospite!\n");
+        System.out.println("\nBenvenuto nella schermata home ospite!");
         System.out.println("Scegli un'opzione:");
         System.out.println("1. Registrati");
         System.out.println("2. Accedi");
