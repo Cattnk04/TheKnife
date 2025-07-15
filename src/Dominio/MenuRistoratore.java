@@ -7,9 +7,6 @@ public class MenuRistoratore {
     private Utente utenteCorrente;
     private ListaRistoranti listaRistoranti;
     private ListaRecensioni listaRecensioni;
-    private static final String FILE_RISTORANTI = "src/Data/Ristoranti.txt";
-    private static final String FILE_RECENSIONI = "src/Data/Recensioni.txt";
-    private static final String FILE_RISPOSTE = "src/Data/RisposteRecensioni.txt";
     private static final Scanner scanner = new Scanner(System.in);
 
     //Costruttore

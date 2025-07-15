@@ -6,7 +6,6 @@ import java.util.InputMismatchException;
 
 public class Menu {
 
-    private static final String FILE_UTENTI = "src/Data/Utenti.txt";
     private static final Scanner scanner = new Scanner(System.in);
     private MenuRistoratore menuRistoratore;
     private MenuUtenteLog menuUtenteLog;
@@ -44,9 +43,6 @@ public class Menu {
                             MenuUtenteLog menuUtenteLog = new MenuUtenteLog(utenteCorrente);
                         }
                     }
-                    /*else{
-                        System.out.println("Prova funzionamento");
-                    }*/
                     break;
                 case 3:
                     listaRistoranti.cercaRistorante();

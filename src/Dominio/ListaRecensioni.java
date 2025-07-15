@@ -8,7 +8,6 @@ import java.util.Scanner;
 public class ListaRecensioni {
 
     private List<Recensione> listaRecensioni = new ArrayList<>();
-    private static final String FILE_PATH = "src/Data/Recensioni.txt";
 
     //Costruttore
     public ListaRecensioni() {
@@ -27,7 +26,7 @@ public class ListaRecensioni {
 
     //Metodo per salvare su CSV
     public void salvaRecensioniSuCSV() {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/Data/Recensioni.txt"))){
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(Recensione.FILE_RECENSIONI))){
             for (Recensione r :listaRecensioni){
                 writer.write(r.toString());
                 writer.newLine();
@@ -39,7 +38,7 @@ public class ListaRecensioni {
 
     //Metodo per ricavare da CSV
     public void ricavaRecensioniDaCSV() {
-        try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(Recensione.FILE_RECENSIONI))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 if (!line.trim().isEmpty()) {  // Ignora le righe vuote

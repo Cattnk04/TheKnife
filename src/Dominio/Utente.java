@@ -5,7 +5,7 @@ import java.util.Locale;
 import java.util.Scanner;
 
 public class Utente {
-    public static final String FILE_UTENTI = "src/Data/Utenti.txt";
+    public static final String FILE_UTENTI = "./Data/Utenti.txt";
     private static final Scanner scanner = new Scanner(System.in);
     private String nome;
     private String cognome;
@@ -68,7 +68,7 @@ public class Utente {
 
     //Metodo per la registrazione
     public Utente() {
-        System.out.println("\n=== Registrazione ===");
+        System.out.println("\n\n=== Registrazione ===");
         do{
             System.out.print("Inserisci il tuo nome: ");
             this.nome = scanner.nextLine().trim();
@@ -119,7 +119,6 @@ public class Utente {
             valido = true;
             System.out.print("Inserisci la tua password: ");
             password = scanner.nextLine();
-            //VEDERE COME FAR VISUALIZZARE GLI ASTERISCHI INVECE DELLA STRINGA
             if(password.length()<8){
                 valido = false;
                 System.out.println("Password troppo corta, inserirne una più lunga.");

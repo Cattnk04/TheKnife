@@ -23,7 +23,7 @@ public class ListaUtenti {
 
     //Metodo per salvare gli utenti sul CSV
     public void salvaUtentiSuCSV(){
-        File file = new File("src/Data/Utenti.txt");
+        File file = new File(Utente.FILE_UTENTI);
         file.getParentFile().mkdirs(); // Crea le directory se non esistono
     
         try (FileWriter writer = new FileWriter(file)) {  // Uso del try-with-resources
@@ -39,7 +39,7 @@ public class ListaUtenti {
     //Metodo per ricavare dal CSV
     private void ricavaUtentiDaCSV() {
         try {
-            FileReader reader = new FileReader("src/Data/Utenti.txt");
+            FileReader reader = new FileReader(Utente.FILE_UTENTI);
             BufferedReader bufferedReader = new BufferedReader(reader);
             String riga;
             while ((riga = bufferedReader.readLine()) != null) {

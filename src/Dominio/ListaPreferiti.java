@@ -17,7 +17,7 @@ public class ListaPreferiti {
     //Metodo per leggere i preferiti da CSV
     private void ricavaPreferitiDaCSV(){
         try {
-            FileReader reader = new FileReader("src/Data/Preferiti.txt");
+            FileReader reader = new FileReader(Preferito.FILE_PREFERITI);
             BufferedReader bufferedReader = new BufferedReader(reader);
             String riga;
             while ((riga = bufferedReader.readLine()) != null) {
@@ -43,7 +43,7 @@ public class ListaPreferiti {
 
     //Metodo per salvare su CSV
     public void salvaPreferitiSuCSV(){
-        File file = new File("src/Data/Preferiti.txt");
+        File file = new File(Preferito.FILE_PREFERITI);
         file.getParentFile().mkdirs(); // Crea le directory se non esistono
 
         try (FileWriter writer = new FileWriter(file)) {  // Uso del try-with-resources

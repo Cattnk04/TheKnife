@@ -22,7 +22,7 @@ public class ListaRistoranti {
 
     //Metodo per salvare sul CSV
     public void salvaRistorantiSuCSV() {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/Data/Ristoranti.txt"))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(Ristorante.FILE_RISTORANTI))) {
             for (Ristorante r : listaRistoranti) {
                 writer.write(r.toString());
                 writer.newLine();
@@ -37,7 +37,7 @@ public class ListaRistoranti {
     public void ricavaRistorantiDaCSV(){
         //lettura del file Ristoranti.txt e salvataggio nella lista listaRistoranti
         listaRistoranti.clear();
-        try (BufferedReader reader = new BufferedReader(new FileReader("src/Data/Ristoranti.txt"))){
+        try (BufferedReader reader = new BufferedReader(new FileReader(Ristorante.FILE_RISTORANTI))){
             String line;
             while((line = reader.readLine()) != null){
                 String[] dati = line.split(",");

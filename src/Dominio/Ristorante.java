@@ -15,6 +15,7 @@ public class Ristorante {
     private boolean servizioDelivery;
     private boolean servizioPrenotazioneOnline;
     private String tipoCucina;
+    public static final String FILE_RISTORANTI = "./Data/Ristoranti.txt";
 
     //Costruttore 1
     public Ristorante(String nome, String emailRistoratore, String nazione, String citta, String indirizzo, double fasciaPrezzo, boolean servizioDelivery, boolean servizioPrenotazioneOnline, String tipoCucina){

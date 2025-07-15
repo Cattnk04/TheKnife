@@ -10,6 +10,7 @@ public class Recensione {
     int valutazione;
     String recensione;
     String risposta;
+    public static final String FILE_RECENSIONI = "./Data/Recensioni.txt";
 
     //Costruttore 1
     public Recensione(Utente utente, ListaRistoranti ristoranti) {
