@@ -63,3 +63,4 @@ shanghai.dragon@rest.com,Li,Wei,rest0123,cina,shanghai,true
 lisboa.porto@rest.com,Manuel,Silva,rest4567,portogallo,lisbona,true
 mexico.cantina@rest.com,Miguel,Lopez,rest8901,messico,città del messico,true
 giaco@gmail.com,giaco@gmail.com,tancredi,7a74504f71374be5e8a29f5d1779f8b352a3b07c46aaf0b256999debb3fac60f,italia,como,false
+gpellegrini@gmail.com,gaia,pellegrini,a39e430a2a81307fac559689729204bbae570c2af17d7e0354fcc26e4c1cac13,italia,como,false
