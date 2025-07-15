@@ -1,6 +1,9 @@
 package Dominio;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.ArrayList;
 import java.io.FileWriter;
@@ -89,6 +92,21 @@ public class ListaUtenti {
             String email = scanner.nextLine().trim();
             System.out.print("Inserisci la tua password: ");
             String password = scanner.nextLine().trim();
+            try {
+                MessageDigest digest = MessageDigest.getInstance("SHA-256");
+                byte[] hashBytes = digest.digest(password.getBytes(StandardCharsets.UTF_8));
+
+                // Converti i byte in una stringa esadecimale
+                StringBuilder hexString = new StringBuilder();
+                for (byte b : hashBytes) {
+                    String hex = Integer.toHexString(0xff & b);
+                    if(hex.length() == 1) hexString.append('0');
+                    hexString.append(hex);
+                }
+                password = hexString.toString();
+            } catch (NoSuchAlgorithmException e) {
+                throw new RuntimeException(e);
+            }
 
             Utente utente = trovaUtente(email, password);
 

@@ -1,7 +1,9 @@
 package Dominio;
 
 import java.io.*;
-import java.util.Locale;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 public class Utente {
@@ -124,6 +126,22 @@ public class Utente {
                 System.out.println("Password troppo corta, inserirne una più lunga.");
             }
         } while (!valido);
-        this.password = password;
+
+
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hashBytes = digest.digest(password.getBytes(StandardCharsets.UTF_8));
+
+            // Converti i byte in una stringa esadecimale
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : hashBytes) {
+                String hex = Integer.toHexString(0xff & b);
+                if(hex.length() == 1) hexString.append('0');
+                hexString.append(hex);
+            }
+            this.password = hexString.toString().trim();
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
