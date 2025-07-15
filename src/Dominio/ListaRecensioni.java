@@ -177,7 +177,7 @@ public class ListaRecensioni {
     public void mostraRecensioniUtente(Utente utente) {
         List<Recensione> recensioni = recensioniUtente(utente);
         if (recensioni == null || recensioni.isEmpty()) {
-            System.out.println("Non hai ancora scritto recensioni.");
+            System.out.println("\nNon hai ancora scritto recensioni.");
         } else {
             System.out.println("\n=== Le tue recensioni ===");
             for (Recensione r : recensioni) {

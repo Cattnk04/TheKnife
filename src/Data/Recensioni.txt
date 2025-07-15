@@ -3,7 +3,7 @@ ana.garcia@email.com*Palazzo del Gusto*5*Experiencia gastron�mica inolvidable 
 andrea.romano@email.com*El Patio*4*Tapas autentiche e sangria eccellente. Ambiente vivace e allegro.*null
 andrea.romano@email.com*Borgo Antico Elite*5*Tartufo e vini umbri eccellenti. Servizio impeccabile.*null
 beatrice.villa@email.com*Fusion Lounge*4*Cocktail creativi e fusion ben riuscito. Atmosfera molto cool.*null
-beatrice.villa@email.com*The Wellington*2*Servizio arrogante e cibo mediocre. Fish and chips troppo unto.*null
+beatrice.villa@email.com*The Wellington*2*Servizio arrogante e cibo mediocre. Fish and chips troppo unto.*we're sorry!
 chiara.marino@email.com*Bistrot Parisien*5*Croissant come a Parigi! Colazione da sogno sulla Promenade.*null
 claudia.moretti@email.com*Le Gourmet*5*Esperienza gastronomica indimenticabile. Vale ogni euro.*null
 claudia.moretti@email.com*Mexican Fiesta*1*Cibo piccante oltre ogni limite e servizio caotico. Pessima esperienza.*null

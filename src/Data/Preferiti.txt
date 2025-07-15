@@ -32,3 +32,4 @@ sophie.anderson@email.com,International Club
 wang.lei@email.com,Dragon Palace
 pedro.martinez@email.com,Mexican Fiesta
 pedro.martinez@email.com,El Patio
+gpellegrini@gmail.com,Little Italy

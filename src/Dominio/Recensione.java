@@ -93,6 +93,7 @@ public class Recensione {
 
     //Metodo per stampare le recensioni
     public String stampaRecensione(){
+        System.out.println("\n----------------------------------------");
         String stringa =  "Valutazione: " + getValutazione() + "\nRecensione: " + getRecensione();
         if(getRisposta() != null){
             stringa += "\nRisposta: " + getRisposta();

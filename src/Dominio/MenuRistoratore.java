@@ -228,10 +228,24 @@ public class MenuRistoratore {
             return;
         }
 
-        System.out.print("\nInserisci il nome del ristorante: ");
-        String nomeRistorante = scanner.nextLine();
+        System.out.print("\nInserisci il numero del ristorante: ");
+        String input = scanner.nextLine();
+        int sceltaNumero;
+        try {
+            sceltaNumero = Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            System.out.println("Input non valido, inserisci un numero.");
+            return;
+        }
 
-        // Verifica che il ristorante appartenga al proprietario
+        if (sceltaNumero < 1 || sceltaNumero > mieiRistoranti.size()) {
+            System.out.println("Numero non valido.");
+            return;
+        }
+
+        String nomeRistorante = mieiRistoranti.get(sceltaNumero - 1).getNome();
+
+        // Verifica che il ristorante appartenga al proprietario (teoricamente già garantito dalla lista)
         if (!appartienePropietario(nomeRistorante)) {
             System.out.println("Il ristorante specificato non ti appartiene!");
             return;
@@ -241,16 +255,23 @@ public class MenuRistoratore {
 
         for (Recensione recensione : listaRecensioni.getListaRecensione()) {
             if (recensione.getNomeRistorante().equals(nomeRistorante) &&
-                (recensione.getRisposta() == null || recensione.getRisposta().equals("null"))) {
+                    (recensione.getRisposta() == null || recensione.getRisposta().equals("null"))) {
 
                 trovateRecensioni = true;
                 System.out.println("\n----------------------------------------");
                 System.out.printf("Recensione di: %s\n", recensione.getEmail());
                 System.out.printf("Valutazione: %d/5\n", recensione.getValutazione());
                 System.out.printf("Testo: %s\n", recensione.getRecensione());
+                System.out.println("----------------------------------------");
 
-                System.out.print("\nVuoi rispondere a questa recensione? (s/n): ");
-                String scelta = scanner.nextLine().trim().toLowerCase();
+                String scelta;
+                do {
+                    System.out.print("\nVuoi rispondere a questa recensione? (s/n): ");
+                    scelta = scanner.nextLine().trim().toLowerCase();
+                    if (!scelta.equals("s") && !scelta.equals("n")) {
+                        System.out.println("Input non valido, inserisci 's' per sì o 'n' per no.");
+                    }
+                } while (!scelta.equals("s") && !scelta.equals("n"));
 
                 if (scelta.equals("s")) {
                     System.out.print("Inserisci la tua risposta: ");
@@ -266,6 +287,7 @@ public class MenuRistoratore {
             System.out.println("Non ci sono nuove recensioni da rispondere per questo ristorante.");
         }
     }
+
 
     //Metodo per visualizzare il riepilogo delle recensioni di tutti i ristoranti (la media e il numero di recensioni)
     private void visualizzaRiepilogo() {
