@@ -1,66 +1,43 @@
-adminprova@gmail.com,admin,prova,adminprova,italia,como,true
-adminprova2@gmail.com,Admin,Prova,adminprova2,italia,como,false
-gt@gmail.com,Giacomo,Tancredi,password1,italia,como,false
-dklsnckj@kjsackj.com,Elena,Catelli,dsnvdjknv,italia,co,false
-mario.rossi@email.com,Mario,Rossi,password123,italia,milano,false
-laura.bianchi@email.com,Laura,Bianchi,pwd567890,italia,roma,false
-marco.verdi@email.com,Marco,Verdi,secure789,italia,torino,false
-giulia.ferrari@email.com,Giulia,Ferrari,pass4321,italia,firenze,false
-andrea.romano@email.com,Andrea,Romano,pwdandrea1,italia,bologna,false
-sofia.colombo@email.com,Sofia,Colombo,sofiapwd22,italia,venezia,false
-luca.ricci@email.com,Luca,Ricci,lucapwd123,italia,genova,false
-chiara.marino@email.com,Chiara,Marino,chiarapw99,italia,palermo,false
-alessandro.greco@email.com,Alessandro,Greco,alepwd567,italia,napoli,false
-valentina.conti@email.com,Valentina,Conti,vale12345,italia,bari,false
-roberto.mancini@email.com,Roberto,Mancini,robpwd789,italia,verona,false
-francesca.serra@email.com,Francesca,Serra,frapwd234,italia,padova,false
-davide.leone@email.com,Davide,Leone,davidpwd1,italia,trieste,false
-elena.martini@email.com,Elena,Martini,elenapw56,italia,brescia,false
-paolo.galli@email.com,Paolo,Galli,paolopwd7,italia,bergamo,false
-silvia.rizzi@email.com,Silvia,Rizzi,silviapw8,italia,pisa,false
-michele.costa@email.com,Michele,Costa,mikepwd99,italia,parma,false
-claudia.moretti@email.com,Claudia,Moretti,claupwd12,italia,modena,false
-stefano.barbieri@email.com,Stefano,Barbieri,stefpwd34,italia,livorno,false
-beatrice.villa@email.com,Beatrice,Villa,beapwd567,italia,ravenna,false
-trattoria.sapori@rest.com,Giuseppe,Esposito,rest1234,italia,milano,true
-osteria.antica@rest.com,Antonio,Romano,rest5678,italia,roma,true
-ristorante.bella@rest.com,Maria,Caruso,rest9012,italia,firenze,true
-locanda.mare@rest.com,Francesco,Marino,rest3456,italia,napoli,true
-pizzeria.napoli@rest.com,Salvatore,Russo,rest7890,italia,palermo,true
-taverna.siciliana@rest.com,Carmela,Ferrara,rest2345,italia,catania,true
-osteria.toscana@rest.com,Lorenzo,Toscano,rest6789,italia,siena,true
-ristorante.venezia@rest.com,Marco,Veneziano,rest0123,italia,venezia,true
-trattoria.emilia@rest.com,Paolo,Emiliano,rest4567,italia,bologna,true
-cucina.ligure@rest.com,Anna,Genovese,rest8901,italia,genova,true
-osteria.pugliese@rest.com,Vito,Pugliese,rest2345,italia,bari,true
-ristorante.adriatico@rest.com,Luigi,Adriani,rest6789,italia,pescara,true
-locanda.alpina@rest.com,Giovanni,Alpini,rest0123,italia,trento,true
-trattoria.roma@rest.com,Roberto,Romani,rest4567,italia,roma,true
-cucina.piemonte@rest.com,Carlo,Piemontesi,rest8901,italia,torino,true
-osteria.umbra@rest.com,Federico,Umbri,rest2345,italia,perugia,true
-ristorante.marche@rest.com,Andrea,Marchetti,rest6789,italia,ancona,true
-locanda.calabra@rest.com,Domenico,Calabrese,rest0123,italia,reggio calabria,true
-trattoria.sarda@rest.com,Gavino,Sardi,rest4567,italia,cagliari,true
-cucina.abruzzo@rest.com,Bruno,Abruzzese,rest8901,italia,pescara,true
-john.smith@email.com,John,Smith,johnpwd123,inghilterra,londra,false
-marie.dubois@email.com,Marie,Dubois,mariepwd456,francia,parigi,false
-hans.mueller@email.com,Hans,Mueller,hanspwd789,germania,berlino,false
-ana.garcia@email.com,Ana,Garcia,anapwd234,spagna,madrid,false
-erik.johansson@email.com,Erik,Johansson,erikpwd567,svezia,stoccolma,false
-yuki.tanaka@email.com,Yuki,Tanaka,yukipwd890,giappone,tokyo,false
-carlos.santos@email.com,Carlos,Santos,carlospwd12,portogallo,lisbona,false
-sophie.anderson@email.com,Sophie,Anderson,sophiepwd34,usa,new york,false
-wang.lei@email.com,Wang,Lei,wangpwd567,cina,shanghai,false
-pedro.martinez@email.com,Pedro,Martinez,pedropwd89,messico,città del messico,false
-london.cuisine@rest.com,James,Wilson,rest5678,inghilterra,londra,true
-paris.bistro@rest.com,Pierre,Laurent,rest1234,francia,parigi,true
-berlin.haus@rest.com,Michael,Schmidt,rest9012,germania,berlino,true
-madrid.tapas@rest.com,Javier,Rodriguez,rest3456,spagna,madrid,true
-stockholm.nordic@rest.com,Lars,Andersson,rest7890,svezia,stoccolma,true
-tokyo.sushi@rest.com,Hiroshi,Sato,rest2345,giappone,tokyo,true
-nyc.kitchen@rest.com,David,Thompson,rest6789,usa,new york,true
-shanghai.dragon@rest.com,Li,Wei,rest0123,cina,shanghai,true
-lisboa.porto@rest.com,Manuel,Silva,rest4567,portogallo,lisbona,true
-mexico.cantina@rest.com,Miguel,Lopez,rest8901,messico,città del messico,true
+adminprova@gmail.com,admin,prova,e80b5017098950fc58aad83c8c14978e350b721f5850e7276ed352b5771bc2ff,italia,como,true
+adminprova2@gmail.com,Admin,Prova,833675e17b9af4641436f9b54deccca94045982d61c7e98ad18a0cd0e397f569,italia,como,false
+gt@gmail.com,Giacomo,Tancredi,50cd3585b76ce7b04ea5e6482ee9665e4883b4c6df8f306301e589fdb87aa870,italia,como,false
+dklsnckj@kjsackj.com,Elena,Catelli,4d68c8c7f89c778b24fb31937375e250d7b37c561395ed2d3fb9db4a7f357b08,italia,co,false
+mario.rossi@email.com,Mario,Rossi,d247a16d0fcef8b5664d1eed9568fc07528aa743fb9e781427c38760a5af530b,italia,milano,false
+laura.bianchi@email.com,Laura,Bianchi,a6e1414c174c67818521c0c4a3130226b8c454e7772fede76645fe30e9fe7667,italia,roma,false
+marco.verdi@email.com,Marco,Verdi,2f7fb1069178f7642d2e27314d851b9d753f1fb507ca9980f85ba7f367663b8b,italia,torino,false
+giulia.ferrari@email.com,Giulia,Ferrari,3f1ea6ed7911df18272ce8995b4fc1f7280278b102c06940d6241657f86c7e40,italia,firenze,false
+andrea.romano@email.com,Andrea,Romano,d44277c9c2ca47c51a68895d03a58293ccf4854153c7e58ad7f26ce159a44f86,italia,bologna,false
+sofia.colombo@email.com,Sofia,Colombo,d05d0a5c9f88e868b40647431ad4e2536cc0e638b12e2d49cad3ed0e9ce885d6,italia,venezia,false
+luca.ricci@email.com,Luca,Ricci,a8cfcd74832004951b4408cdb0a5dbcd8c7c2b5f3f9f8c8f87c8c3d567e8a9b0,italia,genova,false
+chiara.marino@email.com,Chiara,Marino,c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470,italia,palermo,false
+michele.costa@email.com,Michele,Costa,7d9e257b36e1bf09d6689927d3c00f4758f41f1c18d4b97b195cd0dbcb56b038,italia,parma,false
+claudia.moretti@email.com,Claudia,Moretti,2df5c004c6b44dea29c742f4c0787577bb8cd60437b65785a3494c4c98f22e8c,italia,modena,false
+stefano.barbieri@email.com,Stefano,Barbieri,1f923787a491e3e29ea0c43901edb14324f88c927fb513c6f5e3a205f001631d,italia,livorno,false
+beatrice.villa@email.com,Beatrice,Villa,89e01536ac207279409d4de1e5253e01f4a1769e696db0d6062ca9b8f56767c8,italia,ravenna,false
+osteria.pugliese@rest.com,Vito,Pugliese,d2f1217c6f6a854beba7f5d7ef0a6c7195240b36bdd4131ef2ec824918d6429a,italia,bari,true
+ristorante.adriatico@rest.com,Luigi,Adriani,e50c83c7f19e5847c3c5f1c346df12899c4436968ad891e0c6d6d841cc41e5e4,italia,pescara,true
+locanda.alpina@rest.com,Giovanni,Alpini,62a96da9287cb5bc75f6e31e4d0c890e90bf69f784a36e463ab99163da00fd8b,italia,trento,true
+trattoria.roma@rest.com,Roberto,Romani,f6f2ea8f7dc038f51ec91e711ed6e506eab0aa5a4b577fc8218783f86bfb3c7f,italia,roma,true
+cucina.piemonte@rest.com,Carlo,Piemontesi,41e888a6e4a2721c7fb2f674e093517cafe5d86771f8d7891859c9e868688c6d,italia,torino,true
+osteria.umbra@rest.com,Federico,Umbri,8a9c7e4f1b3d2a5c8e6f0d9b7a4c1e3f5d8b2a6c9e0f7d4b1a8c5e2f9d6b3a7,italia,perugia,true
+ristorante.marche@rest.com,Andrea,Marchetti,c1e3f5d8b2a6c9e0f7d4b1a8c5e2f9d6b3a7c4e8f2d5b9a0c7e4f1b3d2a5c8,italia,ancona,true
+locanda.calabra@rest.com,Domenico,Calabrese,f7d4b1a8c5e2f9d6b3a7c4e8f2d5b9a0c7e4f1b3d2a5c8e6f0d9b7a4c1e3f5,italia,reggio calabria,true
+trattoria.sarda@rest.com,Gavino,Sardi,b3a7c4e8f2d5b9a0c7e4f1b3d2a5c8e6f0d9b7a4c1e3f5d8b2a6c9e0f7d4b1,italia,cagliari,true
+cucina.abruzzo@rest.com,Bruno,Abruzzese,e2f9d6b3a7c4e8f2d5b9a0c7e4f1b3d2a5c8e6f0d9b7a4c1e3f5d8b2a6c9e0,italia,pescara,true
+yuki.tanaka@email.com,Yuki,Tanaka,d1e4f8c2b6a9d7e3f5c8b2a6e9d4f7c1a3b5e8d2f6c9a7b4e1d8f3c5a2b6e9,giappone,tokyo,false
+carlos.santos@email.com,Carlos,Santos,a7b4e1d8f3c5a2b6e9d1e4f8c2b6a9d7e3f5c8b2a6e9d4f7c1a3b5e8d2f6c9,portogallo,lisbona,false
+sophie.anderson@email.com,Sophie,Anderson,b6e9d1e4f8c2b6a9d7e3f5c8b2a6e9d4f7c1a3b5e8d2f6c9a7b4e1d8f3c5a2,usa,new york,false
+wang.lei@email.com,Wang,Lei,c5a2b6e9d1e4f8c2b6a9d7e3f5c8b2a6e9d4f7c1a3b5e8d2f6c9a7b4e1d8f3,cina,shanghai,false
+pedro.martinez@email.com,Pedro,Martinez,f3c5a2b6e9d1e4f8c2b6a9d7e3f5c8b2a6e9d4f7c1a3b5e8d2f6c9a7b4e1d8,messico,città del messico,false
+london.cuisine@rest.com,James,Wilson,d8f3c5a2b6e9d1e4f8c2b6a9d7e3f5c8b2a6e9d4f7c1a3b5e8d2f6c9a7b4e1,inghilterra,londra,true
+paris.bistro@rest.com,Pierre,Laurent,e1d8f3c5a2b6e9d1e4f8c2b6a9d7e3f5c8b2a6e9d4f7c1a3b5e8d2f6c9a7b4,francia,parigi,true
+berlin.haus@rest.com,Michael,Schmidt,b4e1d8f3c5a2b6e9d1e4f8c2b6a9d7e3f5c8b2a6e9d4f7c1a3b5e8d2f6c9a7,germania,berlino,true
+madrid.tapas@rest.com,Javier,Rodriguez,a7b4e1d8f3c5a2b6e9d1e4f8c2b6a9d7e3f5c8b2a6e9d4f7c1a3b5e8d2f6c9,spagna,madrid,true
+stockholm.nordic@rest.com,Lars,Andersson,c9a7b4e1d8f3c5a2b6e9d1e4f8c2b6a9d7e3f5c8b2a6e9d4f7c1a3b5e8d2f6,svezia,stoccolma,true
+tokyo.sushi@rest.com,Hiroshi,Sato,f6c9a7b4e1d8f3c5a2b6e9d1e4f8c2b6a9d7e3f5c8b2a6e9d4f7c1a3b5e8d2,giappone,tokyo,true
+nyc.kitchen@rest.com,David,Thompson,d2f6c9a7b4e1d8f3c5a2b6e9d1e4f8c2b6a9d7e3f5c8b2a6e9d4f7c1a3b5e8,usa,new york,true
+shanghai.dragon@rest.com,Li,Wei,e8d2f6c9a7b4e1d8f3c5a2b6e9d1e4f8c2b6a9d7e3f5c8b2a6e9d4f7c1a3b5,cina,shanghai,true
+lisboa.porto@rest.com,Manuel,Silva,b5e8d2f6c9a7b4e1d8f3c5a2b6e9d1e4f8c2b6a9d7e3f5c8b2a6e9d4f7c1a3,portogallo,lisbona,true
+mexico.cantina@rest.com,Miguel,Lopez,a3b5e8d2f6c9a7b4e1d8f3c5a2b6e9d1e4f8c2b6a9d7e3f5c8b2a6e9d4f7c1,messico,città del messico,true
 giaco@gmail.com,giaco@gmail.com,tancredi,7a74504f71374be5e8a29f5d1779f8b352a3b07c46aaf0b256999debb3fac60f,italia,como,false
 gpellegrini@gmail.com,gaia,pellegrini,a39e430a2a81307fac559689729204bbae570c2af17d7e0354fcc26e4c1cac13,italia,como,false
