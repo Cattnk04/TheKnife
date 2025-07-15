@@ -4,13 +4,37 @@ package Dominio;
 import java.util.Scanner;
 import java.util.InputMismatchException;
 
+/**
+ * @author Catelli Elena, Pellegrini Gaia, Tancredi Giacomo, Rizzi Camilla
+ * @version 1.0
+ *
+ * La classe {@code Menu} rappresenta il menu principale dell'applicazione.
+ * Gestisce la logica per utenti ospiti, registrazione, login e accesso ai sottomenu
+ * per ristoratori o utenti registrati.
+ *
+ * Il menu offre le seguenti opzioni:
+ * <ul>
+ *   <li>Registrazione nuovo utente</li>
+ *   <li>Login utente esistente</li>
+ *   <li>Ricerca ristorante</li>
+ *   <li>Uscita dall'applicazione</li>
+ * </ul>
+ *
+ *
+ */
+
 public class Menu {
 
+    /** Scanner condiviso per l'interazione da console */
     private static final Scanner scanner = new Scanner(System.in);
+
     private MenuRistoratore menuRistoratore;
     private MenuUtenteLog menuUtenteLog;
 
-    // Menu principale
+    /**
+     * Costruttore principale della classe.
+     * Inizializza le liste di utenti e ristoranti e gestisce l'interazione utente in base alla scelta effettuata.
+     */
     public Menu(){
     //Creazione delle diverse liste per l'accesso ai dati
     ListaUtenti listaUtenti = new ListaUtenti();
@@ -63,7 +87,11 @@ public class Menu {
         }
     } while (scelta != 0);
 
-}
+}   /**
+     * Visualizza il menu per l'utente ospite e gestisce l'input.
+     *
+     * @return un intero corrispondente alla scelta dell'utente
+     */
     //Metodo per la scelta fatta dell'utente ospite
     public static int menuGuest() {
         int choice = -1;
@@ -89,7 +117,12 @@ public class Menu {
         scanner.nextLine(); // pulizia della linea
         return choice;
     }
-
+    /**
+     * Registra un nuovo utente chiedendo i dati necessari e aggiungendolo alla lista.
+     *
+     * @param listaUtenti la lista contenente tutti gli utenti registrati
+     * @return l'oggetto {@code Utente} appena registrato, oppure {@code null} se si verifica un errore
+     */
     //Metodo per la registrazione
     public static Utente registraUtente(ListaUtenti listaUtenti){
         try {
@@ -100,7 +133,12 @@ public class Menu {
             return null;
         }
     }
-
+    /**
+     * Esegue il login di un utente già registrato.
+     *
+     * @param listaUtenti la lista di utenti registrati
+     * @return l'oggetto {@code Utente} autenticato, oppure {@code null} se si verifica un errore
+     */
     //Metodo per il login
     public static Utente loginUtente(ListaUtenti listaUtenti) {
         try {

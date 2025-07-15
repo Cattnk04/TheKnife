@@ -2,6 +2,13 @@ package Dominio;
 
 import java.util.*;
 
+/**
+ * @author Catelli Elena, Pellegrini Gaia, Tancredi Giacomo, Rizzi Camilla
+ * @version 1.0
+ *
+ * Classe che rappresenta il menu specifico per i ristoratori,
+ * permettendo di gestire ristoranti, visualizzare e rispondere alle recensioni.
+ */
 public class MenuRistoratore {
 
     private Utente utenteCorrente;
@@ -9,7 +16,13 @@ public class MenuRistoratore {
     private ListaRecensioni listaRecensioni;
     private static final Scanner scanner = new Scanner(System.in);
 
-    //Costruttore
+    /**
+     * Costruttore della classe MenuRistoratore.
+     * Inizializza l'utente corrente, le liste di ristoranti e recensioni,
+     * e mostra immediatamente il menu per il ristoratore.
+     *
+     * @param utente l'utente loggato (ristoratore)
+     */
     public MenuRistoratore(Utente utente) {
         this.utenteCorrente = utente;
         this.listaRistoranti = new ListaRistoranti();
@@ -17,7 +30,10 @@ public class MenuRistoratore {
         mostraMenuRistoratore();
     }
 
-    //Metodo per la "costruzione" del menu
+    /**
+     * Mostra il menu principale per il ristoratore,
+     * gestendo le diverse opzioni fino all'uscita (logout).
+     */
     public void mostraMenuRistoratore() {
         int scelta = 0;
         do {
@@ -67,7 +83,10 @@ public class MenuRistoratore {
         } while (scelta != 0);
     }
 
-    //Metodo per aggiungere un ristorante
+    /**
+     * Permette di aggiungere un nuovo ristorante associato
+     * all'utente ristoratore corrente.
+     */
     private void aggiungiRistorante() {
         System.out.println("\n=== Aggiungi Nuovo Ristorante ===");
         System.out.print("Nome del ristorante: ");
@@ -129,7 +148,10 @@ public class MenuRistoratore {
         System.out.println("Ristorante aggiunto con successo!");
     }
 
-    //Metodo per visualizzare i ristoranti del ristoratore
+    /**
+     * Visualizza la lista di tutti i ristoranti registrati
+     * dall'utente ristoratore corrente.
+     */
     private void visualizzaMieiRistoranti() {
         System.out.println("\n=== I Miei Ristoranti ===");
         boolean trovati = false;
@@ -154,7 +176,10 @@ public class MenuRistoratore {
         }
     }
 
-    //Metodo per la visualizzazione nel dettaglio le recensioni di un ristorante nello specifico
+    /**
+     * Visualizza le recensioni dettagliate di un ristorante scelto
+     * tra quelli gestiti dal ristoratore.
+     */
     private void visualizzaRecensioniRistorante() {
         System.out.println("\n=== Dettaglio Recensioni ===");
         Scanner scanner = new Scanner(System.in);
@@ -206,7 +231,10 @@ public class MenuRistoratore {
         }
     }
 
-    //Metodo per la risposta delle recensioni
+    /**
+     * Permette al ristoratore di rispondere alle recensioni
+     * lasciate sui propri ristoranti.
+     */
     private void rispostaRecensioni() {
         System.out.println("\n=== Rispondi alle Recensioni ===");
 
@@ -290,6 +318,10 @@ public class MenuRistoratore {
 
 
     //Metodo per visualizzare il riepilogo delle recensioni di tutti i ristoranti (la media e il numero di recensioni)
+    /**
+     * Visualizza un riepilogo delle recensioni per tutti i ristoranti
+     * gestiti dal ristoratore, mostrando numero e media delle valutazioni.
+     */
     private void visualizzaRiepilogo() {
         System.out.println("\n=== Riepilogo Recensioni ===");
 
@@ -330,7 +362,13 @@ public class MenuRistoratore {
             System.out.println("Non possiedi ancora nessun ristorante.");
         }
     }
-    //controllo appartenenza ristorante al ristoratore
+    /**
+     * Controlla se un dato ristorante appartiene effettivamente
+     * all'utente ristoratore corrente.
+     *
+     * @param nomeRistorante il nome del ristorante da verificare
+     * @return true se il ristorante appartiene al ristoratore corrente, false altrimenti
+     */
     private boolean appartienePropietario(String nomeRistorante) {
         return listaRistoranti.getListaRistoranti().stream()
                 .anyMatch(r -> r.getNome().equals(nomeRistorante) &&
