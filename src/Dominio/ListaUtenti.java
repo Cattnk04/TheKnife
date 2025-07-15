@@ -11,12 +11,20 @@ import java.util.Scanner;
 /**
  * @author Catelli Elena, Pellegrini Gaia, Tancredi Giacomo, Rizzi Camilla
  * @version 1.0
+ *
+ * Classe che racchiude l'insieme dei metodi per la gestione degli utenti.
+ * Nello specifico per la registrazione, il login
+ * e i controlli su di essi.
  */
 
 public class ListaUtenti {
 
     public static List<Utente> listaUtenti = new ArrayList<Utente>();
 
+    /**
+     * Costruttore di {@code ListaUtenti}.
+     * Se la lista degli utenti è vuota, inizializza la lista caricando gli utenti da un file CSV.
+     */
     //Costruttore
     public ListaUtenti(){
         if (listaUtenti.isEmpty())
@@ -28,6 +36,14 @@ public class ListaUtenti {
         return listaUtenti;
     }
 
+    /**
+     * Salva la lista degli utenti su un file CSV.
+     * <p>
+     * Il file viene creato nella posizione specificata da {@code Utente.FILE_UTENTI}.
+     * Se le directory del percorso non esistono, vengono create automaticamente.
+     * Ogni utente nella lista viene scritto nel file come una riga tramite il metodo {@code toString()}.
+     * In caso di errore durante la scrittura, viene stampato un messaggio di errore e lo stack trace.
+     */
     //Metodo per salvare gli utenti sul CSV
     public void salvaUtentiSuCSV(){
         File file = new File(Utente.FILE_UTENTI);
@@ -43,6 +59,18 @@ public class ListaUtenti {
         }
     }
 
+    /**
+     * Carica gli utenti da un file CSV e li aggiunge alla lista degli utenti.
+     * <p>
+     * Il file letto è quello specificato da {@code Utente.FILE_UTENTI}.
+     * Ogni riga del file viene divisa in campi separati da virgola.
+     * Si assume che ogni riga contenga almeno 7 campi nell'ordine:
+     * email, nome, cognome, password, nazione, città e flag ristoratore (booleano).
+     * <p>
+     * Vengono ignorate le righe vuote o con campi insufficienti, con messaggio di avviso.
+     * In caso di file non trovato, viene mostrato un messaggio informativo.
+     * In caso di errore di lettura, viene stampato un messaggio di errore.
+     */
     //Metodo per ricavare dal CSV
     private void ricavaUtentiDaCSV() {
         try {
@@ -76,6 +104,15 @@ public class ListaUtenti {
         }
     }
 
+    /**
+     * Aggiunge un nuovo utente alla lista se non è duplicato.
+     * <p>
+     * Controlla che l'utente passato non sia nullo e non sia già presente nella lista.
+     * Se l'utente è valido, viene aggiunto alla lista e la lista viene salvata su file CSV.
+     *
+     * @param nuovoUtente l'oggetto {@code Utente} da aggiungere
+     * @return l'utente aggiunto se l'operazione ha successo, {@code null} altrimenti
+     */
     //Metodo per aggiungere utente
     public Utente aggiungiUtente(Utente nuovoUtente){
         if(nuovoUtente != null && !utenteDuplicato(nuovoUtente)){
@@ -86,6 +123,17 @@ public class ListaUtenti {
             return null;
     }
 
+    /**
+     * Gestisce il processo di login dell'utente tramite console.
+     * <p>
+     * Richiede l'inserimento di email e password.
+     * La password viene convertita in hash SHA-256 per la verifica.
+     * Se l'utente è trovato, viene restituito l'oggetto {@code Utente} corrispondente.
+     * In caso di credenziali errate, offre la possibilità di riprovare o uscire.
+     *
+     * @return l'utente autenticato se login riuscito, {@code null} se l'utente sceglie di non riprovare o in caso di fallimento
+     * @throws RuntimeException se l'algoritmo SHA-256 non è supportato (evento raro)
+     */
     //Metodo per il login
     public Utente loginUtente(){
         Scanner scanner = new Scanner(System.in);
@@ -130,6 +178,17 @@ public class ListaUtenti {
         }
     }
 
+    /**
+     * Cerca e restituisce un utente nella lista in base a email e password.
+     * <p>
+     * Confronta l'email e la password (entrambe devono corrispondere esattamente).
+     * Se l'email è trovata ma la password è errata, stampa un messaggio di errore e ritorna {@code null}.
+     * Se nessun utente con l'email specificata è trovato, stampa un messaggio e ritorna {@code null}.
+     *
+     * @param email la email dell'utente da cercare
+     * @param password la password (hashata) dell'utente da cercare
+     * @return l'oggetto {@code Utente} corrispondente se trovato e password corretta, {@code null} altrimenti
+     */
     //Metodo per cercare l'utente nel sistema
     public Utente trovaUtente(String email, String password) {
     
@@ -147,6 +206,14 @@ public class ListaUtenti {
     return null;
     }
 
+    /**
+     * Verifica se un utente con la stessa email è già presente nella lista utenti.
+     * <p>
+     * Scorre la lista degli utenti e confronta le email.
+     *
+     * @param nuovoUtente l'utente da verificare
+     * @return {@code true} se esiste già un utente con la stessa email, {@code false} altrimenti
+     */
     //Controllo del duplicato
     public boolean utenteDuplicato(Utente nuovoUtente){
         //scorrere la lista e verificare se esistono altri utenti con la stessa email del nuovo utente e in caso tornare true
