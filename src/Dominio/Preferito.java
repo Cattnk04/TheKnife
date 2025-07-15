@@ -16,7 +16,7 @@ public class Preferito {
     //Costruttore 2
     public Preferito(Utente utente, ListaRistoranti listaRistoranti) {
         this.emailUtente = utente.getEmail();
-        Ristorante ristorante = listaRistoranti.cercaPerNome("Inserisci il nome del ristorante che vuoi aggiungere alla tua lista dei preferiti: ");
+        Ristorante ristorante = listaRistoranti.cercaPerNome("\nInserisci il nome del ristorante che vuoi aggiungere alla tua lista dei preferiti: ");
         if(ristorante != null)
             this.nomeRistorante = ristorante.getNome();
         else

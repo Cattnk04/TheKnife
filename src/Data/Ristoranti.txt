@@ -68,3 +68,4 @@ International Club,ristorante.venezia@rest.com,italia,milano,Corso Buenos Aires 
 Le Gourmet,paris.bistro@rest.com,francia,bordeaux,Rue Sainte-Catherine 90,160.0,false,true,haute cuisine
 Mare Nostrum,locanda.mare@rest.com,italia,catania,Via Etnea 234,92.0,true,true,pesce
 Fusion Lounge,trattoria.roma@rest.com,italia,firenze,Via de' Tornabuoni 45,135.0,true,true,fusion
+London Eye,london.cuisine@rest.com,Inghilterra,londra,48 Leicester Square,30.0,true,false,internazionale

@@ -60,6 +60,9 @@ public class MenuRistoratore {
                 System.out.println("Inserire un numero valido!");
                 scanner.nextLine(); // Pulizia buffer
                 scelta = -1;
+            } catch (Exception e) {
+                System.out.println("Errore imprevisto: " + e.getMessage());
+                scelta = -1;
             }
         } while (scelta != 0);
     }

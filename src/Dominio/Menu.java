@@ -57,6 +57,9 @@ public class Menu {
             System.out.println("Inserire un numero valido!");
             scanner.nextLine(); // Pulizia del buffer
             scelta = -1;
+        } catch (Exception e) {
+            System.out.println("Errore imprevisto: " + e.getMessage());
+            scelta = -1;
         }
     } while (scelta != 0);
 
@@ -72,26 +75,39 @@ public class Menu {
         System.out.println("0. Esci dall'applicazione");
         System.out.print("La tua scelta: ");
 
-        if (scanner.hasNextInt()) {
-            choice = scanner.nextInt();
-        } else {
-            System.out.println("Input non valido!");
+        try {
+            if (scanner.hasNextInt()) {
+                choice = scanner.nextInt();
+            } else {
+                throw new InputMismatchException("Input non numerico.");
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("Input non valido! Inserisci un numero.");
+        } finally {
             scanner.nextLine(); // pulizia del buffer
         }
-
         scanner.nextLine(); // pulizia della linea
         return choice;
     }
 
     //Metodo per la registrazione
     public static Utente registraUtente(ListaUtenti listaUtenti){
-        //Storing del nuovo utente nel file
-        Utente nuovoUtente = new Utente();
-        return listaUtenti.aggiungiUtente(nuovoUtente);
+        try {
+            Utente nuovoUtente = new Utente();
+            return listaUtenti.aggiungiUtente(nuovoUtente);
+        } catch (Exception e) {
+            System.out.println("Errore nella creazione dell'utente: " + e.getMessage());
+            return null;
+        }
     }
 
     //Metodo per il login
     public static Utente loginUtente(ListaUtenti listaUtenti) {
-        return listaUtenti.loginUtente();
+        try {
+            return listaUtenti.loginUtente();
+        } catch (Exception e) {
+            System.out.println("Errore durante il login: " + e.getMessage());
+            return null;
+        }
     }
 }

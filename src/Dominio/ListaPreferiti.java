@@ -58,13 +58,18 @@ public class ListaPreferiti {
 
     //Metodo per aggiungere un preferito
     public void aggiungiPreferito(Utente utenteCorrente, ListaRistoranti listaRistoranti){
-        Preferito nuovoPreferito = new Preferito(utenteCorrente, listaRistoranti);
-        if(nuovoPreferito != null && nuovoPreferito.getNomeRistorante() != null && !preferitoDuplicato(nuovoPreferito)) {
-            listaPreferiti.add(nuovoPreferito);
-            salvaPreferitiSuCSV();
-            System.out.println("Ristorante aggiunto ai preferiti con successo.");
-        } else {
-            System.out.println("Impossibile aggiungere il ristorante ai preferiti.");
+        try {
+            Preferito nuovoPreferito = new Preferito(utenteCorrente, listaRistoranti);
+            if (nuovoPreferito != null && nuovoPreferito.getNomeRistorante() != null && !preferitoDuplicato(nuovoPreferito)) {
+                listaPreferiti.add(nuovoPreferito);
+                salvaPreferitiSuCSV();
+                System.out.println("Ristorante aggiunto ai preferiti con successo.");
+            } else {
+                System.out.println("Impossibile aggiungere il ristorante ai preferiti.");
+            }
+        } catch (Exception e) {
+            System.err.println("Errore durante l'aggiunta del preferito: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -103,7 +108,7 @@ public class ListaPreferiti {
                 boolean rimosso = false;
                 while(iterator.hasNext()) {
                     Preferito p = iterator.next();
-                    if(p.getNomeRistorante().equals(ristorante.getNome()) && 
+                    if(p.getNomeRistorante().equals(ristorante.getNome()) &&
                        p.getEmailUtente().equals(utente.getEmail())){
                         iterator.remove();
                         rimosso = true;
@@ -116,6 +121,9 @@ public class ListaPreferiti {
                 } else {
                     System.out.println("Il ristorante non è presente nei tuoi preferiti.");
                 }
+            }
+            else {
+                System.out.println("Ristorante non trovato.");
             }
         }
     }

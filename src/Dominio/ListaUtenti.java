@@ -93,9 +93,6 @@ public class ListaUtenti {
             System.out.print("Inserisci la tua password: ");
             String password = scanner.nextLine().trim();
 
-            // Stampa la password prima dell'hashing
-            //System.out.println("\nPassword inserita (prima dell'hashing): " + password); //debugging
-
             try {
                 MessageDigest digest = MessageDigest.getInstance("SHA-256");
                 byte[] hashBytes = digest.digest(password.getBytes(StandardCharsets.UTF_8));

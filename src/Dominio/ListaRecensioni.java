@@ -63,16 +63,21 @@ public class ListaRecensioni {
 
     //Metodo per aggiungere una recensione al file di recensioni
     public void inserisciRecensione(Utente utente, ListaRistoranti listaRistoranti){
-        Recensione recensione = new Recensione(utente, listaRistoranti);
-        if (recensioneDuplicato(recensione)){
-            System.out.println("Hai già lasciato una recensione a questo ristorante!");
-        } else {
-            listaRecensioni.add(recensione);
-            salvaRecensioniSuCSV();
-            System.out.println("Recensione aggiunta con successo!");
+        try {
+            Recensione recensione = new Recensione(utente, listaRistoranti);
+            if (recensioneDuplicato(recensione)){
+                System.out.println("Hai già lasciato una recensione a questo ristorante!");
+            } else {
+                listaRecensioni.add(recensione);
+                salvaRecensioniSuCSV();
+                System.out.println("Recensione aggiunta con successo!");
+            }
+        } catch (Exception e) {
+            System.err.println("Errore durante l'inserimento della recensione: " + e.getMessage());
         }
     }
-    
+
+
     //Metodo per il controllo della duplicazione delle recensioni
     public boolean recensioneDuplicato(Recensione recensione){
         for(Recensione r : listaRecensioni){
@@ -131,19 +136,24 @@ public class ListaRecensioni {
         String email = utente.getEmail();
 
         boolean recensioneTrovata = false;
-        for (Recensione r : listaRecensioni) {
-            if (r.getEmail().equals(email) && r.getNomeRistorante().equals(nomeRistorante)) {
-                listaRecensioni.remove(r);
-                recensioneTrovata = true;
-                break;
-            }
-        }
 
-        if (recensioneTrovata) {
-            salvaRecensioniSuCSV();
-            System.out.println("Recensione eliminata con successo\n");
-        } else {
-            System.out.println("Recensione non trovata\n");
+        try {
+            for (Recensione r : new ArrayList<>(listaRecensioni)) {
+                if (r.getEmail().equals(email) && r.getNomeRistorante().equals(nomeRistorante)) {
+                    listaRecensioni.remove(r);
+                    recensioneTrovata = true;
+                    break;
+                }
+            }
+
+            if (recensioneTrovata) {
+                salvaRecensioniSuCSV();
+                System.out.println("Recensione eliminata con successo\n");
+            } else {
+                System.out.println("Recensione non trovata\n");
+            }
+        } catch (Exception e) {
+            System.err.println("Errore durante l'eliminazione: " + e.getMessage());
         }
     }
 
