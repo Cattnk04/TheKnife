@@ -8,17 +8,41 @@ import java.util.Iterator;
 /**
  * @author Catelli Elena, Pellegrini Gaia, Tancredi Giacomo, Rizzi Camilla
  * @version 1.0
+ *
+ * Classe che racchiude l'insieme dei metodi per la gestione dei preferiti.
+ * Nello specifico per l'aggiunta, rimozione e la visualizzazione di essi.
  */
 
 public class ListaPreferiti {
     private static List<Preferito> listaPreferiti;
 
-    //Costruttore
-    public ListaPreferiti(){
+    /**
+     * Costruttore della classe {@code ListaPreferiti}.
+     * <p>
+     * Inizializza la lista dei preferiti come una nuova {@code ArrayList} vuota
+     * e carica eventuali preferiti salvati precedentemente richiamando il metodo
+     * {@code ricavaPreferitiDaCSV()}, che legge i dati da un file CSV.
+     * </p>
+     */
+    public ListaPreferiti() {
         this.listaPreferiti = new ArrayList<>();
         ricavaPreferitiDaCSV();
     }
 
+    /**
+     * Legge i dati dei ristoranti preferiti dal file CSV specificato nella costante {@code Preferito.FILE_PREFERITI}
+     * e li aggiunge alla lista dei preferiti dell'applicazione.
+     * <p>
+     * Ogni riga del file deve contenere esattamente due campi separati da virgola: l'email dell'utente e il nome del ristorante.
+     * Le righe non valide (vuote o con un numero errato di campi) vengono ignorate e segnalate con un messaggio di avviso.
+     * </p>
+     * <p>
+     * In caso di assenza del file, viene mostrato un messaggio e viene creata una nuova lista vuota.
+     * In caso di errori di I/O, viene stampato un messaggio descrittivo.
+     * </p>
+     *
+     * @throws SecurityException se i permessi di accesso al file sono negati (non gestito direttamente ma possibile)
+     */
     //Metodo per leggere i preferiti da CSV
     private void ricavaPreferitiDaCSV(){
         try {
@@ -46,7 +70,18 @@ public class ListaPreferiti {
         }
     }
 
-    //Metodo per salvare su CSV
+    /**
+     * Salva la lista dei preferiti su un file CSV.
+     * <p>
+     * Il file di destinazione è definito dalla costante {@code Preferito.FILE_PREFERITI}.
+     * Se le directory parent non esistono, vengono create automaticamente.
+     * Ogni oggetto {@code Preferito} presente nella lista {@code listaPreferiti}
+     * viene scritto come una riga nel file, utilizzando il suo metodo {@code toString()}.
+     * </p>
+     *
+     * @throws RuntimeException se si verifica un errore di I/O durante la scrittura del file.
+     */
+    //Metodo per salvare sul CSV
     public void salvaPreferitiSuCSV(){
         File file = new File(Preferito.FILE_PREFERITI);
         file.getParentFile().mkdirs(); // Crea le directory se non esistono
@@ -61,6 +96,19 @@ public class ListaPreferiti {
         }
     }
 
+    /**
+     * Aggiunge un nuovo ristorante alla lista dei preferiti per l'utente specificato.
+     * <p>
+     * Crea un oggetto {@code Preferito} a partire dall'utente corrente e dalla lista di ristoranti.
+     * Se il preferito non è nullo, ha un nome valido e non è già presente nella lista,
+     * viene aggiunto alla lista {@code listaPreferiti}, salvato su file CSV e viene notificato l’utente.
+     * </p>
+     *
+     * @param utenteCorrente     L'utente che desidera aggiungere un ristorante ai preferiti.
+     * @param listaRistoranti    La lista dei ristoranti da cui si seleziona il preferito.
+     *
+     * @throws RuntimeException se si verifica un errore imprevisto durante la creazione o l'aggiunta del preferito.
+     */
     //Metodo per aggiungere un preferito
     public void aggiungiPreferito(Utente utenteCorrente, ListaRistoranti listaRistoranti){
         try {
@@ -78,6 +126,17 @@ public class ListaPreferiti {
         }
     }
 
+    /**
+     * Verifica se il preferito specificato è già presente nella lista dei preferiti.
+     * <p>
+     * Il controllo di duplicato avviene confrontando il nome del ristorante e
+     * l'email dell'utente associati al nuovo preferito con quelli già presenti nella lista {@code listaPreferiti}.
+     * Se esiste un preferito con lo stesso ristorante e la stessa email utente, il metodo restituisce {@code true}.
+     * </p>
+     *
+     * @param nuovoPreferito Il preferito da verificare per la presenza di duplicati.
+     * @return {@code true} se il preferito è già presente nella lista, {@code false} altrimenti.
+     */
     //Controllo del duplicato
     public boolean preferitoDuplicato(Preferito nuovoPreferito){
         for(Preferito p : listaPreferiti){
@@ -88,6 +147,16 @@ public class ListaPreferiti {
         return false;
     }
 
+    /**
+     * Mostra a console la lista dei ristoranti preferiti dell'utente specificato.
+     * <p>
+     * Recupera i preferiti associati all'utente corrente e li stampa uno per riga.
+     * Se l'utente non ha preferiti salvati, viene mostrato un messaggio informativo.
+     * </p>
+     *
+     * @param utenteCorrente L'utente di cui visualizzare i ristoranti preferiti.
+     * @return {@code true} se l'utente ha almeno un ristorante preferito, {@code false} altrimenti.
+     */
     //Metodo per mostrare i preferiti
     public boolean mostraPreferiti(Utente utenteCorrente){
         List<Preferito> preferitiUtente = preferitiUtente(utenteCorrente);
@@ -103,6 +172,20 @@ public class ListaPreferiti {
         return true;
     }
 
+    /**
+     * Rimuove un ristorante dalla lista dei preferiti dell'utente specificato.
+     * <p>
+     * Mostra all'utente i ristoranti attualmente presenti tra i suoi preferiti e
+     * richiede l'inserimento del nome del ristorante da rimuovere.
+     * Se il ristorante è presente tra i preferiti dell'utente, viene rimosso
+     * e la lista aggiornata viene salvata su file CSV.
+     * Se il ristorante non viene trovato nella lista o non è tra i preferiti,
+     * viene notificato all'utente tramite messaggi a console.
+     * </p>
+     *
+     * @param utente           L'utente che desidera rimuovere un ristorante dai preferiti.
+     * @param listaRistoranti  La lista dei ristoranti da cui cercare il ristorante da rimuovere.
+     */
     // Metodo per rimuovere i preferiti
     public void rimuoviPreferito(Utente utente, ListaRistoranti listaRistoranti){
         if(mostraPreferiti(utente)){
@@ -133,6 +216,16 @@ public class ListaPreferiti {
         }
     }
 
+    /**
+     * Restituisce la lista dei ristoranti preferiti associati all'utente specificato.
+     * <p>
+     * Filtra la lista globale {@code listaPreferiti} e seleziona solo i preferiti
+     * il cui indirizzo email corrisponde a quello dell'utente corrente.
+     * </p>
+     *
+     * @param utenteCorrente L'utente di cui recuperare i ristoranti preferiti.
+     * @return Una lista di oggetti {@code Preferito} associati all'utente. La lista può essere vuota se non ci sono preferiti.
+     */
     //Metodo per filtrare e restituire solo i preferiti dell'utente corrente
     public List<Preferito> preferitiUtente (Utente utenteCorrente){
         List<Preferito> preferitiUtente = new ArrayList<>();
