@@ -27,9 +27,9 @@ public class Menu {
                     if(utenteCorrente != null){
                         System.out.println("Registrazione avvenuta con successo!");
                         if(utenteCorrente.getRistoratore()) {
-                            MenuRistoratore menuRistoratore = new MenuRistoratore(utenteCorrente);
+                            menuRistoratore = new MenuRistoratore(utenteCorrente);
                         } else {
-                            MenuUtenteLog menuUtenteLog = new MenuUtenteLog(utenteCorrente);
+                            menuUtenteLog = new MenuUtenteLog(utenteCorrente);
                         }
                     }
                     break;
@@ -38,9 +38,9 @@ public class Menu {
                     if(utenteCorrente != null){
                         System.out.println("Login avvenuto con successo!");
                         if(utenteCorrente.getRistoratore()) {
-                            MenuRistoratore menuRistoratore = new MenuRistoratore(utenteCorrente);
+                            menuRistoratore = new MenuRistoratore(utenteCorrente);
                         } else {
-                            MenuUtenteLog menuUtenteLog = new MenuUtenteLog(utenteCorrente);
+                            menuUtenteLog = new MenuUtenteLog(utenteCorrente);
                         }
                     }
                     break;
