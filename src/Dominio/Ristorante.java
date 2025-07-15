@@ -2,6 +2,11 @@ package Dominio;
 
 import java.util.Scanner;
 
+/**
+ * @author Catelli Elena, Pellegrini Gaia, Tancredi Giacomo, Rizzi Camilla
+ * @version 1.0
+ */
+
 public class Ristorante {
 
     private String nome;

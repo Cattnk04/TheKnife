@@ -6,8 +6,12 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.ArrayList;
-import java.io.FileWriter;
 import java.util.Scanner;
+
+/**
+ * @author Catelli Elena, Pellegrini Gaia, Tancredi Giacomo, Rizzi Camilla
+ * @version 1.0
+ */
 
 public class ListaUtenti {
 

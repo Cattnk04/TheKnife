@@ -2,6 +2,11 @@ package Dominio;
 
 import java.util.*;
 
+/**
+ * @author Catelli Elena, Pellegrini Gaia, Tancredi Giacomo, Rizzi Camilla
+ * @version 1.0
+ */
+
 public class MenuUtenteLog {
 
     private static final Scanner scanner = new Scanner(System.in);

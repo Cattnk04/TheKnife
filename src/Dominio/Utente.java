@@ -1,10 +1,14 @@
 package Dominio;
 
-import java.io.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
+
+/**
+ * @author Catelli Elena, Pellegrini Gaia, Tancredi Giacomo, Rizzi Camilla
+ * @version 1.0
+ */
 
 public class Utente {
     public static final String FILE_UTENTI = "./Data/Utenti.txt";
