@@ -1,5 +1,3 @@
-La rosa,adminprova@gmail.com,Italia,Milano,Viale Monte Ceneri 11,25.0,false,false,italiana
-La rosa - Roma,adminprova@gmail.com,Italia,Roma,Via Ferdinando Gregorovius 32,25.0,false,true,italiana
 Sapori d'Elite,trattoria.sapori@rest.com,italia,milano,Via Monte Napoleone 15,45.0,true,true,francese
 Antica Osteria del Centro,osteria.antica@rest.com,italia,roma,Via del Corso 234,35.0,false,true,italiana
 Bella Vista,ristorante.bella@rest.com,italia,firenze,Piazza della Signoria 8,55.0,false,true,fusion
