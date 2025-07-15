@@ -155,25 +155,49 @@ public class MenuRistoratore {
     private void visualizzaRecensioniRistorante() {
         System.out.println("\n=== Dettaglio Recensioni ===");
         Scanner scanner = new Scanner(System.in);
-        int cont = 0;
-        for(Ristorante r : listaRistoranti.getListaRistoranti()) {
+
+        // Lista temporanea per tenere traccia dei ristoranti dell'utente
+        List<Ristorante> ristorantiUtente = new ArrayList<>();
+
+        int cont = 1;
+        for (Ristorante r : listaRistoranti.getListaRistoranti()) {
             if (r.getEmailRistoratore().equals(utenteCorrente.getEmail())) {
-                cont++;
                 System.out.println(cont + ": " + r.getNome());
+                ristorantiUtente.add(r);
+                cont++;
             }
         }
-        Ristorante ristorante = null;
-        System.out.print("\nInserisci il nome del tuo ristorante del quale vuoi vedere le recensioni: ");
-        String nomeRistorante = scanner.nextLine();
-        for(Ristorante r : listaRistoranti.getListaRistoranti()) {
-            if (r.getEmailRistoratore().equals(utenteCorrente.getEmail()) && r.getNome().equals(nomeRistorante)) {
-                ristorante = r;
-            }
+
+        if (ristorantiUtente.isEmpty()) {
+            System.out.println("Non hai ristoranti registrati.");
+            return;
         }
-        if(ristorante == null) {
-            System.out.println("Hai inserito un nome errato");
+
+        System.out.println("----------------------------------------");
+        System.out.print("\nInserisci il numero del ristorante del quale vuoi vedere le recensioni: ");
+        int scelta;
+        try {
+            scelta = Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Input non valido. Inserire un numero.");
+            return;
+        }
+
+        if (scelta < 1 || scelta > ristorantiUtente.size()) {
+            System.out.println("Numero non valido.");
+            return;
+        }
+
+        Ristorante ristoranteSelezionato = ristorantiUtente.get(scelta - 1);
+
+        // Mostra recensioni
+        List<Recensione> recensioni = listaRecensioni.recensioniRistorante(ristoranteSelezionato.getNome());
+        if (recensioni.isEmpty()) {
+            System.out.println("\n----------------------------------------");
+            System.out.println("Nessuna recensione disponibile per questo ristorante.");
+            System.out.println("----------------------------------------");
         } else {
-            for(Recensione rec : listaRecensioni.recensioniRistorante(ristorante.getNome())) {
+            for (Recensione rec : recensioni) {
                 System.out.println(rec.stampaRecensione());
             }
         }

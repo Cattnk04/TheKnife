@@ -182,30 +182,23 @@ public class ListaRecensioni {
     //Metodo per filtrare e restituire solo per le recensioni appartenenti al ristorante inserito
     public List<Recensione> recensioniRistorante(String nomeRistorante){
         List<Recensione> recensioniRistorante = new ArrayList<>();
-        for(Recensione r : listaRecensioni){
-            if(r.getNomeRistorante().equals(nomeRistorante)){
+        for (Recensione r : listaRecensioni) {
+            if (r.getNomeRistorante().trim().equalsIgnoreCase(nomeRistorante.trim())) {
                 recensioniRistorante.add(r);
             }
         }
-        if(recensioniRistorante.isEmpty()){
-            return null;
-        } else {
-            return recensioniRistorante;
-        }
+        return recensioniRistorante;
     }
+
 
     //Metodo per filtrare e restituire solo le recensioni dell'utente corrente
     public List<Recensione> recensioniUtente(Utente utente) {
         List<Recensione> recensioniUtente = new ArrayList<>();
         for (Recensione r : listaRecensioni) {
-            if (r.getEmail().equals(utente.getEmail())) {
+            if (r.getEmail().trim().equalsIgnoreCase(utente.getEmail())) {
                 recensioniUtente.add(r);
             }
         }
-        if (recensioniUtente.isEmpty()) {
-            return null;
-        } else {
-            return recensioniUtente;
-        }
+        return recensioniUtente; // sempre lista, mai null
     }
 }
