@@ -82,13 +82,16 @@ public class ListaUtenti {
     //Metodo per il login
     public Utente loginUtente(){
         Scanner scanner = new Scanner(System.in);
+        Console console = System.console();
 
         while (true) {
             System.out.println("\n=== Login ===");
             System.out.print("Inserisci la tua e-mail: ");
             String email = scanner.nextLine().trim();
-            System.out.print("Inserisci la tua password: ");
-            String password = scanner.nextLine().trim();
+            //System.out.print("Inserisci la tua password: ");
+            char[] arrayPwd = console.readPassword("Inserisci la tua password: ");
+            //String password = scanner.nextLine().trim();
+            String password = new String(arrayPwd);
 
             Utente utente = trovaUtente(email, password);
 
