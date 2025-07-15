@@ -17,11 +17,13 @@ public class MenuRistoratore {
     private static final Scanner scanner = new Scanner(System.in);
 
     /**
-     * Costruttore della classe MenuRistoratore.
-     * Inizializza l'utente corrente, le liste di ristoranti e recensioni,
-     * e mostra immediatamente il menu per il ristoratore.
+     * Costruttore della classe {@code MenuRistoratore}.
+     * <p>
+     * Inizializza il menu dedicato all'utente con ruolo di ristoratore.
+     * Imposta l'utente corrente e crea nuove istanze delle liste di ristoranti e recensioni.
+     * Alla fine, avvia la visualizzazione del menu specifico per il ristoratore.
      *
-     * @param utente l'utente loggato (ristoratore)
+     * @param utente l'utente corrente con ruolo di ristoratore
      */
     public MenuRistoratore(Utente utente) {
         this.utenteCorrente = utente;
@@ -31,8 +33,20 @@ public class MenuRistoratore {
     }
 
     /**
-     * Mostra il menu principale per il ristoratore,
-     * gestendo le diverse opzioni fino all'uscita (logout).
+     * Mostra il menu interattivo dedicato all'utente ristoratore.
+     * <p>
+     * Presenta diverse opzioni per gestire i ristoranti e le recensioni:
+     * <ul>
+     *   <li>1 - Aggiungi un nuovo ristorante</li>
+     *   <li>2 - Visualizza i propri ristoranti</li>
+     *   <li>3 - Visualizza un riepilogo delle recensioni di tutti i ristoranti</li>
+     *   <li>4 - Visualizza i dettagli delle recensioni per un ristorante specifico</li>
+     *   <li>5 - Rispondi alle recensioni</li>
+     *   <li>0 - Esci dal menu (logout)</li>
+     * </ul>
+     * <p>
+     * Gestisce l'input da tastiera e controlla la validità delle scelte, mostrando messaggi di errore in caso di input non valido o altre eccezioni.
+     * Il menu rimane attivo fino a quando l'utente sceglie di uscire (opzione 0).
      */
     public void mostraMenuRistoratore() {
         int scelta = 0;
@@ -84,8 +98,14 @@ public class MenuRistoratore {
     }
 
     /**
-     * Permette di aggiungere un nuovo ristorante associato
-     * all'utente ristoratore corrente.
+     * Permette all'utente ristoratore di aggiungere un nuovo ristorante.
+     * <p>
+     * Raccoglie i dati del ristorante tramite input da tastiera, tra cui nome,
+     * nazione, città, indirizzo, fascia di prezzo, servizi delivery e prenotazione online,
+     * e tipo di cucina.
+     * Crea un nuovo oggetto {@code Ristorante} e lo inserisce nella lista dei ristoranti,
+     * salvando poi i dati su file CSV.
+     * Stampa un messaggio di conferma al termine dell'aggiunta.
      */
     private void aggiungiRistorante() {
         System.out.println("\n=== Aggiungi Nuovo Ristorante ===");
@@ -149,8 +169,11 @@ public class MenuRistoratore {
     }
 
     /**
-     * Visualizza la lista di tutti i ristoranti registrati
-     * dall'utente ristoratore corrente.
+     * Visualizza tutti i ristoranti registrati dall'utente ristoratore corrente.
+     * <p>
+     * Scorre la lista di tutti i ristoranti e stampa i dettagli di quelli associati
+     * all'email dell'utente corrente.
+     * Se non sono stati registrati ristoranti, informa l'utente che non ne ha ancora aggiunti.
      */
     private void visualizzaMieiRistoranti() {
         System.out.println("\n=== I Miei Ristoranti ===");
@@ -177,8 +200,12 @@ public class MenuRistoratore {
     }
 
     /**
-     * Visualizza le recensioni dettagliate di un ristorante scelto
-     * tra quelli gestiti dal ristoratore.
+     * Visualizza le recensioni relative a uno dei ristoranti dell'utente ristoratore corrente.
+     * <p>
+     * Elenca i ristoranti dell'utente e permette di selezionare uno di essi tramite input numerico.
+     * Successivamente mostra tutte le recensioni associate al ristorante selezionato,
+     * oppure informa se non ci sono recensioni disponibili.
+     * Gestisce input non validi o selezioni fuori range.
      */
     private void visualizzaRecensioniRistorante() {
         System.out.println("\n=== Dettaglio Recensioni ===");
@@ -232,8 +259,13 @@ public class MenuRistoratore {
     }
 
     /**
-     * Permette al ristoratore di rispondere alle recensioni
-     * lasciate sui propri ristoranti.
+     * Permette all'utente ristoratore di rispondere alle recensioni dei propri ristoranti.
+     * <p>
+     * Mostra i ristoranti dell'utente, consente di selezionare uno di essi,
+     * quindi elenca le recensioni senza risposta per quel ristorante.
+     * Per ogni recensione senza risposta, offre la possibilità di inserire una risposta
+     * tramite input da tastiera. Salva le risposte aggiornate nel file CSV.
+     * Gestisce casi di input non valido o mancanza di recensioni da rispondere.
      */
     private void rispostaRecensioni() {
         System.out.println("\n=== Rispondi alle Recensioni ===");
@@ -316,12 +348,16 @@ public class MenuRistoratore {
         }
     }
 
-
-    //Metodo per visualizzare il riepilogo delle recensioni di tutti i ristoranti (la media e il numero di recensioni)
     /**
      * Visualizza un riepilogo delle recensioni per tutti i ristoranti
-     * gestiti dal ristoratore, mostrando numero e media delle valutazioni.
+     * associati all'utente ristoratore corrente.
+     * <p>
+     * Per ogni ristorante dell'utente, mostra il numero totale di recensioni ricevute
+     * e la media delle valutazioni in stelle.
+     * Se un ristorante non ha recensioni, viene indicato con un messaggio specifico.
+     * Se l'utente non possiede ristoranti, viene visualizzato un messaggio appropriato.
      */
+    //Metodo per visualizzare il riepilogo delle recensioni di tutti i ristoranti (la media e il numero di recensioni)
     private void visualizzaRiepilogo() {
         System.out.println("\n=== Riepilogo Recensioni ===");
 
@@ -362,12 +398,14 @@ public class MenuRistoratore {
             System.out.println("Non possiedi ancora nessun ristorante.");
         }
     }
+
     /**
-     * Controlla se un dato ristorante appartiene effettivamente
+     * Verifica se un ristorante, identificato dal nome, appartiene
      * all'utente ristoratore corrente.
      *
      * @param nomeRistorante il nome del ristorante da verificare
-     * @return true se il ristorante appartiene al ristoratore corrente, false altrimenti
+     * @return true se il ristorante appartiene all'utente corrente,
+     *         false altrimenti
      */
     private boolean appartienePropietario(String nomeRistorante) {
         return listaRistoranti.getListaRistoranti().stream()

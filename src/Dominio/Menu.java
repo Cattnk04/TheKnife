@@ -20,20 +20,29 @@ import java.util.InputMismatchException;
  *   <li>Uscita dall'applicazione</li>
  * </ul>
  *
- *
  */
 
 public class Menu {
 
-    /** Scanner condiviso per l'interazione da console */
     private static final Scanner scanner = new Scanner(System.in);
-
     private MenuRistoratore menuRistoratore;
     private MenuUtenteLog menuUtenteLog;
 
     /**
-     * Costruttore principale della classe.
-     * Inizializza le liste di utenti e ristoranti e gestisce l'interazione utente in base alla scelta effettuata.
+     * Costruttore della classe {@code Menu}.
+     * <p>
+     * Inizializza le liste degli utenti e dei ristoranti.
+     * Presenta un menu interattivo per l'utente guest con le seguenti opzioni:
+     * <ul>
+     *   <li>Registrazione di un nuovo utente</li>
+     *   <li>Login di un utente esistente</li>
+     *   <li>Ricerca di un ristorante</li>
+     *   <li>Uscita dal programma</li>
+     * </ul>
+     * <p>
+     * Gestisce le eccezioni relative all'input errato o altri errori imprevisti.
+     * Se un utente si registra o fa login con successo, viene aperto il menu dedicato
+     * in base al tipo di utente (ristoratore o utente normale).
      */
     public Menu(){
     //Creazione delle diverse liste per l'accesso ai dati
@@ -42,55 +51,65 @@ public class Menu {
     int scelta;
     Utente utenteCorrente;
     
-    do {
-        try {
-            scelta = menuGuest();
-            switch(scelta){
-                case 1:
-                    utenteCorrente = registraUtente(listaUtenti);
-                    if(utenteCorrente != null){
-                        System.out.println("Registrazione avvenuta con successo!");
-                        if(utenteCorrente.getRistoratore()) {
-                            menuRistoratore = new MenuRistoratore(utenteCorrente);
-                        } else {
-                            menuUtenteLog = new MenuUtenteLog(utenteCorrente);
+        do {
+            try {
+                scelta = menuGuest();
+                switch(scelta){
+                    case 1:
+                        utenteCorrente = registraUtente(listaUtenti);
+                        if(utenteCorrente != null){
+                            System.out.println("Registrazione avvenuta con successo!");
+                            if(utenteCorrente.getRistoratore()) {
+                                menuRistoratore = new MenuRistoratore(utenteCorrente);
+                            } else {
+                                menuUtenteLog = new MenuUtenteLog(utenteCorrente);
+                            }
                         }
-                    }
-                    break;
-                case 2:
-                    utenteCorrente = loginUtente(listaUtenti);
-                    if(utenteCorrente != null){
-                        System.out.println("Login avvenuto con successo!");
-                        if(utenteCorrente.getRistoratore()) {
-                            menuRistoratore = new MenuRistoratore(utenteCorrente);
-                        } else {
-                            menuUtenteLog = new MenuUtenteLog(utenteCorrente);
+                        break;
+                    case 2:
+                        utenteCorrente = loginUtente(listaUtenti);
+                        if(utenteCorrente != null){
+                            System.out.println("Login avvenuto con successo!");
+                            if(utenteCorrente.getRistoratore()) {
+                                menuRistoratore = new MenuRistoratore(utenteCorrente);
+                            } else {
+                                menuUtenteLog = new MenuUtenteLog(utenteCorrente);
+                            }
                         }
-                    }
-                    break;
-                case 3:
-                    listaRistoranti.cercaRistorante();
-                    break;
-                case 0:
-                    System.out.println("Grazie per aver usato il nostro servizio!");
-                    break;
-                default:
-                    System.out.println("Scelta non valida!");
+                        break;
+                    case 3:
+                        listaRistoranti.cercaRistorante();
+                        break;
+                    case 0:
+                        System.out.println("Grazie per aver usato il nostro servizio!");
+                        break;
+                    default:
+                        System.out.println("Scelta non valida!");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Inserire un numero valido!");
+                scanner.nextLine(); // Pulizia del buffer
+                scelta = -1;
+            } catch (Exception e) {
+                System.out.println("Errore imprevisto: " + e.getMessage());
+                scelta = -1;
             }
-        } catch (InputMismatchException e) {
-            System.out.println("Inserire un numero valido!");
-            scanner.nextLine(); // Pulizia del buffer
-            scelta = -1;
-        } catch (Exception e) {
-            System.out.println("Errore imprevisto: " + e.getMessage());
-            scelta = -1;
-        }
-    } while (scelta != 0);
-
-}   /**
-     * Visualizza il menu per l'utente ospite e gestisce l'input.
-     *
-     * @return un intero corrispondente alla scelta dell'utente
+        } while (scelta != 0);
+    }
+    /**
+     * Mostra il menu principale per un utente ospite e acquisisce la scelta da tastiera.
+     *  * <p>
+     *  * Le opzioni presentate sono:
+     *  * <ul>
+     *  *   <li>1 - Registrati</li>
+     *  *   <li>2 - Accedi</li>
+     *  *   <li>3 - Cerca ristorante</li>
+     *  *   <li>0 - Esci dall'applicazione</li>
+     *  * </ul>
+     *  * <p>
+     *  * Gestisce l'input non numerico segnalando un errore e pulendo il buffer di input.
+     *  *
+     *  * @return un intero corrispondente alla scelta dell'utente, o -1 se l'input non è valido
      */
     //Metodo per la scelta fatta dell'utente ospite
     public static int menuGuest() {
@@ -117,11 +136,16 @@ public class Menu {
         scanner.nextLine(); // pulizia della linea
         return choice;
     }
+
     /**
-     * Registra un nuovo utente chiedendo i dati necessari e aggiungendolo alla lista.
+     * Registra un nuovo utente creando un oggetto {@code Utente} e aggiungendolo alla lista utenti.
+     * <p>
+     * Viene creato un nuovo utente (presumibilmente con dati raccolti nel costruttore di {@code Utente}).
+     * Se l'aggiunta alla lista ha successo, restituisce l'utente appena creato.
+     * In caso di errore durante la creazione o l'aggiunta, stampa un messaggio e ritorna {@code null}.
      *
-     * @param listaUtenti la lista contenente tutti gli utenti registrati
-     * @return l'oggetto {@code Utente} appena registrato, oppure {@code null} se si verifica un errore
+     * @param listaUtenti la lista degli utenti in cui aggiungere il nuovo utente
+     * @return il nuovo utente aggiunto se la registrazione ha successo, {@code null} altrimenti
      */
     //Metodo per la registrazione
     public static Utente registraUtente(ListaUtenti listaUtenti){
@@ -133,11 +157,16 @@ public class Menu {
             return null;
         }
     }
+
     /**
-     * Esegue il login di un utente già registrato.
+     * Esegue il processo di login delegando la richiesta alla lista utenti.
+     * <p>
+     * Chiama il metodo {@code loginUtente()} della classe {@code ListaUtenti} per gestire
+     * l'interazione con l'utente e l'autenticazione.
+     * In caso di eccezioni, stampa un messaggio di errore e restituisce {@code null}.
      *
-     * @param listaUtenti la lista di utenti registrati
-     * @return l'oggetto {@code Utente} autenticato, oppure {@code null} se si verifica un errore
+     * @param listaUtenti la lista degli utenti su cui effettuare il login
+     * @return l'utente autenticato se il login ha successo, {@code null} in caso di errore o fallimento
      */
     //Metodo per il login
     public static Utente loginUtente(ListaUtenti listaUtenti) {

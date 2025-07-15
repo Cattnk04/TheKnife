@@ -5,6 +5,8 @@ import java.util.*;
 /**
  * @author Catelli Elena, Pellegrini Gaia, Tancredi Giacomo, Rizzi Camilla
  * @version 1.0
+ * Classe che rappresenta il menu specifico per gli utenti loggati,
+ * permettendo di gestire i preferiti e le proprie recensioni.
  */
 
 public class MenuUtenteLog {
@@ -18,7 +20,15 @@ public class MenuUtenteLog {
     private ListaRistoranti listaRistoranti;
 
 
-    //Costruttore
+    /**
+     * Costruttore della classe MenuUtenteLog.
+     * <p>
+     * Inizializza le liste di preferiti, recensioni e ristoranti,
+     * e imposta l'utente corrente.
+     * Infine, avvia la visualizzazione del menu per l'utente loggato.
+     *
+     * @param utente l'utente attualmente loggato
+     */
     public MenuUtenteLog(Utente utente) { // Aggiungi i parametri
         listaPreferiti = new ListaPreferiti();
         listaRecensioni = new ListaRecensioni();
@@ -27,6 +37,22 @@ public class MenuUtenteLog {
         mostraMenuUtente();
     }
 
+    /**
+     * Visualizza il menu principale per l'utente loggato e gestisce
+     * le interazioni dell'utente tramite input da tastiera.
+     *
+     * Il menu permette di:
+     * <ul>
+     *   <li>Cercare ristoranti</li>
+     *   <li>Visualizzare, aggiungere e rimuovere ristoranti dai preferiti</li>
+     *   <li>Visualizzare, aggiungere, modificare ed eliminare recensioni</li>
+     *   <li>Effettuare il logout</li>
+     * </ul>
+     *
+     * Il metodo rimane in esecuzione finché l'utente non sceglie di uscire (scelta 0).
+     * Viene gestita anche l'eventuale eccezione InputMismatchException
+     * per assicurare l'inserimento di un numero valido.
+     */
     //Menu utente
     public void mostraMenuUtente(){
         int scelta = 0;
@@ -88,31 +114,31 @@ public class MenuUtenteLog {
         } while (scelta != 0);
     }
 
-    //Mostra i ristoranti preferiti dell'utente
+    /** Mostra i ristoranti preferiti dell'utente*/
     private void mostraPreferiti() {
         //List<Preferito> preferitiUtente = listaPreferiti.preferitiUtente(utenteCorrente);
         listaPreferiti.mostraPreferiti(utenteCorrente);
     }
 
-    // Aggiunta ristorante ai preferiti dell'utente con controllo duplicati
+    /** Aggiunta ristorante ai preferiti dell'utente con controllo duplicati*/
     public void aggiungiPreferito() {
         listaPreferiti.aggiungiPreferito(utenteCorrente, listaRistoranti);
     }
 
-    // Rimuovi ristorante dai preferiti dell'utente
+    /** Rimuovi ristorante dai preferiti dell'utente*/
     public void rimuoviPreferito() {
         listaPreferiti.rimuoviPreferito(utenteCorrente, listaRistoranti);
     }
 
-    //Mostra le recensioni dell'utente
+    /** Mostra le recensioni dell'utente */
     private void mostraRecensioni() { listaRecensioni.mostraRecensioniUtente(utenteCorrente);}
 
-    // Aggiunta recensione
+    /** Aggiunta recensione */
     public void aggiungiRecensione() { listaRecensioni.inserisciRecensione(utenteCorrente, listaRistoranti);}
 
-    // Modifica recensione
+    /** Modifica recensione */
     public void modificaRecensione() { listaRecensioni.modificaRecensione(utenteCorrente);}
 
-    // Elimina recensione
+    /** Elimina recensione */
     public void eliminaRecensione() { listaRecensioni.eliminaRecensione(utenteCorrente);}
 }
