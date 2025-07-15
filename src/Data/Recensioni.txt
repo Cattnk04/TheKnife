@@ -18,15 +18,15 @@ giulia.ferrari@email.com*Villa dei Limoni*4*Limoncello fatto in casa eccezionale
 hans.mueller@email.com*Enoteca Stellata*4*Ausgezeichnete Weinauswahl und hervorragendes Essen.*null
 john.smith@email.com*Villa Gourmet*5*Extraordinary Italian cuisine in a beautiful setting.*null
 laura.bianchi@email.com*La Vecchia Cantina*5*Atmosfera autentica nei Sassi di Matera. Orecchiette fatte in casa divine!*Siamo felici che abbiate apprezzato la nostra tradizione.
-laura.bianchi@email.com*Locanda dei Dogi	*5*Cucina veneziana autentica in location da sogno.	*null
-luca.ricci@email.com	*Dragon Palace*1*Cibo poco fresco e condizioni igieniche discutibili. Mai più.*We deeply apologize for your experience. We are addressing these issues immediately.
-luca.ricci@email.com	*Little Italy*4*Carbonara eccezionale e servizio cordiale. Prezzi nella media.*null
+laura.bianchi@email.com*Locanda dei Dogi*5*Cucina veneziana autentica in location da sogno.	*null
+luca.ricci@email.com*Dragon Palace*1*Cibo poco fresco e condizioni igieniche discutibili. Mai più.*We deeply apologize for your experience. We are addressing these issues immediately.
+luca.ricci@email.com*Little Italy*4*Carbonara eccezionale e servizio cordiale. Prezzi nella media.*null
 marco.verdi@email.com*Masseria del Sud*5*Atmosfera magica tra gli ulivi. Cucina pugliese doc.*Grazie per aver apprezzato la nostra terra!
 marco.verdi@email.com*Fusion Garden*3*Interessante mix di sapori ma porzioni un po' piccole per il prezzo.*null
 marie.dubois@email.com*La Pergola Sul Mare*5*Vue magnifique et cuisine méditerranéenne parfaite.*Grazie del feedback!
 mario.rossi@email.com*Sapori di Mare*4*Pesce freschissimo e vista mare splendida. Prezzi un po' alti ma vale la pena.*null
 mario.rossi@email.com*Rifugio d'Alta Quota*4*Vista mozzafiato sulle Dolomiti e cucina eccellente.*null
-michele.costa@email.com*El Patio*	1*Paella immangiabile e sangria annacquata. Servizio lentissimo.*Lo sentimos mucho, tomaremos medidas para mejorar.
+michele.costa@email.com*El Patio*1*Paella immangiabile e sangria annacquata. Servizio lentissimo.*Lo sentimos mucho, tomaremos medidas para mejorar.
 michele.costa@email.com*International Club*3*Location elegante ma prezzi troppo elevati.*null
 paolo.galli@email.com*American Diner*4*Hamburger succulenti e milkshake come nei film.*Thank you, come back soon!
 paolo.galli@email.com*Sapori di Mare*1*Pesce non fresco, prezzi assurdi e servizio scadente. Da evitare.*null
