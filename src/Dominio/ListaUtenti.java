@@ -120,6 +120,7 @@ public class ListaUtenti {
             salvaUtentiSuCSV();
             return nuovoUtente;
         } else
+            System.out.println("L'utente esiste già, registrati con un altro indirizzo email.");
             return null;
     }
 

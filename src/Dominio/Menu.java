@@ -104,7 +104,7 @@ public class Menu {
      *  *   <li>1 - Registrati</li>
      *  *   <li>2 - Accedi</li>
      *  *   <li>3 - Cerca ristorante</li>
-     *  *   <li>0 - Esci dall'applicazione</li>
+     *  *   <li>0 - Logout</li>
      *  * </ul>
      *  * <p>
      *  * Gestisce l'input non numerico segnalando un errore e pulendo il buffer di input.
@@ -119,7 +119,7 @@ public class Menu {
         System.out.println("1. Registrati");
         System.out.println("2. Accedi");
         System.out.println("3. Cerca ristorante");
-        System.out.println("0. Esci dall'applicazione");
+        System.out.println("0. Logout");
         System.out.print("La tua scelta: ");
 
         try {

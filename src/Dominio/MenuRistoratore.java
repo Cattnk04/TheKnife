@@ -58,7 +58,7 @@ public class MenuRistoratore {
                 System.out.println("3. Visualizza riepilogo recensioni di tutti i ristoranti");
                 System.out.println("4. Visualizza dettagli recensioni");
                 System.out.println("5. Rispondi alle recensioni"); // Nuova opzione
-                System.out.println("0. Esci");
+                System.out.println("0. Logout");
                 System.out.print("La tua scelta: ");
 
                 scelta = scanner.nextInt();
