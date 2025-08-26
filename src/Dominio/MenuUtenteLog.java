@@ -58,7 +58,7 @@ public class MenuUtenteLog {
         int scelta = 0;
         do{
             try{ //il try catch è inutile in quanto c'è gia il caso di default
-                System.out.println("\n=== Menu Utente ===");
+                System.out.println("\n=== Menu Cliente ===");
                 System.out.println("1. Cerca un ristorante");
                 System.out.println("2. Visualizza i tuoi preferiti");
                 System.out.println("3. Aggiungi ristorante ai preferiti");

@@ -52,3 +52,4 @@ shanghai.dragon@rest.com,yuki,tsunoda,df96a634bb665eab3f58fe7904d58e5a2590737a8c
 lisboa.porto@rest.com,joao,silva,41e95cacd6a78bfeb87c0c82400b6125c606fbdec055e43b97e8bc1706d3e71c,portogallo,lisbona,true
 mexico.cantina@rest.com,Pato,oward,982fab8a158ab82dd684ef25a90105721fee638d17040fe4bbd38a7900e13e32,messico,citt� del messico,true
 landonorris4@gmail.com,Lando,Norris,d84baace6c655cb2e1f02cb032e5a4e5e1a77a4bd55edb4a981db1d224d86133,monaco,monaco,false
+utentecliente@email.it,Utente,Cliente,c31bf05fb78b983f46290a6c6392ff08a5c8d2eba5d20bf352c93999f1f3f2a4,italia,como,false
