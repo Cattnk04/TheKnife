@@ -91,6 +91,8 @@ public class ListaRistoranti {
                 );
                 listaRistoranti.add(r);
             }
+        } catch (FileNotFoundException e) {
+            System.out.println("File Ristoranti.txt non trovato. Verrà creata una nuova lista ristoranti.");
         }
         catch (IOException e) {
             System.out.println("Errore nel caricamento dei ristoranti: " + e.getMessage());
