@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 public class Recensione {
 
-    public static final String FILE_RECENSIONI = "./Data/Recensioni.txt";
+    public static final String FILE_RECENSIONI = "Data/Recensioni.txt";
     String email;
     String nomeRistorante;
     int valutazione;

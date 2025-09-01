@@ -20,7 +20,7 @@ public class Ristorante {
     private boolean servizioDelivery;
     private boolean servizioPrenotazioneOnline;
     private String tipoCucina;
-    public static final String FILE_RISTORANTI = "./Data/Ristoranti.txt";
+    public static final String FILE_RISTORANTI = "Data/Ristoranti.txt";
 
     /**
      * Costruttore della classe Ristorante che inizializza un nuovo ristorante

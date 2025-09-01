@@ -13,7 +13,7 @@ import java.util.Scanner;
  */
 
 public class Utente {
-    public static final String FILE_UTENTI = "./Data/Utenti.txt";
+    public static final String FILE_UTENTI = "Data/Utenti.txt";
     private static final Scanner scanner = new Scanner(System.in);
     private String nome;
     private String cognome;

@@ -11,7 +11,7 @@ public class Preferito {
 
     String emailUtente;
     String nomeRistorante;
-    public static final String FILE_PREFERITI = "./Data/Preferiti.txt";
+    public static final String FILE_PREFERITI = "Data/Preferiti.txt";
 
 
     /**
