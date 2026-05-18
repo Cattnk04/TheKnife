@@ -1,5 +1,7 @@
 package Dominio;
 
+import GestioneDati.ListaRistoranti;
+
 /**
  * @author Catelli Elena, Pellegrini Gaia, Tancredi Giacomo, Rizzi Camilla
  * @version 1.0

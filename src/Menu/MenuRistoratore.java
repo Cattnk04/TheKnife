@@ -1,4 +1,10 @@
-package Dominio;
+package Menu;
+
+import Dominio.Recensione;
+import Dominio.Ristorante;
+import Dominio.Utente;
+import GestioneDati.ListaRecensioni;
+import GestioneDati.ListaRistoranti;
 
 import java.util.*;
 

@@ -1,4 +1,8 @@
-package Dominio;
+package GestioneDati;
+
+import Dominio.Preferito;
+import Dominio.Ristorante;
+import Dominio.Utente;
 
 import java.io.*;
 import java.util.ArrayList;

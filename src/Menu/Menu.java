@@ -1,5 +1,9 @@
-package Dominio;
+package Menu;
 
+
+import Dominio.Utente;
+import GestioneDati.ListaRistoranti;
+import GestioneDati.ListaUtenti;
 
 import java.util.Scanner;
 import java.util.InputMismatchException;

@@ -1,4 +1,6 @@
-package Dominio;
+package GestioneDati;
+
+import Dominio.Utente;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;

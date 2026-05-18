@@ -1,4 +1,9 @@
-package Dominio;
+package Menu;
+
+import Dominio.Utente;
+import GestioneDati.ListaPreferiti;
+import GestioneDati.ListaRecensioni;
+import GestioneDati.ListaRistoranti;
 
 import java.util.*;
 

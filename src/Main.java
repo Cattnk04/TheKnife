@@ -1,4 +1,4 @@
-import Dominio.*;
+import Menu.Menu;
 
 
 public class Main {
