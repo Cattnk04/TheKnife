@@ -19,7 +19,7 @@ public class Recensione {
     String nomeRistorante;
     int valutazione;
     String recensione;
-    String risposta;
+    public String risposta;
 
 
     /**
