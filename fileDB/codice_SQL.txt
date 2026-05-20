@@ -11,12 +11,12 @@ CREATE TABLE Utente(
 );
 
 CREATE TABLE TipiCucina(
-    IDTipoCucina SERIAL PRIMARY KEY,
+    IDTipoCucina INT PRIMARY KEY AUTO_INCREMENT,
     TipoCucina VARCHAR(30) UNIQUE NOT NULL
 );
 
 CREATE TABLE Ristorante(
-    IDRistorante SERIAL PRIMARY KEY,
+    IDRistorante INT PRIMARY KEY AUTO_INCREMENT,
     NomeRistorante VARCHAR(50) NOT NULL,
     Email VARCHAR(50) NOT NULL,
     Citta VARCHAR(50) NOT NULL,
@@ -36,7 +36,7 @@ CREATE TABLE Ristorante(
 CREATE TABLE Preferiti(
     IDRistorante INT,
     Email VARCHAR(50),
-    PRIMARY KEY (IDRistorante, Email),
+    PRIMARY KEY (IDRistorante, Email)
     FOREIGN KEY (IDRistorante)
         REFERENCES Ristorante(IDRistorante),
     FOREIGN KEY (Email)
@@ -49,9 +49,9 @@ CREATE TABLE Recensioni(
     Valutazione INT NOT NULL,
     Recensione VARCHAR(750),
     Risposta VARCHAR(750),
-    PRIMARY KEY (Email, IDRistorante),
+    PRIMARY KEY (Email, IDRistorante)
     FOREIGN KEY (Email)
-        REFERENCES Utente(Email),
+        REFERENCES Utente(Email)
     FOREIGN KEY (IDRistorante)
         REFERENCES Ristorante(IDRistorante)
 );
